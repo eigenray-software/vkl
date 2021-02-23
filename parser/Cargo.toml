@@ -1,0 +1,15 @@
+[package]
+name = "parser"
+version = "0.1.0"
+authors = ["Atil Kurtulmus <LoST_94@msn.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+fxhash = "0.2.1"
+lalrpop-util = "0.19.1"
+xml-rs = "0.8.3"
+
+[build-dependencies]
+lalrpop = {version = "0.19.1", features = ["lexer"]}

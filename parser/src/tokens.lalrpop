@@ -1,0 +1,46 @@
+use crate::*;
+grammar;
+
+Hex: u64 = r"0x\d+" => u64::from_str_radix(&<>[2..], 16).unwrap();
+Int: i64 = r"\d+" => <>.parse().unwrap();
+Float: f32 = r"\d+([.]\d*)?f" => <>.replace("f", "").parse().unwrap();
+Uint: u32 = r"\d+[uU]" => <>[..<>.len() - 1].parse().unwrap();
+Uint64: u64 = r"\d+(ull|ULL)" => <>[..<>.len() - 3].parse().unwrap();
+
+Ident: String = r"[a-zA-Z_][a-zA-Z_0-9]*" => <>.to_string();
+
+Arr: String = {
+	"[" <Int> "]" 	=> format!("[{}]", <>),
+	"[" <Ident> "]" => format!("[{}]", <>),
+}
+
+CP: &'input str = {
+	"const",
+	"*" 
+}
+
+Type: String = {
+  <pre:"const"*> <st:"struct"?>
+  <t:Ident> <cp:CP*> => {
+    format!("{} {} {} {}", pre.join(" "), st.unwrap_or_default(), t, cp.join(" ")).trim().to_owned()
+  }
+}
+
+Arr0: String = Arr* => <>.join("");
+
+Param: (String, String, String) = {
+  Type Ident Arr0 
+}
+
+pub ParamParser: (String, String, Vec<(String, String, String)>) = {
+	<sig:Param> "(" <args:Seq<(<Param>)>> ")" ";" => (sig.0, sig.1, args)
+}
+
+
+Seq<T> : Vec<T> = {
+	<mut l:(<T> ",")*> <r:T?> => {
+		if let Some(r) = r {
+			l.push(r);
+		} l
+	}
+}
