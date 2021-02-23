@@ -243,7 +243,8 @@ fn main() {
     println!("#ifdef VKL_IMPL");
     write_cmds(&ext, commands);
     println!("#endif");
-    write_structs(&ext, structs);
+    
+    //write_structs(&ext, structs);
 }
 
 fn collect_pairs(args: &[(String, String, String)], n: bool) -> String {
@@ -273,7 +274,8 @@ fn write_cmd(name: &String, re: &String, mut args: &Vec<(String, String, String)
 }
 
 fn is_instance_function(func: &str, arg: &str) -> bool {
-    arg == "VkInstance" || arg == "VkPhysicalDevice" || !arg.starts_with("Vk")
+    arg == "VkInstance" || arg == "VkPhysicalDevice" || !arg.starts_with("Vk") ||
+    func == "vkGetDeviceProcAddr"
 }
 
 fn write_cmds(
@@ -330,33 +332,35 @@ fn write_cmds(
 
     println!(
         "{}",
-        r#"VkResult vkl_init() {
-
-      #ifdef __cplusplus 
-      #define VKL_EXTERN extern "C"
-      #else
-      #define VKL_EXTERN extern
-      #endif
-
-      #ifdef _WIN32
-        VKL_EXTERN void* __stdcall LoadLibraryA(const char*);
-        VKL_EXTERN void* __stdcall GetProcAddress(void*, const char*);
-      #define LOAD_LIB LoadLibraryA("vulkan-1.dll")
-      #define PROC_ADDR(lib, proc) GetProcAddress(lib, proc)
-      #elif __linux__
-        VKL_EXTERN void* dlopen(const char*, int);
-        VKL_EXTERN void* dlsym(void*, const char*);
-      #define LOAD_LIB dlopen("vulkan-1.so", RTLD_NOW)
-      #define PROC_ADDR dlsym(lib, proc)
-      #else
-      #error "Unsupported platform"
-      #endif
       
+        r#"
+        #ifdef __cplusplus 
+        #define VKL_EXTERN extern "C"
+        #else
+        #define VKL_EXTERN extern
+        #endif
+  
+        #ifdef _WIN32
+          typedef __int64 (__stdcall *FARPROC)();
+          __declspec(dllimport) VKL_EXTERN HMODULE __stdcall LoadLibraryA(const char*);
+          __declspec(dllimport) VKL_EXTERN FARPROC __stdcall GetProcAddress(struct HINSTANCE__*, const char*);
+        #define LOAD_LIB (void*)LoadLibraryA("vulkan-1.dll")
+        #define PROC_ADDR(lib, proc) ((void*)GetProcAddress((struct HINSTANCE__*)lib, proc))
+        #elif __linux__
+          VKL_EXTERN void* dlopen(const char*, int);
+          VKL_EXTERN void* dlsym(void*, const char*);
+        #define LOAD_LIB dlopen("vulkan-1.so", RTLD_NOW)
+        #define PROC_ADDR dlsym(lib, proc)
+        #else
+        #error "Unsupported platform"
+        #endif
+
+      VkResult vkl_init() {      
         void* lib = LOAD_LIB;
         if (!lib) {
           return VK_ERROR_INITIALIZATION_FAILED;
         }
-        g_vkl_fnptrs.vkGetInstanceProcAddr = PROC_ADDR(lib, "vkGetInstanceProcAddr");
+        g_vkl_fnptrs.vkGetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)PROC_ADDR(lib, "vkGetInstanceProcAddr");
       
         if (!g_vkl_fnptrs.vkGetInstanceProcAddr) {
           return VK_ERROR_INITIALIZATION_FAILED;

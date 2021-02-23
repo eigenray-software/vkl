@@ -1,1 +1,2 @@
-./parser/target
+./parser/target/*
+.cache
