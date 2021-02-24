@@ -348,10 +348,9 @@ fn write_cmds(
         #define LOAD_LIB (void*)LoadLibraryA("vulkan-1.dll")
         #define PROC_ADDR(lib, proc) ((void*)GetProcAddress((struct HINSTANCE__*)lib, proc))
         #elif __linux__
-          VKL_EXTERN void* dlopen(const char*, int);
-          VKL_EXTERN void* dlsym(void*, const char*);
+        #include <dlfcn.h>
         #define LOAD_LIB dlopen("vulkan-1.so", RTLD_NOW)
-        #define PROC_ADDR dlsym(lib, proc)
+        #define PROC_ADDR(lib, proc) dlsym(lib, proc)
         #else
         #error "Unsupported platform"
         #endif
