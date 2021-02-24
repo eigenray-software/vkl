@@ -93,7 +93,7 @@ int main() {
 
   }
 
-  printf("Succes\n");
+  printf("Success\n");
 
 }
 

@@ -1985,9 +1985,10 @@ VkResult vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV(VkPhy
         #endif
   
         #ifdef _WIN32
-          typedef __int64 (__stdcall *FARPROC)();
-          __declspec(dllimport) VKL_EXTERN HMODULE __stdcall LoadLibraryA(const char*);
-          __declspec(dllimport) VKL_EXTERN FARPROC __stdcall GetProcAddress(struct HINSTANCE__*, const char*);
+        typedef struct HINSTANCE__* HMODULE;
+        typedef __int64 (__stdcall *FARPROC)();
+        __declspec(dllimport) VKL_EXTERN HMODULE __stdcall LoadLibraryA(const char*);
+        __declspec(dllimport) VKL_EXTERN FARPROC __stdcall GetProcAddress(HMODULE, const char*);
         #define LOAD_LIB (void*)LoadLibraryA("vulkan-1.dll")
         #define PROC_ADDR(lib, proc) ((void*)GetProcAddress((struct HINSTANCE__*)lib, proc))
         #elif __linux__
