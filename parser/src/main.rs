@@ -213,6 +213,8 @@ fn main() {
             continue;
         }
     }
+    println!("#ifndef A21E2F7E_5464_4B27_8400_EC0EB967B70B");
+    println!("#define A21E2F7E_5464_4B27_8400_EC0EB967B70B");
     println!("#include <vulkan/vulkan.h>");
 
     let fp = tokens::ParamParserParser::new();
@@ -243,7 +245,7 @@ fn main() {
     println!("#ifdef VKL_IMPL");
     write_cmds(&ext, commands);
     println!("#endif");
-    
+    println!("#endif //A21E2F7E_5464_4B27_8400_EC0EB967B70B");
     //write_structs(&ext, structs);
 }
 

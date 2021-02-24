@@ -1,3 +1,5 @@
+#ifndef A21E2F7E_5464_4B27_8400_EC0EB967B70B
+#define A21E2F7E_5464_4B27_8400_EC0EB967B70B
 #include <vulkan/vulkan.h>
 
 
@@ -2609,3 +2611,4 @@ void vkl_load_device_functions(VkDevice device) {
 #endif
 }
 #endif
+#endif //A21E2F7E_5464_4B27_8400_EC0EB967B70B
