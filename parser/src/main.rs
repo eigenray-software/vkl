@@ -365,7 +365,7 @@ fn write_cmds(
         #define PROC_ADDR(lib, proc) ((void*)GetProcAddress((struct HINSTANCE__*)lib, proc))
         #elif __linux__
         #include <dlfcn.h>
-        #define LOAD_LIB dlopen("vulkan-1.so", RTLD_NOW)
+        #define LOAD_LIB dlopen("vulkan.so.1", RTLD_NOW)
         #define PROC_ADDR(lib, proc) dlsym(lib, proc)
         #else
         #error "Unsupported platform"
