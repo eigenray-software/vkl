@@ -1,3 +1,4 @@
-parser/target/*
+parser/target
 .cache
 a.exe
+build/

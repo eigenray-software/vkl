@@ -189,7 +189,11 @@ pub enum Len {
 }
 
 fn main() {
-    let reg = parser_xml("../Vulkan-Docs/xml/vk.xml");
+    let args: Vec<String> = std::env::args().collect();
+
+    std::io::stdout();
+
+    let reg = parser_xml(args[1].as_str());
     let ext = reg
         .children()
         .into_iter()
@@ -213,10 +217,12 @@ fn main() {
             continue;
         }
     }
+
     println!("#ifndef A21E2F7E_5464_4B27_8400_EC0EB967B70B");
     println!("#define A21E2F7E_5464_4B27_8400_EC0EB967B70B");
     println!("#include <vulkan/vulkan.h>");
-    println!(r#"
+    println!(
+        r#"
 typedef uint8_t u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
@@ -229,7 +235,8 @@ typedef int64_t i64;
 
 typedef float f32;
 typedef double f64;
-"#);
+"#
+    );
 
     let fp = tokens::ParamParserParser::new();
 
@@ -253,9 +260,12 @@ typedef double f64;
     }
 
     println!("{}", "\n\nVkResult vkl_init();");
-    println!("{}", "void vkl_load_instance_functions(VkInstance instance);");
+    println!(
+        "{}",
+        "void vkl_load_instance_functions(VkInstance instance);"
+    );
     println!("{}", "void vkl_load_device_functions(VkDevice device);\n\n");
-    
+
     println!("#ifdef VKL_IMPL");
     write_cmds(&ext, commands);
     println!("#endif");
@@ -290,8 +300,10 @@ fn write_cmd(name: &String, re: &String, mut args: &Vec<(String, String, String)
 }
 
 fn is_instance_function(func: &str, arg: &str) -> bool {
-    arg == "VkInstance" || arg == "VkPhysicalDevice" || !arg.starts_with("Vk") ||
-    func == "vkGetDeviceProcAddr"
+    arg == "VkInstance"
+        || arg == "VkPhysicalDevice"
+        || !arg.starts_with("Vk")
+        || func == "vkGetDeviceProcAddr"
 }
 
 fn write_cmds(
@@ -348,7 +360,6 @@ fn write_cmds(
 
     println!(
         "{}",
-      
         r#"
         #ifdef __cplusplus 
         #define VKL_EXTERN extern "C"
@@ -395,7 +406,7 @@ fn write_cmds(
       }"#
     );
 
-    { 
+    {
         println!("void vkl_load_instance_functions(VkInstance instance) {{");
 
         for (name, (re, args)) in inmap.iter() {
