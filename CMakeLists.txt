@@ -4,5 +4,5 @@ project(vkl)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Vulkan-Headers)
-add_library(vkl vkl.c)
+add_library(vkl vkl.cpp)
 target_link_libraries(vkl PUBLIC Vulkan-Headers)

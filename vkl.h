@@ -16,7 +16,6 @@ typedef float f32;
 typedef double f64;
 
 
-
 VkResult vkl_init();
 void vkl_load_instance_functions(VkInstance instance);
 void vkl_load_device_functions(VkDevice device);
