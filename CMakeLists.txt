@@ -3,6 +3,11 @@ cmake_minimum_required(VERSION 3.10.2)
 project(vkl)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Vulkan-Headers)
-add_library(vkl vkl.cpp)
+add_library(vkl ${CMAKE_CURRENT_SOURCE_DIR}/vkl.cpp)
+
 target_link_libraries(vkl PUBLIC Vulkan-Headers)
+
+add_executable(test ${CMAKE_CURRENT_SOURCE_DIR}/test.cpp)
+target_link_libraries(test PUBLIC vkl)

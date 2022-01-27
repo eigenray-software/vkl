@@ -1,6 +1,7 @@
 all: install_cargo
 	@git submodule update --init --recursive
-	@cd parser && cargo run > ../vkl.h
+	@cd parser
+	@cargo run ../Vulkan-Headers/registry/vk.xml > ../vkl.h
 
 install_cargo:
 ifeq ($(shell which cargo),)
