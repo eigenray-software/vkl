@@ -259,6 +259,11 @@ typedef double f64;
         }
     }
 
+    println!(r#"
+#ifdef __cplusplus
+extern "C" {{
+#endif
+"#);
     println!("{}", "\n\nVkResult vkl_init();");
     println!(
         "{}",
@@ -269,6 +274,11 @@ typedef double f64;
     println!("#ifdef VKL_IMPL");
     write_cmds(&ext, commands);
     println!("#endif");
+        println!(r#"
+#ifdef __cplusplus
+}}
+#endif
+"#);
     println!("#endif //A21E2F7E_5464_4B27_8400_EC0EB967B70B");
     //write_structs(&ext, structs);
 }

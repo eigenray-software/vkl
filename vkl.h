@@ -16,6 +16,11 @@ typedef float f32;
 typedef double f64;
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 
 VkResult vkl_init();
 void vkl_load_instance_functions(VkInstance instance);
@@ -2971,4 +2976,9 @@ void vkl_load_device_functions(VkDevice device) {
 #endif
 }
 #endif
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif //A21E2F7E_5464_4B27_8400_EC0EB967B70B
