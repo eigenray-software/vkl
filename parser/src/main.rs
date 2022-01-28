@@ -299,7 +299,7 @@ fn collect_pairs(args: &[(String, String, String)], n: bool) -> String {
 
 fn write_cmd(name: &String, re: &String, mut args: &Vec<(String, String, String)>) {
     println!(
-        "{} {}({}) {{\n\t{}g_vkl_fnptrs.{}({});\n}}",
+        "VKAPI_ATTR {} VKAPI_CALL {}({}) {{\n\t{}g_vkl_fnptrs.{}({});\n}}",
         re,
         name,
         collect_pairs(&args, false),
