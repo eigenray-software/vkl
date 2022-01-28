@@ -2272,8 +2272,8 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWaitForPresentKHR(VkDevice device, VkSwapchainK
         #ifdef _WIN32
         typedef struct HINSTANCE__* HMODULE;
         typedef __int64 (__stdcall *FARPROC)();
-        __declspec(dllimport) VKL_EXTERN HMODULE __stdcall LoadLibraryA(const char*);
-        __declspec(dllimport) VKL_EXTERN FARPROC __stdcall GetProcAddress(HMODULE, const char*);
+        VKL_EXTERN __declspec(dllimport) HMODULE __stdcall LoadLibraryA(const char*);
+        VKL_EXTERN __declspec(dllimport) FARPROC __stdcall GetProcAddress(HMODULE, const char*);
         #define LOAD_LIB (void*)LoadLibraryA("vulkan-1.dll")
         #define PROC_ADDR(lib, proc) ((void*)GetProcAddress((struct HINSTANCE__*)lib, proc))
         #elif __linux__
