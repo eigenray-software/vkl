@@ -15,6 +15,17 @@ typedef int64_t i64;
 typedef float f32;
 typedef double f64;
 
+#ifndef VULKAN_LIBRARY_NAME
+
+#ifdef _WIN32
+#define VULKAN_LIBRARY_NAME "vulkan-1.dll"
+#elif __linux__
+#define VULKAN_LIBRARY_NAME "libvulkan.so.1"
+#endif
+
+#endif
+
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -22,7 +33,7 @@ extern "C" {
 
 
 
-VkResult vkl_init();
+VkResult vkl_init(void* (*pfn_load_lib)(const char*), void*(pfn_get_proc_addr)(void*, const char*));
 void vkl_load_instance_functions(VkInstance instance);
 void vkl_load_device_functions(VkDevice device);
 
@@ -2263,48 +2274,31 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWaitForPresentKHR(VkDevice device, VkSwapchainK
 }
 #endif
 
-        #ifdef __cplusplus 
-        #define VKL_EXTERN extern "C"
-        #else
-        #define VKL_EXTERN extern
-        #endif
-  
-        #ifdef _WIN32
-        typedef struct HINSTANCE__* HMODULE;
-        typedef __int64 (__stdcall *FARPROC)();
-        VKL_EXTERN __declspec(dllimport) HMODULE __stdcall LoadLibraryA(const char*);
-        VKL_EXTERN __declspec(dllimport) FARPROC __stdcall GetProcAddress(HMODULE, const char*);
-        #define LOAD_LIB (void*)LoadLibraryA("vulkan-1.dll")
-        #define PROC_ADDR(lib, proc) ((void*)GetProcAddress((struct HINSTANCE__*)lib, proc))
-        #elif __linux__
-        #include <dlfcn.h>
-        #define LOAD_LIB dlopen("libvulkan.so.1", RTLD_NOW)
-        #define PROC_ADDR(lib, proc) dlsym(lib, proc)
-        #else
-        #error "Unsupported platform"
-        #endif
+      VkResult vkl_init(void* (*pfn_load_lib)(const char*), void*(pfn_get_proc_addr)(void*, const char*))
+      {
+          void* lib = pfn_load_lib(VULKAN_LIBRARY_NAME);
+          if (!lib)
+          {
+              return VK_ERROR_INITIALIZATION_FAILED;
+          }
+          g_vkl_fnptrs.vkGetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)pfn_get_proc_addr(lib, "vkGetInstanceProcAddr");
 
-      VkResult vkl_init() {      
-        void* lib = LOAD_LIB;
-        if (!lib) {
-          return VK_ERROR_INITIALIZATION_FAILED;
-        }
-        g_vkl_fnptrs.vkGetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)PROC_ADDR(lib, "vkGetInstanceProcAddr");
-      
-        if (!g_vkl_fnptrs.vkGetInstanceProcAddr) {
-          return VK_ERROR_INITIALIZATION_FAILED;
-        }
-      
-        g_vkl_fnptrs.vkCreateInstance = (PFN_vkCreateInstance)g_vkl_fnptrs.vkGetInstanceProcAddr(0, "vkCreateInstance");
-        g_vkl_fnptrs.vkEnumerateInstanceVersion = (PFN_vkEnumerateInstanceVersion)g_vkl_fnptrs.vkGetInstanceProcAddr(0, "vkEnumerateInstanceVersion");
-        g_vkl_fnptrs.vkEnumerateInstanceLayerProperties = (PFN_vkEnumerateInstanceLayerProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(0, "vkEnumerateInstanceLayerProperties");
-        g_vkl_fnptrs.vkEnumerateInstanceExtensionProperties = (PFN_vkEnumerateInstanceExtensionProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(0,"vkEnumerateInstanceExtensionProperties");
+          if (!g_vkl_fnptrs.vkGetInstanceProcAddr)
+          {
+              return VK_ERROR_INITIALIZATION_FAILED;
+          }
 
-        if (!g_vkl_fnptrs.vkCreateInstance) {
-          return VK_ERROR_INITIALIZATION_FAILED;
-        }
-      
-        return VK_SUCCESS;
+          g_vkl_fnptrs.vkCreateInstance                       = (PFN_vkCreateInstance)g_vkl_fnptrs.vkGetInstanceProcAddr(0, "vkCreateInstance");
+          g_vkl_fnptrs.vkEnumerateInstanceVersion             = (PFN_vkEnumerateInstanceVersion)g_vkl_fnptrs.vkGetInstanceProcAddr(0, "vkEnumerateInstanceVersion");
+          g_vkl_fnptrs.vkEnumerateInstanceLayerProperties     = (PFN_vkEnumerateInstanceLayerProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(0, "vkEnumerateInstanceLayerProperties");
+          g_vkl_fnptrs.vkEnumerateInstanceExtensionProperties = (PFN_vkEnumerateInstanceExtensionProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(0, "vkEnumerateInstanceExtensionProperties");
+
+          if (!g_vkl_fnptrs.vkCreateInstance)
+          {
+              return VK_ERROR_INITIALIZATION_FAILED;
+          }
+
+          return VK_SUCCESS;
       }
 void vkl_load_instance_functions(VkInstance instance) {
 	g_vkl_fnptrs.vkCreateInstance = (PFN_vkCreateInstance)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkCreateInstance");
