@@ -46,7 +46,7 @@ int main() {
 
   VkApplicationInfo app = {
       .sType = VK_STRUCTURE_TYPE_APPLICATION_INFO,
-      .apiVersion = VK_API_VERSION_1_2,
+      .apiVersion = VK_API_VERSION_1_3,
   };
 
   const char* layers[] = {"VK_LAYER_KHRONOS_validation"};
@@ -102,7 +102,7 @@ int main() {
     VkDevice dev;
 
     CHECKRE(vkCreateDevice(pdev, &info, 0, &dev));
-    
+
     // optional loading of function that are specific to the device created
     VklDeviceFunctions dfn;
     vkl_load_device_functions(dev, &dfn);

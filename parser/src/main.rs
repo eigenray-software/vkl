@@ -302,21 +302,29 @@ fn collect_pairs(args: &[(String, String, String)], n: bool) -> String {
 
 trait VkFunction {
     fn is_instance_function(&self) -> bool {
+        !self.is_global_function()
+            && (self.get_arg().unwrap() == "VkInstance"
+                || self.get_arg().unwrap() == "VkPhysicalDevice"
+                || self.get_name() == "vkGetDeviceProcAddr")
+    }
+
+    fn is_global_function(&self) -> bool {
         if let Some(arg) = self.get_arg() {
-            arg == "VkInstance"
-                || arg == "VkPhysicalDevice"
-                || !arg.starts_with("Vk")
-                || self.get_name() == "vkGetDeviceProcAddr"
+            !arg.starts_with("Vk") || self.get_name() == "vkGetInstanceProcAddr"
         } else {
-            false
+            true
         }
     }
 
+    fn is_device_function(&self) -> bool {
+        !self.is_instance_function() && !self.is_global_function()
+    }
+
     fn get_glob(&self) -> String {
-        let st = if self.is_instance_function() {
-            ""
-        } else {
+        let st = if self.is_device_function() {
             "dfn."
+        } else {
+            ""
         };
         format!("g_vkl_fnptrs.{}{}", st, self.get_name())
     }
@@ -402,7 +410,7 @@ fn write_cmds(
         println!("struct VklDeviceFunctions {{");
 
         for f in inmap.iter() {
-            if !f.is_instance_function() {
+            if f.is_device_function() {
                 let name = f.get_name();
                 println!("\tPFN_{} {};", name, name);
             }
@@ -410,7 +418,7 @@ fn write_cmds(
         for (ext, v) in map.iter() {
             println!("#ifdef {}", ext);
             for f in v {
-                if !f.is_instance_function() {
+                if f.is_device_function() {
                     let name = f.get_name();
                     println!("\tPFN_{} {};", name, name);
                 }
@@ -423,7 +431,7 @@ fn write_cmds(
         println!("struct VklFunctions {{");
 
         for f in inmap.iter() {
-            if f.is_instance_function() {
+            if f.is_instance_function() || f.is_global_function() {
                 let name = f.get_name();
                 println!("\tPFN_{} {};", name, name);
             }
@@ -431,7 +439,7 @@ fn write_cmds(
         for (ext, v) in map.iter() {
             println!("#ifdef {}", ext);
             for f in v {
-                if f.is_instance_function() {
+                if f.is_instance_function() || f.is_global_function() {
                     let name = f.get_name();
                     println!("\tPFN_{} {};", name, name);
                 }
@@ -518,7 +526,7 @@ fn write_cmds(
         println!("void vkl_load_device_functions_impl(VkDevice device, PFN_vkGetDeviceProcAddr pfn_load_dev_fn, VklDeviceFunctions* fnptrs) {{");
 
         for f in inmap.iter() {
-            if !f.is_instance_function() {
+            if f.is_device_function() {
                 let name = f.get_name();
                 println!(
                     "\tfnptrs->{} = (PFN_{})pfn_load_dev_fn(device, \"{}\");",
@@ -530,7 +538,7 @@ fn write_cmds(
         for (ext, v) in map.iter() {
             println!("#ifdef {}", ext);
             for f in v.iter() {
-                if !f.is_instance_function() {
+                if f.is_device_function() {
                     let name = f.get_name();
                     println!(
                         "\tfnptrs->{} = (PFN_{})pfn_load_dev_fn(device, \"{}\");",

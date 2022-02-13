@@ -7,6 +7,7 @@ then
   curl https://sh.rustup.rs -sSf | sh -s -- -y
 fi
 
+export RUST_BACKTRACE=1
 cd parser
 cargo run ../Vulkan-Headers/registry/vk.xml > ../vkl.h
 cd ..

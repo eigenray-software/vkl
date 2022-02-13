@@ -2472,7 +2472,6 @@ VKAPI_ATTR VkResult VKAPI_CALL vkWaitForPresentKHR(VkDevice device, VkSwapchainK
           return VK_SUCCESS;
       }
 void vkl_load_instance_functions(VkInstance instance) {
-	g_vkl_fnptrs.vkCreateInstance = (PFN_vkCreateInstance)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkCreateInstance");
 	g_vkl_fnptrs.vkGetPhysicalDeviceSparseImageFormatProperties2 = (PFN_vkGetPhysicalDeviceSparseImageFormatProperties2)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceSparseImageFormatProperties2");
 	g_vkl_fnptrs.vkEnumerateDeviceLayerProperties = (PFN_vkEnumerateDeviceLayerProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkEnumerateDeviceLayerProperties");
 	g_vkl_fnptrs.vkCreateDevice = (PFN_vkCreateDevice)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkCreateDevice");
@@ -2491,16 +2490,12 @@ void vkl_load_instance_functions(VkInstance instance) {
 	g_vkl_fnptrs.vkGetPhysicalDeviceSparseImageFormatProperties = (PFN_vkGetPhysicalDeviceSparseImageFormatProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceSparseImageFormatProperties");
 	g_vkl_fnptrs.vkGetPhysicalDeviceExternalFenceProperties = (PFN_vkGetPhysicalDeviceExternalFenceProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalFenceProperties");
 	g_vkl_fnptrs.vkDestroyInstance = (PFN_vkDestroyInstance)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkDestroyInstance");
-	g_vkl_fnptrs.vkEnumerateInstanceExtensionProperties = (PFN_vkEnumerateInstanceExtensionProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkEnumerateInstanceExtensionProperties");
-	g_vkl_fnptrs.vkEnumerateInstanceVersion = (PFN_vkEnumerateInstanceVersion)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkEnumerateInstanceVersion");
 	g_vkl_fnptrs.vkGetPhysicalDeviceQueueFamilyProperties = (PFN_vkGetPhysicalDeviceQueueFamilyProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyProperties");
 	g_vkl_fnptrs.vkGetPhysicalDeviceExternalBufferProperties = (PFN_vkGetPhysicalDeviceExternalBufferProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalBufferProperties");
 	g_vkl_fnptrs.vkGetPhysicalDeviceProperties = (PFN_vkGetPhysicalDeviceProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceProperties");
 	g_vkl_fnptrs.vkEnumeratePhysicalDevices = (PFN_vkEnumeratePhysicalDevices)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDevices");
 	g_vkl_fnptrs.vkGetPhysicalDeviceMemoryProperties2 = (PFN_vkGetPhysicalDeviceMemoryProperties2)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceMemoryProperties2");
 	g_vkl_fnptrs.vkGetPhysicalDeviceImageFormatProperties = (PFN_vkGetPhysicalDeviceImageFormatProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceImageFormatProperties");
-	g_vkl_fnptrs.vkGetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkGetInstanceProcAddr");
-	g_vkl_fnptrs.vkEnumerateInstanceLayerProperties = (PFN_vkEnumerateInstanceLayerProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkEnumerateInstanceLayerProperties");
 	g_vkl_fnptrs.vkGetPhysicalDeviceMemoryProperties = (PFN_vkGetPhysicalDeviceMemoryProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceMemoryProperties");
 #ifdef VK_AMD_shader_info
 #endif
