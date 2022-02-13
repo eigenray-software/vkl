@@ -236,16 +236,6 @@ typedef int64_t i64;
 typedef float f32;
 typedef double f64;
 
-#ifndef VULKAN_LIBRARY_NAME
-
-#ifdef _WIN32
-#define VULKAN_LIBRARY_NAME "vulkan-1.dll"
-#elif __linux__
-#define VULKAN_LIBRARY_NAME "libvulkan.so.1"
-#endif
-
-#endif
-
 "#
     );
 
@@ -270,26 +260,28 @@ typedef double f64;
         }
     }
 
-    println!(r#"
+    println!(
+        r#"
 #ifdef __cplusplus
 extern "C" {{
 #endif
-"#);
-    println!("{}", "\n\nVkResult vkl_init(void* (*pfn_load_lib)(const char*), void*(pfn_get_proc_addr)(void*, const char*));");
-    println!(
-        "{}",
-        "void vkl_load_instance_functions(VkInstance instance);"
+"#
     );
-    println!("{}", "void vkl_load_device_functions(VkDevice device);\n\n");
+    println!("\n\nVkResult vkl_init(PFN_vkGetInstanceProcAddr);");
+    println!("void vkl_load_instance_functions(VkInstance instance);");
+    println!(
+        "void vkl_load_device_functions(VkDevice device, struct VklDeviceFunctions* fnptrs);\n\n"
+    );
 
-    println!("#ifdef VKL_IMPL");
     write_cmds(&ext, commands);
-    println!("#endif");
-        println!(r#"
+
+    println!(
+        r#"
 #ifdef __cplusplus
 }}
 #endif
-"#);
+"#
+    );
     println!("#endif //A21E2F7E_5464_4B27_8400_EC0EB967B70B");
     //write_structs(&ext, structs);
 }
@@ -308,23 +300,79 @@ fn collect_pairs(args: &[(String, String, String)], n: bool) -> String {
     }
 }
 
-fn write_cmd(name: &String, re: &String, mut args: &Vec<(String, String, String)>) {
-    println!(
-        "VKAPI_ATTR {} VKAPI_CALL {}({}) {{\n\t{}g_vkl_fnptrs.{}({});\n}}",
-        re,
-        name,
-        collect_pairs(&args, false),
-        if re != "void" { "return " } else { "" },
-        name,
-        collect_pairs(&args, true)
-    );
+trait VkFunction {
+    fn is_instance_function(&self) -> bool {
+        if let Some(arg) = self.get_arg() {
+            arg == "VkInstance"
+                || arg == "VkPhysicalDevice"
+                || !arg.starts_with("Vk")
+                || self.get_name() == "vkGetDeviceProcAddr"
+        } else {
+            false
+        }
+    }
+
+    fn get_glob(&self) -> String {
+        let st = if self.is_instance_function() {
+            ""
+        } else {
+            "dfn."
+        };
+        format!("g_vkl_fnptrs.{}{}", st, self.get_name())
+    }
+
+    fn write_cmd(&self) {
+        let name = self.get_name();
+        let re = self.get_re();
+        let args = self.get_args();
+
+        println!(
+            "VKAPI_ATTR {} VKAPI_CALL {}({}) {{\n\t{}{}({});\n}}",
+            re,
+            name,
+            collect_pairs(&args, false),
+            if re != "void" { "return " } else { "" },
+            self.get_glob(),
+            collect_pairs(&args, true)
+        );
+    }
+
+    fn get_name(&self) -> &str;
+    fn get_arg(&self) -> Option<&str>;
+    fn get_args(&self) -> &Vec<(String, String, String)>;
+    fn get_re(&self) -> &str;
 }
 
-fn is_instance_function(func: &str, arg: &str) -> bool {
-    arg == "VkInstance"
-        || arg == "VkPhysicalDevice"
-        || !arg.starts_with("Vk")
-        || func == "vkGetDeviceProcAddr"
+impl VkFunction for (&String, &(String, Vec<(String, String, String)>)) {
+    fn get_name(&self) -> &str {
+        self.0.as_str()
+    }
+    fn get_arg(&self) -> Option<&str> {
+        self.1 .1.first().map(|s| s.0.as_str())
+    }
+
+    fn get_args(&self) -> &Vec<(String, String, String)> {
+        &self.1 .1
+    }
+
+    fn get_re(&self) -> &str {
+        &self.1 .0
+    }
+}
+
+impl VkFunction for &(String, String, Vec<(String, String, String)>) {
+    fn get_name(&self) -> &str {
+        self.0.as_str()
+    }
+    fn get_arg(&self) -> Option<&str> {
+        self.2.first().map(|s| s.0.as_str())
+    }
+    fn get_args(&self) -> &Vec<(String, String, String)> {
+        &self.2
+    }
+    fn get_re(&self) -> &str {
+        &self.1
+    }
 }
 
 fn write_cmds(
@@ -351,29 +399,59 @@ fn write_cmds(
     }
 
     {
-        println!("struct {{");
-        for (name, _) in inmap.iter() {
-            println!("\tPFN_{} {};", name, name);
-        }
+        println!("struct VklDeviceFunctions {{");
 
+        for f in inmap.iter() {
+            if !f.is_instance_function() {
+                let name = f.get_name();
+                println!("\tPFN_{} {};", name, name);
+            }
+        }
         for (ext, v) in map.iter() {
             println!("#ifdef {}", ext);
-            for (name, re, args) in v {
-                println!("\tPFN_{} {};", name, name);
+            for f in v {
+                if !f.is_instance_function() {
+                    let name = f.get_name();
+                    println!("\tPFN_{} {};", name, name);
+                }
             }
             println!("#endif");
         }
-        println!("}} g_vkl_fnptrs;")
-    }
 
-    {
-        for (name, (re, args)) in inmap.iter() {
-            write_cmd(name, re, args);
+        println!("}};");
+
+        println!("struct VklFunctions {{");
+
+        for f in inmap.iter() {
+            if f.is_instance_function() {
+                let name = f.get_name();
+                println!("\tPFN_{} {};", name, name);
+            }
         }
         for (ext, v) in map.iter() {
             println!("#ifdef {}", ext);
-            for (name, re, args) in v {
-                write_cmd(name, re, args);
+            for f in v {
+                if f.is_instance_function() {
+                    let name = f.get_name();
+                    println!("\tPFN_{} {};", name, name);
+                }
+            }
+            println!("#endif");
+        }
+
+        println!("\tVklDeviceFunctions dfn;");
+        println!("}};");
+    }
+    println!("#ifdef VKL_IMPL");
+    println!("static struct VklFunctions g_vkl_fnptrs;");
+    {
+        for f in inmap.iter() {
+            f.write_cmd();
+        }
+        for (ext, v) in map.iter() {
+            println!("#ifdef {}", ext);
+            for f in v {
+                f.write_cmd();
             }
             println!("#endif");
         }
@@ -382,24 +460,19 @@ fn write_cmds(
     println!(
         "{}",
         r#"
-      VkResult vkl_init(void* (*pfn_load_lib)(const char*), void*(pfn_get_proc_addr)(void*, const char*))
+      VkResult vkl_init(PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr)
       {
-          void* lib = pfn_load_lib(VULKAN_LIBRARY_NAME);
-          if (!lib)
+          if (!vkGetInstanceProcAddr)
           {
               return VK_ERROR_INITIALIZATION_FAILED;
           }
-          g_vkl_fnptrs.vkGetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)pfn_get_proc_addr(lib, "vkGetInstanceProcAddr");
+          
+          g_vkl_fnptrs.vkGetInstanceProcAddr = vkGetInstanceProcAddr;
 
-          if (!g_vkl_fnptrs.vkGetInstanceProcAddr)
-          {
-              return VK_ERROR_INITIALIZATION_FAILED;
-          }
-
-          g_vkl_fnptrs.vkCreateInstance                       = (PFN_vkCreateInstance)g_vkl_fnptrs.vkGetInstanceProcAddr(0, "vkCreateInstance");
-          g_vkl_fnptrs.vkEnumerateInstanceVersion             = (PFN_vkEnumerateInstanceVersion)g_vkl_fnptrs.vkGetInstanceProcAddr(0, "vkEnumerateInstanceVersion");
-          g_vkl_fnptrs.vkEnumerateInstanceLayerProperties     = (PFN_vkEnumerateInstanceLayerProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(0, "vkEnumerateInstanceLayerProperties");
-          g_vkl_fnptrs.vkEnumerateInstanceExtensionProperties = (PFN_vkEnumerateInstanceExtensionProperties)g_vkl_fnptrs.vkGetInstanceProcAddr(0, "vkEnumerateInstanceExtensionProperties");
+          g_vkl_fnptrs.vkCreateInstance                       = (PFN_vkCreateInstance)vkGetInstanceProcAddr(0, "vkCreateInstance");
+          g_vkl_fnptrs.vkEnumerateInstanceVersion             = (PFN_vkEnumerateInstanceVersion)vkGetInstanceProcAddr(0, "vkEnumerateInstanceVersion");
+          g_vkl_fnptrs.vkEnumerateInstanceLayerProperties     = (PFN_vkEnumerateInstanceLayerProperties)vkGetInstanceProcAddr(0, "vkEnumerateInstanceLayerProperties");
+          g_vkl_fnptrs.vkEnumerateInstanceExtensionProperties = (PFN_vkEnumerateInstanceExtensionProperties)vkGetInstanceProcAddr(0, "vkEnumerateInstanceExtensionProperties");
 
           if (!g_vkl_fnptrs.vkCreateInstance)
           {
@@ -413,69 +486,70 @@ fn write_cmds(
     {
         println!("void vkl_load_instance_functions(VkInstance instance) {{");
 
-        for (name, (re, args)) in inmap.iter() {
-            if is_instance_function(&name, &args[0].0) {
+        for f in inmap.iter() {
+            if f.is_instance_function() {
+                let name = f.get_name();
                 println!(
-                    "\tg_vkl_fnptrs.{} = (PFN_{})g_vkl_fnptrs.vkGetInstanceProcAddr(instance, \"{}\");",
-                    name, name, name
-                )
+                "\tg_vkl_fnptrs.{} = (PFN_{})g_vkl_fnptrs.vkGetInstanceProcAddr(instance, \"{}\");",
+                name, name, name
+            )
             }
         }
 
         for (ext, v) in map.iter() {
-            let mut load = vec![];
-            for (name, re, args) in v.iter() {
-                if is_instance_function(&name, &args[0].0) {
-                    load.push(name);
-                }
-            }
-            if !load.is_empty() {
-                println!("#ifdef {}", ext);
-                for name in load {
+            println!("#ifdef {}", ext);
+            for f in v.iter() {
+                if f.is_instance_function() {
+                    let name = f.get_name();
                     println!(
                         "\tg_vkl_fnptrs.{} = (PFN_{})g_vkl_fnptrs.vkGetInstanceProcAddr(instance, \"{}\");",
                         name, name, name
                     );
                 }
-                println!("#endif");
             }
+            println!("#endif");
         }
-
+        println!("\tvoid vkl_load_device_functions_impl(VkDevice device, PFN_vkGetDeviceProcAddr pfn_load_dev_fn, VklDeviceFunctions* fnptrs);");
+        println!("\tvkl_load_device_functions_impl((VkDevice)instance, (PFN_vkGetDeviceProcAddr)g_vkl_fnptrs.vkGetInstanceProcAddr, &g_vkl_fnptrs.dfn);");
         println!("}}");
     }
 
     {
-        println!("void vkl_load_device_functions(VkDevice device) {{");
-        for (name, (re, args)) in inmap.iter() {
-            if !is_instance_function(&name, &args[0].0) {
+        println!("void vkl_load_device_functions_impl(VkDevice device, PFN_vkGetDeviceProcAddr pfn_load_dev_fn, VklDeviceFunctions* fnptrs) {{");
+
+        for f in inmap.iter() {
+            if !f.is_instance_function() {
+                let name = f.get_name();
                 println!(
-                    "\tg_vkl_fnptrs.{} = (PFN_{})g_vkl_fnptrs.vkGetDeviceProcAddr(device, \"{}\");",
+                    "\tfnptrs->{} = (PFN_{})pfn_load_dev_fn(device, \"{}\");",
                     name, name, name
                 )
             }
         }
 
         for (ext, v) in map.iter() {
-            let mut load = vec![];
-            for (name, re, args) in v.iter() {
-                if !is_instance_function(&name, &args[0].0) {
-                    load.push(name);
-                }
-            }
-            if !load.is_empty() {
-                println!("#ifdef {}", ext);
-                for name in load {
+            println!("#ifdef {}", ext);
+            for f in v.iter() {
+                if !f.is_instance_function() {
+                    let name = f.get_name();
                     println!(
-                        "\tg_vkl_fnptrs.{} = (PFN_{})g_vkl_fnptrs.vkGetDeviceProcAddr(device, \"{}\");",
+                        "\tfnptrs->{} = (PFN_{})pfn_load_dev_fn(device, \"{}\");",
                         name, name, name
                     );
                 }
-                println!("#endif");
             }
+            println!("#endif");
         }
 
         println!("}}");
+
+        println!("void vkl_load_device_functions(VkDevice device, VklDeviceFunctions* fnptrs) {{");
+        println!(
+            "\tvkl_load_device_functions_impl(device, g_vkl_fnptrs.vkGetDeviceProcAddr, fnptrs);"
+        );
+        println!("}}");
     }
+    println!("#endif");
 }
 
 fn write_structs(ext: &Vec<&XmlNode>, mut map: Map<String, String>) {
