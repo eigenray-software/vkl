@@ -286,15 +286,13 @@ extern "C" {{
     //write_structs(&ext, structs);
 }
 
-fn collect_pairs(args: &[(String, String, String)], n: bool) -> String {
+fn collect_pairs<'a, I: Iterator<Item = &'a (String, String, String)>>(args: I, n: bool) -> String {
     if n {
-        args.iter()
-            .map(|(_, n, _)| n.to_string())
+        args.map(|(_, n, _)| n.to_string())
             .collect::<Vec<_>>()
             .join(", ")
     } else {
-        args.iter()
-            .map(|(t, n, arr)| format!("{} {}{}", t, n, arr))
+        args.map(|(t, n, arr)| format!("{} {}{}", t, n, arr))
             .collect::<Vec<_>>()
             .join(", ")
     }
@@ -326,7 +324,7 @@ trait VkFunction {
         } else {
             ""
         };
-        format!("g_vkl_fnptrs.{}{}", st, self.get_name())
+        format!("g_vkl_fnptrs.{}pfn_{}", st, self.get_name())
     }
 
     fn write_cmd(&self) {
@@ -335,13 +333,80 @@ trait VkFunction {
         let args = self.get_args();
 
         println!(
-            "VKAPI_ATTR {} VKAPI_CALL {}({}) {{\n\t{}{}({});\n}}",
+            "VKAPI_ATTR {} VKAPI_CALL {}({}) {{\n\t{} {}({});\n}}",
             re,
             name,
-            collect_pairs(&args, false),
+            collect_pairs(args.iter(), false),
             if re != "void" { "return " } else { "" },
             self.get_glob(),
-            collect_pairs(&args, true)
+            collect_pairs(args.iter(), true)
+        );
+    }
+
+    fn can_write_device_cmd(&self) -> bool {
+        if let Some("VkDevice") = self.get_arg() {
+            return self.is_device_function();
+        }
+
+        false
+    }
+
+    fn write_device_cmd(&self) {
+        if !self.can_write_device_cmd() {
+            return;
+        }
+
+        let name = self.get_name();
+        let re = self.get_re();
+        let args = self.get_args();
+        let dev = if args.len() > 1 { ", " } else { "" };
+        println!(
+            "\t{} {}({}) {{\n\t\t{}pfn_{}(handle{}{});\n\t}}",
+            re,
+            &name[2..],
+            collect_pairs(args.iter().skip(1), false),
+            if re != "void" { "return " } else { "" },
+            name,
+            dev,
+            collect_pairs(args.iter().skip(1), true)
+        );
+    }
+
+    fn can_write_cmd_cmd(&self, handle_name: &str, prefix: &str) -> bool {
+        if !self.is_device_function() {
+            return false;
+        }
+
+        if let Some(arg) = self.get_arg() {
+            if arg != handle_name {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        true
+    }
+
+    fn write_cmd_cmd(&self, handle_name: &str, prefix: &str) {
+        if !self.can_write_cmd_cmd(handle_name, prefix) {
+            return;
+        }
+
+        let name = self.get_name();
+        let re = self.get_re();
+        let args = self.get_args();
+        let dev = if args.len() > 1 { ", " } else { "" };
+        let name2 = name.replace(&handle_name[2..], "");
+
+        println!(
+            "\t{} {}({}) {{\n\t\t{}fnptrs->pfn_{}(handle{}{});\n\t}}",
+            re,
+            &name2[2 + ((name2.starts_with(prefix) as usize) * (prefix.len() - 2))..],
+            collect_pairs(args.iter().skip(1), false),
+            if re != "void" { "return " } else { "" },
+            name,
+            dev,
+            collect_pairs(args.iter().skip(1), true)
         );
     }
 
@@ -408,43 +473,128 @@ fn write_cmds(
 
     {
         println!("struct VklDeviceFunctions {{");
+        println!("\tVkDevice handle;");
 
         for f in inmap.iter() {
             if f.is_device_function() {
                 let name = f.get_name();
-                println!("\tPFN_{} {};", name, name);
+                println!("\tPFN_{} pfn_{};", name, name);
             }
         }
+
+        for (ext, v) in map.iter() {
+            let it = v.iter().filter(|f| f.is_device_function());
+
+            if it.clone().count() > 0 {
+                println!("#ifdef {}", ext);
+                for f in it {
+                    let name = f.get_name();
+                    println!("\tPFN_{} pfn_{};", name, name);
+                }
+                println!("#endif");
+            }
+        }
+
+        println!("#ifdef __cplusplus");
+
+        for f in inmap.iter() {
+            f.write_device_cmd();
+        }
+
         for (ext, v) in map.iter() {
             println!("#ifdef {}", ext);
             for f in v {
-                if f.is_device_function() {
-                    let name = f.get_name();
-                    println!("\tPFN_{} {};", name, name);
-                }
+                f.write_device_cmd();
             }
             println!("#endif");
         }
 
+        println!("#endif");
+
+        println!("}};");
+    }
+
+    {
+        println!("#ifdef __cplusplus");
+        println!("struct VklCommandFunctions {{");
+        println!("\tVklDeviceFunctions* fnptrs;");
+        println!("\tVkCommandBuffer handle;");
+
+        let handle = "VkCommandBuffer";
+        let prefix = "vkCmd";
+
+        for f in inmap.iter() {
+            f.write_cmd_cmd(handle, prefix);
+        }
+
+        for (ext, v) in map.iter() {
+            let it = v.iter().filter(|f| f.can_write_cmd_cmd(handle, prefix));
+            if it.clone().count() > 0 {
+                println!("#ifdef {}", ext);
+                for f in it {
+                    f.write_cmd_cmd(handle, prefix);
+                }
+                println!("#endif");
+            }
+        }
+
         println!("}};");
 
+        println!("#endif");
+    }
+
+    {
+        println!("#ifdef __cplusplus");
+        println!("struct VklQueueFunctions {{");
+        println!("\tVklDeviceFunctions* fnptrs;");
+        println!("\tVkQueue handle;");
+
+        let handle = "VkQueue";
+        let prefix = "vkQueue";
+
+        for f in inmap.iter() {
+            f.write_cmd_cmd(handle, prefix);
+        }
+
+        for (ext, v) in map.iter() {
+            let it = v.iter().filter(|f| f.can_write_cmd_cmd(handle, prefix));
+            if it.clone().count() > 0 {
+                println!("#ifdef {}", ext);
+                for f in it {
+                    f.write_cmd_cmd(handle, prefix);
+                }
+                println!("#endif");
+            }
+        }
+
+        println!("}};");
+
+        println!("#endif");
+    }
+
+    {
         println!("struct VklFunctions {{");
 
         for f in inmap.iter() {
             if f.is_instance_function() || f.is_global_function() {
                 let name = f.get_name();
-                println!("\tPFN_{} {};", name, name);
+                println!("\tPFN_{} pfn_{};", name, name);
             }
         }
+
         for (ext, v) in map.iter() {
-            println!("#ifdef {}", ext);
-            for f in v {
-                if f.is_instance_function() || f.is_global_function() {
+            let it = v
+                .iter()
+                .filter(|f| f.is_instance_function() || f.is_global_function());
+
+            if it.clone().count() > 0 {
+                println!("#ifdef {}", ext);
+                for f in it {
                     let name = f.get_name();
-                    println!("\tPFN_{} {};", name, name);
+                    println!("\tPFN_{} pfn_{};", name, name);
                 }
+                println!("#endif");
             }
-            println!("#endif");
         }
 
         println!("\tVklDeviceFunctions dfn;");
@@ -475,14 +625,14 @@ fn write_cmds(
               return VK_ERROR_INITIALIZATION_FAILED;
           }
           
-          g_vkl_fnptrs.vkGetInstanceProcAddr = vkGetInstanceProcAddr;
+          g_vkl_fnptrs.pfn_vkGetInstanceProcAddr = vkGetInstanceProcAddr;
 
-          g_vkl_fnptrs.vkCreateInstance                       = (PFN_vkCreateInstance)vkGetInstanceProcAddr(0, "vkCreateInstance");
-          g_vkl_fnptrs.vkEnumerateInstanceVersion             = (PFN_vkEnumerateInstanceVersion)vkGetInstanceProcAddr(0, "vkEnumerateInstanceVersion");
-          g_vkl_fnptrs.vkEnumerateInstanceLayerProperties     = (PFN_vkEnumerateInstanceLayerProperties)vkGetInstanceProcAddr(0, "vkEnumerateInstanceLayerProperties");
-          g_vkl_fnptrs.vkEnumerateInstanceExtensionProperties = (PFN_vkEnumerateInstanceExtensionProperties)vkGetInstanceProcAddr(0, "vkEnumerateInstanceExtensionProperties");
+          g_vkl_fnptrs.pfn_vkCreateInstance                       = (PFN_vkCreateInstance)vkGetInstanceProcAddr(0, "vkCreateInstance");
+          g_vkl_fnptrs.pfn_vkEnumerateInstanceVersion             = (PFN_vkEnumerateInstanceVersion)vkGetInstanceProcAddr(0, "vkEnumerateInstanceVersion");
+          g_vkl_fnptrs.pfn_vkEnumerateInstanceLayerProperties     = (PFN_vkEnumerateInstanceLayerProperties)vkGetInstanceProcAddr(0, "vkEnumerateInstanceLayerProperties");
+          g_vkl_fnptrs.pfn_vkEnumerateInstanceExtensionProperties = (PFN_vkEnumerateInstanceExtensionProperties)vkGetInstanceProcAddr(0, "vkEnumerateInstanceExtensionProperties");
 
-          if (!g_vkl_fnptrs.vkCreateInstance)
+          if (!g_vkl_fnptrs.pfn_vkCreateInstance)
           {
               return VK_ERROR_INITIALIZATION_FAILED;
           }
@@ -498,7 +648,7 @@ fn write_cmds(
             if f.is_instance_function() {
                 let name = f.get_name();
                 println!(
-                "\tg_vkl_fnptrs.{} = (PFN_{})g_vkl_fnptrs.vkGetInstanceProcAddr(instance, \"{}\");",
+                "\tg_vkl_fnptrs.pfn_{} = (PFN_{})g_vkl_fnptrs.pfn_vkGetInstanceProcAddr(instance, \"{}\");",
                 name, name, name
             )
             }
@@ -510,7 +660,7 @@ fn write_cmds(
                 if f.is_instance_function() {
                     let name = f.get_name();
                     println!(
-                        "\tg_vkl_fnptrs.{} = (PFN_{})g_vkl_fnptrs.vkGetInstanceProcAddr(instance, \"{}\");",
+                        "\tg_vkl_fnptrs.pfn_{} = (PFN_{})g_vkl_fnptrs.pfn_vkGetInstanceProcAddr(instance, \"{}\");",
                         name, name, name
                     );
                 }
@@ -518,18 +668,18 @@ fn write_cmds(
             println!("#endif");
         }
         println!("\tvoid vkl_load_device_functions_impl(VkDevice device, PFN_vkGetDeviceProcAddr pfn_load_dev_fn, VklDeviceFunctions* fnptrs);");
-        println!("\tvkl_load_device_functions_impl((VkDevice)instance, (PFN_vkGetDeviceProcAddr)g_vkl_fnptrs.vkGetInstanceProcAddr, &g_vkl_fnptrs.dfn);");
+        println!("\tvkl_load_device_functions_impl((VkDevice)instance, (PFN_vkGetDeviceProcAddr)g_vkl_fnptrs.pfn_vkGetInstanceProcAddr, &g_vkl_fnptrs.dfn);");
         println!("}}");
     }
 
     {
         println!("void vkl_load_device_functions_impl(VkDevice device, PFN_vkGetDeviceProcAddr pfn_load_dev_fn, VklDeviceFunctions* fnptrs) {{");
-
+        println!("\tfnptrs->handle = device;");
         for f in inmap.iter() {
             if f.is_device_function() {
                 let name = f.get_name();
                 println!(
-                    "\tfnptrs->{} = (PFN_{})pfn_load_dev_fn(device, \"{}\");",
+                    "\tfnptrs->pfn_{} = (PFN_{})pfn_load_dev_fn(device, \"{}\");",
                     name, name, name
                 )
             }
@@ -541,7 +691,7 @@ fn write_cmds(
                 if f.is_device_function() {
                     let name = f.get_name();
                     println!(
-                        "\tfnptrs->{} = (PFN_{})pfn_load_dev_fn(device, \"{}\");",
+                        "\tfnptrs->pfn_{} = (PFN_{})pfn_load_dev_fn(device, \"{}\");",
                         name, name, name
                     );
                 }
@@ -553,7 +703,7 @@ fn write_cmds(
 
         println!("void vkl_load_device_functions(VkDevice device, VklDeviceFunctions* fnptrs) {{");
         println!(
-            "\tvkl_load_device_functions_impl(device, g_vkl_fnptrs.vkGetDeviceProcAddr, fnptrs);"
+            "\tvkl_load_device_functions_impl(device, g_vkl_fnptrs.pfn_vkGetDeviceProcAddr, fnptrs);"
         );
         println!("}}");
     }
