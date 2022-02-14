@@ -361,7 +361,7 @@ trait VkFunction {
         let args = self.get_args();
         let dev = if args.len() > 1 { ", " } else { "" };
         println!(
-            "\t{} {}({}) {{\n\t\t{}pfn_{}(handle{}{});\n\t}}",
+            "\t{} {}({}) {{\n\t\t{}pfn_{}(this->handle{}{});\n\t}}",
             re,
             &name[2..],
             collect_pairs(args.iter().skip(1), false),
@@ -399,7 +399,7 @@ trait VkFunction {
         let name2 = name.replace(&handle_name[2..], "");
 
         println!(
-            "\t{} {}({}) {{\n\t\t{}fnptrs->pfn_{}(handle{}{});\n\t}}",
+            "\t{} {}({}) {{\n\t\t{}fnptrs->pfn_{}(this->handle{}{});\n\t}}",
             re,
             &name2[2 + ((name2.starts_with(prefix) as usize) * (prefix.len() - 2))..],
             collect_pairs(args.iter().skip(1), false),

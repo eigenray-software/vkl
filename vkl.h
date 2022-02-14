@@ -533,305 +533,305 @@ struct VklDeviceFunctions {
 #endif
 #ifdef __cplusplus
 	VkResult DeviceWaitIdle() {
-		return pfn_vkDeviceWaitIdle(handle);
+		return pfn_vkDeviceWaitIdle(this->handle);
 	}
 	void DestroyRenderPass(VkRenderPass renderPass, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyRenderPass(handle, renderPass, pAllocator);
+		pfn_vkDestroyRenderPass(this->handle, renderPass, pAllocator);
 	}
 	VkDeviceAddress GetBufferDeviceAddress(const  VkBufferDeviceAddressInfo * pInfo) {
-		return pfn_vkGetBufferDeviceAddress(handle, pInfo);
+		return pfn_vkGetBufferDeviceAddress(this->handle, pInfo);
 	}
 	VkResult BindBufferMemory2(uint32_t bindInfoCount, const  VkBindBufferMemoryInfo * pBindInfos) {
-		return pfn_vkBindBufferMemory2(handle, bindInfoCount, pBindInfos);
+		return pfn_vkBindBufferMemory2(this->handle, bindInfoCount, pBindInfos);
 	}
 	void GetDeviceImageSparseMemoryRequirements(const  VkDeviceImageMemoryRequirements * pInfo, uint32_t * pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2 * pSparseMemoryRequirements) {
-		pfn_vkGetDeviceImageSparseMemoryRequirements(handle, pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
+		pfn_vkGetDeviceImageSparseMemoryRequirements(this->handle, pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
 	}
 	void DestroyImage(VkImage image, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyImage(handle, image, pAllocator);
+		pfn_vkDestroyImage(this->handle, image, pAllocator);
 	}
 	VkResult WaitSemaphores(const  VkSemaphoreWaitInfo * pWaitInfo, uint64_t timeout) {
-		return pfn_vkWaitSemaphores(handle, pWaitInfo, timeout);
+		return pfn_vkWaitSemaphores(this->handle, pWaitInfo, timeout);
 	}
 	void GetDeviceBufferMemoryRequirements(const  VkDeviceBufferMemoryRequirements * pInfo, VkMemoryRequirements2 * pMemoryRequirements) {
-		pfn_vkGetDeviceBufferMemoryRequirements(handle, pInfo, pMemoryRequirements);
+		pfn_vkGetDeviceBufferMemoryRequirements(this->handle, pInfo, pMemoryRequirements);
 	}
 	VkResult CreateBuffer(const  VkBufferCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkBuffer * pBuffer) {
-		return pfn_vkCreateBuffer(handle, pCreateInfo, pAllocator, pBuffer);
+		return pfn_vkCreateBuffer(this->handle, pCreateInfo, pAllocator, pBuffer);
 	}
 	void DestroyDescriptorPool(VkDescriptorPool descriptorPool, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyDescriptorPool(handle, descriptorPool, pAllocator);
+		pfn_vkDestroyDescriptorPool(this->handle, descriptorPool, pAllocator);
 	}
 	void DestroyEvent(VkEvent event, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyEvent(handle, event, pAllocator);
+		pfn_vkDestroyEvent(this->handle, event, pAllocator);
 	}
 	VkResult CreatePrivateDataSlot(const  VkPrivateDataSlotCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkPrivateDataSlot * pPrivateDataSlot) {
-		return pfn_vkCreatePrivateDataSlot(handle, pCreateInfo, pAllocator, pPrivateDataSlot);
+		return pfn_vkCreatePrivateDataSlot(this->handle, pCreateInfo, pAllocator, pPrivateDataSlot);
 	}
 	void GetImageMemoryRequirements2(const  VkImageMemoryRequirementsInfo2 * pInfo, VkMemoryRequirements2 * pMemoryRequirements) {
-		pfn_vkGetImageMemoryRequirements2(handle, pInfo, pMemoryRequirements);
+		pfn_vkGetImageMemoryRequirements2(this->handle, pInfo, pMemoryRequirements);
 	}
 	VkResult CreateSampler(const  VkSamplerCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkSampler * pSampler) {
-		return pfn_vkCreateSampler(handle, pCreateInfo, pAllocator, pSampler);
+		return pfn_vkCreateSampler(this->handle, pCreateInfo, pAllocator, pSampler);
 	}
 	void DestroyDescriptorUpdateTemplate(VkDescriptorUpdateTemplate descriptorUpdateTemplate, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyDescriptorUpdateTemplate(handle, descriptorUpdateTemplate, pAllocator);
+		pfn_vkDestroyDescriptorUpdateTemplate(this->handle, descriptorUpdateTemplate, pAllocator);
 	}
 	void GetImageSparseMemoryRequirements(VkImage image, uint32_t * pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements * pSparseMemoryRequirements) {
-		pfn_vkGetImageSparseMemoryRequirements(handle, image, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
+		pfn_vkGetImageSparseMemoryRequirements(this->handle, image, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
 	}
 	VkResult SetEvent(VkEvent event) {
-		return pfn_vkSetEvent(handle, event);
+		return pfn_vkSetEvent(this->handle, event);
 	}
 	VkResult ResetEvent(VkEvent event) {
-		return pfn_vkResetEvent(handle, event);
+		return pfn_vkResetEvent(this->handle, event);
 	}
 	VkResult CreateSamplerYcbcrConversion(const  VkSamplerYcbcrConversionCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkSamplerYcbcrConversion * pYcbcrConversion) {
-		return pfn_vkCreateSamplerYcbcrConversion(handle, pCreateInfo, pAllocator, pYcbcrConversion);
+		return pfn_vkCreateSamplerYcbcrConversion(this->handle, pCreateInfo, pAllocator, pYcbcrConversion);
 	}
 	void GetBufferMemoryRequirements(VkBuffer buffer, VkMemoryRequirements * pMemoryRequirements) {
-		pfn_vkGetBufferMemoryRequirements(handle, buffer, pMemoryRequirements);
+		pfn_vkGetBufferMemoryRequirements(this->handle, buffer, pMemoryRequirements);
 	}
 	VkResult ResetCommandPool(VkCommandPool commandPool, VkCommandPoolResetFlags flags) {
-		return pfn_vkResetCommandPool(handle, commandPool, flags);
+		return pfn_vkResetCommandPool(this->handle, commandPool, flags);
 	}
 	void TrimCommandPool(VkCommandPool commandPool, VkCommandPoolTrimFlags flags) {
-		pfn_vkTrimCommandPool(handle, commandPool, flags);
+		pfn_vkTrimCommandPool(this->handle, commandPool, flags);
 	}
 	void GetDeviceGroupPeerMemoryFeatures(uint32_t heapIndex, uint32_t localDeviceIndex, uint32_t remoteDeviceIndex, VkPeerMemoryFeatureFlags * pPeerMemoryFeatures) {
-		pfn_vkGetDeviceGroupPeerMemoryFeatures(handle, heapIndex, localDeviceIndex, remoteDeviceIndex, pPeerMemoryFeatures);
+		pfn_vkGetDeviceGroupPeerMemoryFeatures(this->handle, heapIndex, localDeviceIndex, remoteDeviceIndex, pPeerMemoryFeatures);
 	}
 	VkResult CreateGraphicsPipelines(VkPipelineCache pipelineCache, uint32_t createInfoCount, const  VkGraphicsPipelineCreateInfo * pCreateInfos, const  VkAllocationCallbacks * pAllocator, VkPipeline * pPipelines) {
-		return pfn_vkCreateGraphicsPipelines(handle, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines);
+		return pfn_vkCreateGraphicsPipelines(this->handle, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines);
 	}
 	void DestroyImageView(VkImageView imageView, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyImageView(handle, imageView, pAllocator);
+		pfn_vkDestroyImageView(this->handle, imageView, pAllocator);
 	}
 	void GetImageSparseMemoryRequirements2(const  VkImageSparseMemoryRequirementsInfo2 * pInfo, uint32_t * pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2 * pSparseMemoryRequirements) {
-		pfn_vkGetImageSparseMemoryRequirements2(handle, pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
+		pfn_vkGetImageSparseMemoryRequirements2(this->handle, pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
 	}
 	VkResult CreateDescriptorUpdateTemplate(const  VkDescriptorUpdateTemplateCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkDescriptorUpdateTemplate * pDescriptorUpdateTemplate) {
-		return pfn_vkCreateDescriptorUpdateTemplate(handle, pCreateInfo, pAllocator, pDescriptorUpdateTemplate);
+		return pfn_vkCreateDescriptorUpdateTemplate(this->handle, pCreateInfo, pAllocator, pDescriptorUpdateTemplate);
 	}
 	VkResult CreatePipelineCache(const  VkPipelineCacheCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkPipelineCache * pPipelineCache) {
-		return pfn_vkCreatePipelineCache(handle, pCreateInfo, pAllocator, pPipelineCache);
+		return pfn_vkCreatePipelineCache(this->handle, pCreateInfo, pAllocator, pPipelineCache);
 	}
 	VkResult BindBufferMemory(VkBuffer buffer, VkDeviceMemory memory, VkDeviceSize memoryOffset) {
-		return pfn_vkBindBufferMemory(handle, buffer, memory, memoryOffset);
+		return pfn_vkBindBufferMemory(this->handle, buffer, memory, memoryOffset);
 	}
 	void UpdateDescriptorSetWithTemplate(VkDescriptorSet descriptorSet, VkDescriptorUpdateTemplate descriptorUpdateTemplate, const  void * pData) {
-		pfn_vkUpdateDescriptorSetWithTemplate(handle, descriptorSet, descriptorUpdateTemplate, pData);
+		pfn_vkUpdateDescriptorSetWithTemplate(this->handle, descriptorSet, descriptorUpdateTemplate, pData);
 	}
 	VkResult ResetFences(uint32_t fenceCount, const  VkFence * pFences) {
-		return pfn_vkResetFences(handle, fenceCount, pFences);
+		return pfn_vkResetFences(this->handle, fenceCount, pFences);
 	}
 	VkResult AllocateMemory(const  VkMemoryAllocateInfo * pAllocateInfo, const  VkAllocationCallbacks * pAllocator, VkDeviceMemory * pMemory) {
-		return pfn_vkAllocateMemory(handle, pAllocateInfo, pAllocator, pMemory);
+		return pfn_vkAllocateMemory(this->handle, pAllocateInfo, pAllocator, pMemory);
 	}
 	VkResult SetPrivateData(VkObjectType objectType, uint64_t objectHandle, VkPrivateDataSlot privateDataSlot, uint64_t data) {
-		return pfn_vkSetPrivateData(handle, objectType, objectHandle, privateDataSlot, data);
+		return pfn_vkSetPrivateData(this->handle, objectType, objectHandle, privateDataSlot, data);
 	}
 	VkResult CreateImage(const  VkImageCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkImage * pImage) {
-		return pfn_vkCreateImage(handle, pCreateInfo, pAllocator, pImage);
+		return pfn_vkCreateImage(this->handle, pCreateInfo, pAllocator, pImage);
 	}
 	VkResult CreateRenderPass2(const  VkRenderPassCreateInfo2 * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkRenderPass * pRenderPass) {
-		return pfn_vkCreateRenderPass2(handle, pCreateInfo, pAllocator, pRenderPass);
+		return pfn_vkCreateRenderPass2(this->handle, pCreateInfo, pAllocator, pRenderPass);
 	}
 	VkResult CreateQueryPool(const  VkQueryPoolCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkQueryPool * pQueryPool) {
-		return pfn_vkCreateQueryPool(handle, pCreateInfo, pAllocator, pQueryPool);
+		return pfn_vkCreateQueryPool(this->handle, pCreateInfo, pAllocator, pQueryPool);
 	}
 	void DestroyBuffer(VkBuffer buffer, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyBuffer(handle, buffer, pAllocator);
+		pfn_vkDestroyBuffer(this->handle, buffer, pAllocator);
 	}
 	void DestroyDevice(const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyDevice(handle, pAllocator);
+		pfn_vkDestroyDevice(this->handle, pAllocator);
 	}
 	void ResetQueryPool(VkQueryPool queryPool, uint32_t firstQuery, uint32_t queryCount) {
-		pfn_vkResetQueryPool(handle, queryPool, firstQuery, queryCount);
+		pfn_vkResetQueryPool(this->handle, queryPool, firstQuery, queryCount);
 	}
 	VkResult MergePipelineCaches(VkPipelineCache dstCache, uint32_t srcCacheCount, const  VkPipelineCache * pSrcCaches) {
-		return pfn_vkMergePipelineCaches(handle, dstCache, srcCacheCount, pSrcCaches);
+		return pfn_vkMergePipelineCaches(this->handle, dstCache, srcCacheCount, pSrcCaches);
 	}
 	void FreeCommandBuffers(VkCommandPool commandPool, uint32_t commandBufferCount, const  VkCommandBuffer * pCommandBuffers) {
-		pfn_vkFreeCommandBuffers(handle, commandPool, commandBufferCount, pCommandBuffers);
+		pfn_vkFreeCommandBuffers(this->handle, commandPool, commandBufferCount, pCommandBuffers);
 	}
 	void DestroyPipeline(VkPipeline pipeline, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyPipeline(handle, pipeline, pAllocator);
+		pfn_vkDestroyPipeline(this->handle, pipeline, pAllocator);
 	}
 	VkResult CreateBufferView(const  VkBufferViewCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkBufferView * pView) {
-		return pfn_vkCreateBufferView(handle, pCreateInfo, pAllocator, pView);
+		return pfn_vkCreateBufferView(this->handle, pCreateInfo, pAllocator, pView);
 	}
 	VkResult GetQueryPoolResults(VkQueryPool queryPool, uint32_t firstQuery, uint32_t queryCount, size_t dataSize, void * pData, VkDeviceSize stride, VkQueryResultFlags flags) {
-		return pfn_vkGetQueryPoolResults(handle, queryPool, firstQuery, queryCount, dataSize, pData, stride, flags);
+		return pfn_vkGetQueryPoolResults(this->handle, queryPool, firstQuery, queryCount, dataSize, pData, stride, flags);
 	}
 	uint64_t GetDeviceMemoryOpaqueCaptureAddress(const  VkDeviceMemoryOpaqueCaptureAddressInfo * pInfo) {
-		return pfn_vkGetDeviceMemoryOpaqueCaptureAddress(handle, pInfo);
+		return pfn_vkGetDeviceMemoryOpaqueCaptureAddress(this->handle, pInfo);
 	}
 	VkResult MapMemory(VkDeviceMemory memory, VkDeviceSize offset, VkDeviceSize size, VkMemoryMapFlags flags, void * * ppData) {
-		return pfn_vkMapMemory(handle, memory, offset, size, flags, ppData);
+		return pfn_vkMapMemory(this->handle, memory, offset, size, flags, ppData);
 	}
 	VkResult FlushMappedMemoryRanges(uint32_t memoryRangeCount, const  VkMappedMemoryRange * pMemoryRanges) {
-		return pfn_vkFlushMappedMemoryRanges(handle, memoryRangeCount, pMemoryRanges);
+		return pfn_vkFlushMappedMemoryRanges(this->handle, memoryRangeCount, pMemoryRanges);
 	}
 	void UpdateDescriptorSets(uint32_t descriptorWriteCount, const  VkWriteDescriptorSet * pDescriptorWrites, uint32_t descriptorCopyCount, const  VkCopyDescriptorSet * pDescriptorCopies) {
-		pfn_vkUpdateDescriptorSets(handle, descriptorWriteCount, pDescriptorWrites, descriptorCopyCount, pDescriptorCopies);
+		pfn_vkUpdateDescriptorSets(this->handle, descriptorWriteCount, pDescriptorWrites, descriptorCopyCount, pDescriptorCopies);
 	}
 	VkResult CreateDescriptorSetLayout(const  VkDescriptorSetLayoutCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkDescriptorSetLayout * pSetLayout) {
-		return pfn_vkCreateDescriptorSetLayout(handle, pCreateInfo, pAllocator, pSetLayout);
+		return pfn_vkCreateDescriptorSetLayout(this->handle, pCreateInfo, pAllocator, pSetLayout);
 	}
 	void GetDeviceImageMemoryRequirements(const  VkDeviceImageMemoryRequirements * pInfo, VkMemoryRequirements2 * pMemoryRequirements) {
-		pfn_vkGetDeviceImageMemoryRequirements(handle, pInfo, pMemoryRequirements);
+		pfn_vkGetDeviceImageMemoryRequirements(this->handle, pInfo, pMemoryRequirements);
 	}
 	void DestroyPipelineLayout(VkPipelineLayout pipelineLayout, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyPipelineLayout(handle, pipelineLayout, pAllocator);
+		pfn_vkDestroyPipelineLayout(this->handle, pipelineLayout, pAllocator);
 	}
 	void DestroyPrivateDataSlot(VkPrivateDataSlot privateDataSlot, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyPrivateDataSlot(handle, privateDataSlot, pAllocator);
+		pfn_vkDestroyPrivateDataSlot(this->handle, privateDataSlot, pAllocator);
 	}
 	void DestroyFramebuffer(VkFramebuffer framebuffer, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyFramebuffer(handle, framebuffer, pAllocator);
+		pfn_vkDestroyFramebuffer(this->handle, framebuffer, pAllocator);
 	}
 	void DestroyCommandPool(VkCommandPool commandPool, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyCommandPool(handle, commandPool, pAllocator);
+		pfn_vkDestroyCommandPool(this->handle, commandPool, pAllocator);
 	}
 	VkResult CreateImageView(const  VkImageViewCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkImageView * pView) {
-		return pfn_vkCreateImageView(handle, pCreateInfo, pAllocator, pView);
+		return pfn_vkCreateImageView(this->handle, pCreateInfo, pAllocator, pView);
 	}
 	void GetDeviceQueue2(const  VkDeviceQueueInfo2 * pQueueInfo, VkQueue * pQueue) {
-		pfn_vkGetDeviceQueue2(handle, pQueueInfo, pQueue);
+		pfn_vkGetDeviceQueue2(this->handle, pQueueInfo, pQueue);
 	}
 	void DestroyShaderModule(VkShaderModule shaderModule, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyShaderModule(handle, shaderModule, pAllocator);
+		pfn_vkDestroyShaderModule(this->handle, shaderModule, pAllocator);
 	}
 	VkResult InvalidateMappedMemoryRanges(uint32_t memoryRangeCount, const  VkMappedMemoryRange * pMemoryRanges) {
-		return pfn_vkInvalidateMappedMemoryRanges(handle, memoryRangeCount, pMemoryRanges);
+		return pfn_vkInvalidateMappedMemoryRanges(this->handle, memoryRangeCount, pMemoryRanges);
 	}
 	VkResult CreateShaderModule(const  VkShaderModuleCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkShaderModule * pShaderModule) {
-		return pfn_vkCreateShaderModule(handle, pCreateInfo, pAllocator, pShaderModule);
+		return pfn_vkCreateShaderModule(this->handle, pCreateInfo, pAllocator, pShaderModule);
 	}
 	void GetRenderAreaGranularity(VkRenderPass renderPass, VkExtent2D * pGranularity) {
-		pfn_vkGetRenderAreaGranularity(handle, renderPass, pGranularity);
+		pfn_vkGetRenderAreaGranularity(this->handle, renderPass, pGranularity);
 	}
 	void DestroySampler(VkSampler sampler, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroySampler(handle, sampler, pAllocator);
+		pfn_vkDestroySampler(this->handle, sampler, pAllocator);
 	}
 	void GetPrivateData(VkObjectType objectType, uint64_t objectHandle, VkPrivateDataSlot privateDataSlot, uint64_t * pData) {
-		pfn_vkGetPrivateData(handle, objectType, objectHandle, privateDataSlot, pData);
+		pfn_vkGetPrivateData(this->handle, objectType, objectHandle, privateDataSlot, pData);
 	}
 	void UnmapMemory(VkDeviceMemory memory) {
-		pfn_vkUnmapMemory(handle, memory);
+		pfn_vkUnmapMemory(this->handle, memory);
 	}
 	void GetImageMemoryRequirements(VkImage image, VkMemoryRequirements * pMemoryRequirements) {
-		pfn_vkGetImageMemoryRequirements(handle, image, pMemoryRequirements);
+		pfn_vkGetImageMemoryRequirements(this->handle, image, pMemoryRequirements);
 	}
 	VkResult CreateFramebuffer(const  VkFramebufferCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkFramebuffer * pFramebuffer) {
-		return pfn_vkCreateFramebuffer(handle, pCreateInfo, pAllocator, pFramebuffer);
+		return pfn_vkCreateFramebuffer(this->handle, pCreateInfo, pAllocator, pFramebuffer);
 	}
 	void DestroySamplerYcbcrConversion(VkSamplerYcbcrConversion ycbcrConversion, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroySamplerYcbcrConversion(handle, ycbcrConversion, pAllocator);
+		pfn_vkDestroySamplerYcbcrConversion(this->handle, ycbcrConversion, pAllocator);
 	}
 	void GetImageSubresourceLayout(VkImage image, const  VkImageSubresource * pSubresource, VkSubresourceLayout * pLayout) {
-		pfn_vkGetImageSubresourceLayout(handle, image, pSubresource, pLayout);
+		pfn_vkGetImageSubresourceLayout(this->handle, image, pSubresource, pLayout);
 	}
 	VkResult BindImageMemory(VkImage image, VkDeviceMemory memory, VkDeviceSize memoryOffset) {
-		return pfn_vkBindImageMemory(handle, image, memory, memoryOffset);
+		return pfn_vkBindImageMemory(this->handle, image, memory, memoryOffset);
 	}
 	void DestroySemaphore(VkSemaphore semaphore, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroySemaphore(handle, semaphore, pAllocator);
+		pfn_vkDestroySemaphore(this->handle, semaphore, pAllocator);
 	}
 	void DestroyDescriptorSetLayout(VkDescriptorSetLayout descriptorSetLayout, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyDescriptorSetLayout(handle, descriptorSetLayout, pAllocator);
+		pfn_vkDestroyDescriptorSetLayout(this->handle, descriptorSetLayout, pAllocator);
 	}
 	void GetDeviceQueue(uint32_t queueFamilyIndex, uint32_t queueIndex, VkQueue * pQueue) {
-		pfn_vkGetDeviceQueue(handle, queueFamilyIndex, queueIndex, pQueue);
+		pfn_vkGetDeviceQueue(this->handle, queueFamilyIndex, queueIndex, pQueue);
 	}
 	void DestroyFence(VkFence fence, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyFence(handle, fence, pAllocator);
+		pfn_vkDestroyFence(this->handle, fence, pAllocator);
 	}
 	VkResult CreatePipelineLayout(const  VkPipelineLayoutCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkPipelineLayout * pPipelineLayout) {
-		return pfn_vkCreatePipelineLayout(handle, pCreateInfo, pAllocator, pPipelineLayout);
+		return pfn_vkCreatePipelineLayout(this->handle, pCreateInfo, pAllocator, pPipelineLayout);
 	}
 	VkResult SignalSemaphore(const  VkSemaphoreSignalInfo * pSignalInfo) {
-		return pfn_vkSignalSemaphore(handle, pSignalInfo);
+		return pfn_vkSignalSemaphore(this->handle, pSignalInfo);
 	}
 	void DestroyPipelineCache(VkPipelineCache pipelineCache, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyPipelineCache(handle, pipelineCache, pAllocator);
+		pfn_vkDestroyPipelineCache(this->handle, pipelineCache, pAllocator);
 	}
 	VkResult GetEventStatus(VkEvent event) {
-		return pfn_vkGetEventStatus(handle, event);
+		return pfn_vkGetEventStatus(this->handle, event);
 	}
 	void GetBufferMemoryRequirements2(const  VkBufferMemoryRequirementsInfo2 * pInfo, VkMemoryRequirements2 * pMemoryRequirements) {
-		pfn_vkGetBufferMemoryRequirements2(handle, pInfo, pMemoryRequirements);
+		pfn_vkGetBufferMemoryRequirements2(this->handle, pInfo, pMemoryRequirements);
 	}
 	VkResult ResetDescriptorPool(VkDescriptorPool descriptorPool, VkDescriptorPoolResetFlags flags) {
-		return pfn_vkResetDescriptorPool(handle, descriptorPool, flags);
+		return pfn_vkResetDescriptorPool(this->handle, descriptorPool, flags);
 	}
 	VkResult CreateEvent(const  VkEventCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkEvent * pEvent) {
-		return pfn_vkCreateEvent(handle, pCreateInfo, pAllocator, pEvent);
+		return pfn_vkCreateEvent(this->handle, pCreateInfo, pAllocator, pEvent);
 	}
 	void DestroyBufferView(VkBufferView bufferView, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyBufferView(handle, bufferView, pAllocator);
+		pfn_vkDestroyBufferView(this->handle, bufferView, pAllocator);
 	}
 	VkResult FreeDescriptorSets(VkDescriptorPool descriptorPool, uint32_t descriptorSetCount, const  VkDescriptorSet * pDescriptorSets) {
-		return pfn_vkFreeDescriptorSets(handle, descriptorPool, descriptorSetCount, pDescriptorSets);
+		return pfn_vkFreeDescriptorSets(this->handle, descriptorPool, descriptorSetCount, pDescriptorSets);
 	}
 	VkResult CreateSemaphore(const  VkSemaphoreCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkSemaphore * pSemaphore) {
-		return pfn_vkCreateSemaphore(handle, pCreateInfo, pAllocator, pSemaphore);
+		return pfn_vkCreateSemaphore(this->handle, pCreateInfo, pAllocator, pSemaphore);
 	}
 	VkResult CreateFence(const  VkFenceCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkFence * pFence) {
-		return pfn_vkCreateFence(handle, pCreateInfo, pAllocator, pFence);
+		return pfn_vkCreateFence(this->handle, pCreateInfo, pAllocator, pFence);
 	}
 	VkResult GetPipelineCacheData(VkPipelineCache pipelineCache, size_t * pDataSize, void * pData) {
-		return pfn_vkGetPipelineCacheData(handle, pipelineCache, pDataSize, pData);
+		return pfn_vkGetPipelineCacheData(this->handle, pipelineCache, pDataSize, pData);
 	}
 	VkResult WaitForFences(uint32_t fenceCount, const  VkFence * pFences, VkBool32 waitAll, uint64_t timeout) {
-		return pfn_vkWaitForFences(handle, fenceCount, pFences, waitAll, timeout);
+		return pfn_vkWaitForFences(this->handle, fenceCount, pFences, waitAll, timeout);
 	}
 	VkResult BindImageMemory2(uint32_t bindInfoCount, const  VkBindImageMemoryInfo * pBindInfos) {
-		return pfn_vkBindImageMemory2(handle, bindInfoCount, pBindInfos);
+		return pfn_vkBindImageMemory2(this->handle, bindInfoCount, pBindInfos);
 	}
 	VkResult CreateDescriptorPool(const  VkDescriptorPoolCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkDescriptorPool * pDescriptorPool) {
-		return pfn_vkCreateDescriptorPool(handle, pCreateInfo, pAllocator, pDescriptorPool);
+		return pfn_vkCreateDescriptorPool(this->handle, pCreateInfo, pAllocator, pDescriptorPool);
 	}
 	VkResult AllocateDescriptorSets(const  VkDescriptorSetAllocateInfo * pAllocateInfo, VkDescriptorSet * pDescriptorSets) {
-		return pfn_vkAllocateDescriptorSets(handle, pAllocateInfo, pDescriptorSets);
+		return pfn_vkAllocateDescriptorSets(this->handle, pAllocateInfo, pDescriptorSets);
 	}
 	uint64_t GetBufferOpaqueCaptureAddress(const  VkBufferDeviceAddressInfo * pInfo) {
-		return pfn_vkGetBufferOpaqueCaptureAddress(handle, pInfo);
+		return pfn_vkGetBufferOpaqueCaptureAddress(this->handle, pInfo);
 	}
 	void GetDescriptorSetLayoutSupport(const  VkDescriptorSetLayoutCreateInfo * pCreateInfo, VkDescriptorSetLayoutSupport * pSupport) {
-		pfn_vkGetDescriptorSetLayoutSupport(handle, pCreateInfo, pSupport);
+		pfn_vkGetDescriptorSetLayoutSupport(this->handle, pCreateInfo, pSupport);
 	}
 	VkResult CreateRenderPass(const  VkRenderPassCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkRenderPass * pRenderPass) {
-		return pfn_vkCreateRenderPass(handle, pCreateInfo, pAllocator, pRenderPass);
+		return pfn_vkCreateRenderPass(this->handle, pCreateInfo, pAllocator, pRenderPass);
 	}
 	void FreeMemory(VkDeviceMemory memory, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkFreeMemory(handle, memory, pAllocator);
+		pfn_vkFreeMemory(this->handle, memory, pAllocator);
 	}
 	void GetDeviceMemoryCommitment(VkDeviceMemory memory, VkDeviceSize * pCommittedMemoryInBytes) {
-		pfn_vkGetDeviceMemoryCommitment(handle, memory, pCommittedMemoryInBytes);
+		pfn_vkGetDeviceMemoryCommitment(this->handle, memory, pCommittedMemoryInBytes);
 	}
 	void DestroyQueryPool(VkQueryPool queryPool, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyQueryPool(handle, queryPool, pAllocator);
+		pfn_vkDestroyQueryPool(this->handle, queryPool, pAllocator);
 	}
 	VkResult GetFenceStatus(VkFence fence) {
-		return pfn_vkGetFenceStatus(handle, fence);
+		return pfn_vkGetFenceStatus(this->handle, fence);
 	}
 	VkResult AllocateCommandBuffers(const  VkCommandBufferAllocateInfo * pAllocateInfo, VkCommandBuffer * pCommandBuffers) {
-		return pfn_vkAllocateCommandBuffers(handle, pAllocateInfo, pCommandBuffers);
+		return pfn_vkAllocateCommandBuffers(this->handle, pAllocateInfo, pCommandBuffers);
 	}
 	VkResult CreateComputePipelines(VkPipelineCache pipelineCache, uint32_t createInfoCount, const  VkComputePipelineCreateInfo * pCreateInfos, const  VkAllocationCallbacks * pAllocator, VkPipeline * pPipelines) {
-		return pfn_vkCreateComputePipelines(handle, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines);
+		return pfn_vkCreateComputePipelines(this->handle, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines);
 	}
 	VkResult CreateCommandPool(const  VkCommandPoolCreateInfo * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkCommandPool * pCommandPool) {
-		return pfn_vkCreateCommandPool(handle, pCreateInfo, pAllocator, pCommandPool);
+		return pfn_vkCreateCommandPool(this->handle, pCreateInfo, pAllocator, pCommandPool);
 	}
 	VkResult GetSemaphoreCounterValue(VkSemaphore semaphore, uint64_t * pValue) {
-		return pfn_vkGetSemaphoreCounterValue(handle, semaphore, pValue);
+		return pfn_vkGetSemaphoreCounterValue(this->handle, semaphore, pValue);
 	}
 #ifdef VK_AMD_shader_info
 	VkResult GetShaderInfoAMD(VkPipeline pipeline, VkShaderStageFlagBits shaderStage, VkShaderInfoTypeAMD infoType, size_t * pInfoSize, void * pInfo) {
-		return pfn_vkGetShaderInfoAMD(handle, pipeline, shaderStage, infoType, pInfoSize, pInfo);
+		return pfn_vkGetShaderInfoAMD(this->handle, pipeline, shaderStage, infoType, pInfoSize, pInfo);
 	}
 #endif
 #ifdef VK_AMD_buffer_marker
@@ -840,25 +840,25 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_KHR_external_fence_fd
 	VkResult ImportFenceFdKHR(const  VkImportFenceFdInfoKHR * pImportFenceFdInfo) {
-		return pfn_vkImportFenceFdKHR(handle, pImportFenceFdInfo);
+		return pfn_vkImportFenceFdKHR(this->handle, pImportFenceFdInfo);
 	}
 	VkResult GetFenceFdKHR(const  VkFenceGetFdInfoKHR * pGetFdInfo, int * pFd) {
-		return pfn_vkGetFenceFdKHR(handle, pGetFdInfo, pFd);
+		return pfn_vkGetFenceFdKHR(this->handle, pGetFdInfo, pFd);
 	}
 #endif
 #ifdef VK_EXT_debug_marker
 	VkResult DebugMarkerSetObjectTagEXT(const  VkDebugMarkerObjectTagInfoEXT * pTagInfo) {
-		return pfn_vkDebugMarkerSetObjectTagEXT(handle, pTagInfo);
+		return pfn_vkDebugMarkerSetObjectTagEXT(this->handle, pTagInfo);
 	}
 	VkResult DebugMarkerSetObjectNameEXT(const  VkDebugMarkerObjectNameInfoEXT * pNameInfo) {
-		return pfn_vkDebugMarkerSetObjectNameEXT(handle, pNameInfo);
+		return pfn_vkDebugMarkerSetObjectNameEXT(this->handle, pNameInfo);
 	}
 #endif
 #ifdef VK_EXT_acquire_xlib_display
 #endif
 #ifdef VK_KHR_shared_presentable_image
 	VkResult GetSwapchainStatusKHR(VkSwapchainKHR swapchain) {
-		return pfn_vkGetSwapchainStatusKHR(handle, swapchain);
+		return pfn_vkGetSwapchainStatusKHR(this->handle, swapchain);
 	}
 #endif
 #ifdef VK_NV_shading_rate_image
@@ -867,27 +867,27 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_INTEL_performance_query
 	VkResult InitializePerformanceApiINTEL(const  VkInitializePerformanceApiInfoINTEL * pInitializeInfo) {
-		return pfn_vkInitializePerformanceApiINTEL(handle, pInitializeInfo);
+		return pfn_vkInitializePerformanceApiINTEL(this->handle, pInitializeInfo);
 	}
 	void UninitializePerformanceApiINTEL() {
-		pfn_vkUninitializePerformanceApiINTEL(handle);
+		pfn_vkUninitializePerformanceApiINTEL(this->handle);
 	}
 	VkResult AcquirePerformanceConfigurationINTEL(const  VkPerformanceConfigurationAcquireInfoINTEL * pAcquireInfo, VkPerformanceConfigurationINTEL * pConfiguration) {
-		return pfn_vkAcquirePerformanceConfigurationINTEL(handle, pAcquireInfo, pConfiguration);
+		return pfn_vkAcquirePerformanceConfigurationINTEL(this->handle, pAcquireInfo, pConfiguration);
 	}
 	VkResult ReleasePerformanceConfigurationINTEL(VkPerformanceConfigurationINTEL configuration) {
-		return pfn_vkReleasePerformanceConfigurationINTEL(handle, configuration);
+		return pfn_vkReleasePerformanceConfigurationINTEL(this->handle, configuration);
 	}
 	VkResult GetPerformanceParameterINTEL(VkPerformanceParameterTypeINTEL parameter, VkPerformanceValueINTEL * pValue) {
-		return pfn_vkGetPerformanceParameterINTEL(handle, parameter, pValue);
+		return pfn_vkGetPerformanceParameterINTEL(this->handle, parameter, pValue);
 	}
 #endif
 #ifdef VK_ANDROID_external_memory_android_hardware_buffer
 	VkResult GetAndroidHardwareBufferPropertiesANDROID(const struct AHardwareBuffer * buffer, VkAndroidHardwareBufferPropertiesANDROID * pProperties) {
-		return pfn_vkGetAndroidHardwareBufferPropertiesANDROID(handle, buffer, pProperties);
+		return pfn_vkGetAndroidHardwareBufferPropertiesANDROID(this->handle, buffer, pProperties);
 	}
 	VkResult GetMemoryAndroidHardwareBufferANDROID(const  VkMemoryGetAndroidHardwareBufferInfoANDROID * pInfo, struct AHardwareBuffer * * pBuffer) {
-		return pfn_vkGetMemoryAndroidHardwareBufferANDROID(handle, pInfo, pBuffer);
+		return pfn_vkGetMemoryAndroidHardwareBufferANDROID(this->handle, pInfo, pBuffer);
 	}
 #endif
 #ifdef VK_EXT_direct_mode_display
@@ -904,42 +904,42 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_KHR_pipeline_executable_properties
 	VkResult GetPipelineExecutablePropertiesKHR(const  VkPipelineInfoKHR * pPipelineInfo, uint32_t * pExecutableCount, VkPipelineExecutablePropertiesKHR * pProperties) {
-		return pfn_vkGetPipelineExecutablePropertiesKHR(handle, pPipelineInfo, pExecutableCount, pProperties);
+		return pfn_vkGetPipelineExecutablePropertiesKHR(this->handle, pPipelineInfo, pExecutableCount, pProperties);
 	}
 	VkResult GetPipelineExecutableStatisticsKHR(const  VkPipelineExecutableInfoKHR * pExecutableInfo, uint32_t * pStatisticCount, VkPipelineExecutableStatisticKHR * pStatistics) {
-		return pfn_vkGetPipelineExecutableStatisticsKHR(handle, pExecutableInfo, pStatisticCount, pStatistics);
+		return pfn_vkGetPipelineExecutableStatisticsKHR(this->handle, pExecutableInfo, pStatisticCount, pStatistics);
 	}
 	VkResult GetPipelineExecutableInternalRepresentationsKHR(const  VkPipelineExecutableInfoKHR * pExecutableInfo, uint32_t * pInternalRepresentationCount, VkPipelineExecutableInternalRepresentationKHR * pInternalRepresentations) {
-		return pfn_vkGetPipelineExecutableInternalRepresentationsKHR(handle, pExecutableInfo, pInternalRepresentationCount, pInternalRepresentations);
+		return pfn_vkGetPipelineExecutableInternalRepresentationsKHR(this->handle, pExecutableInfo, pInternalRepresentationCount, pInternalRepresentations);
 	}
 #endif
 #ifdef VK_KHR_video_encode_queue
 #endif
 #ifdef VK_EXT_display_control
 	VkResult DisplayPowerControlEXT(VkDisplayKHR display, const  VkDisplayPowerInfoEXT * pDisplayPowerInfo) {
-		return pfn_vkDisplayPowerControlEXT(handle, display, pDisplayPowerInfo);
+		return pfn_vkDisplayPowerControlEXT(this->handle, display, pDisplayPowerInfo);
 	}
 	VkResult RegisterDeviceEventEXT(const  VkDeviceEventInfoEXT * pDeviceEventInfo, const  VkAllocationCallbacks * pAllocator, VkFence * pFence) {
-		return pfn_vkRegisterDeviceEventEXT(handle, pDeviceEventInfo, pAllocator, pFence);
+		return pfn_vkRegisterDeviceEventEXT(this->handle, pDeviceEventInfo, pAllocator, pFence);
 	}
 	VkResult RegisterDisplayEventEXT(VkDisplayKHR display, const  VkDisplayEventInfoEXT * pDisplayEventInfo, const  VkAllocationCallbacks * pAllocator, VkFence * pFence) {
-		return pfn_vkRegisterDisplayEventEXT(handle, display, pDisplayEventInfo, pAllocator, pFence);
+		return pfn_vkRegisterDisplayEventEXT(this->handle, display, pDisplayEventInfo, pAllocator, pFence);
 	}
 	VkResult GetSwapchainCounterEXT(VkSwapchainKHR swapchain, VkSurfaceCounterFlagBitsEXT counter, uint64_t * pCounterValue) {
-		return pfn_vkGetSwapchainCounterEXT(handle, swapchain, counter, pCounterValue);
+		return pfn_vkGetSwapchainCounterEXT(this->handle, swapchain, counter, pCounterValue);
 	}
 #endif
 #ifdef VK_FUCHSIA_external_memory
 	VkResult GetMemoryZirconHandleFUCHSIA(const  VkMemoryGetZirconHandleInfoFUCHSIA * pGetZirconHandleInfo, zx_handle_t * pZirconHandle) {
-		return pfn_vkGetMemoryZirconHandleFUCHSIA(handle, pGetZirconHandleInfo, pZirconHandle);
+		return pfn_vkGetMemoryZirconHandleFUCHSIA(this->handle, pGetZirconHandleInfo, pZirconHandle);
 	}
 	VkResult GetMemoryZirconHandlePropertiesFUCHSIA(VkExternalMemoryHandleTypeFlagBits handleType, zx_handle_t zirconHandle, VkMemoryZirconHandlePropertiesFUCHSIA * pMemoryZirconHandleProperties) {
-		return pfn_vkGetMemoryZirconHandlePropertiesFUCHSIA(handle, handleType, zirconHandle, pMemoryZirconHandleProperties);
+		return pfn_vkGetMemoryZirconHandlePropertiesFUCHSIA(this->handle, handleType, zirconHandle, pMemoryZirconHandleProperties);
 	}
 #endif
 #ifdef VK_HUAWEI_subpass_shading
 	VkResult GetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI(VkRenderPass renderpass, VkExtent2D * pMaxWorkgroupSize) {
-		return pfn_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI(handle, renderpass, pMaxWorkgroupSize);
+		return pfn_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI(this->handle, renderpass, pMaxWorkgroupSize);
 	}
 #endif
 #ifdef VK_EXT_conditional_rendering
@@ -952,7 +952,7 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_AMD_display_native_hdr
 	void SetLocalDimmingAMD(VkSwapchainKHR swapChain, VkBool32 localDimmingEnable) {
-		pfn_vkSetLocalDimmingAMD(handle, swapChain, localDimmingEnable);
+		pfn_vkSetLocalDimmingAMD(this->handle, swapChain, localDimmingEnable);
 	}
 #endif
 #ifdef VK_NV_external_memory_capabilities
@@ -963,28 +963,28 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_NVX_image_view_handle
 	uint32_t GetImageViewHandleNVX(const  VkImageViewHandleInfoNVX * pInfo) {
-		return pfn_vkGetImageViewHandleNVX(handle, pInfo);
+		return pfn_vkGetImageViewHandleNVX(this->handle, pInfo);
 	}
 	VkResult GetImageViewAddressNVX(VkImageView imageView, VkImageViewAddressPropertiesNVX * pProperties) {
-		return pfn_vkGetImageViewAddressNVX(handle, imageView, pProperties);
+		return pfn_vkGetImageViewAddressNVX(this->handle, imageView, pProperties);
 	}
 #endif
 #ifdef VK_KHR_external_fence_win32
 	VkResult ImportFenceWin32HandleKHR(const  VkImportFenceWin32HandleInfoKHR * pImportFenceWin32HandleInfo) {
-		return pfn_vkImportFenceWin32HandleKHR(handle, pImportFenceWin32HandleInfo);
+		return pfn_vkImportFenceWin32HandleKHR(this->handle, pImportFenceWin32HandleInfo);
 	}
 	VkResult GetFenceWin32HandleKHR(const  VkFenceGetWin32HandleInfoKHR * pGetWin32HandleInfo, HANDLE * pHandle) {
-		return pfn_vkGetFenceWin32HandleKHR(handle, pGetWin32HandleInfo, pHandle);
+		return pfn_vkGetFenceWin32HandleKHR(this->handle, pGetWin32HandleInfo, pHandle);
 	}
 #endif
 #ifdef VK_MVK_ios_surface
 #endif
 #ifdef VK_FUCHSIA_external_semaphore
 	VkResult ImportSemaphoreZirconHandleFUCHSIA(const  VkImportSemaphoreZirconHandleInfoFUCHSIA * pImportSemaphoreZirconHandleInfo) {
-		return pfn_vkImportSemaphoreZirconHandleFUCHSIA(handle, pImportSemaphoreZirconHandleInfo);
+		return pfn_vkImportSemaphoreZirconHandleFUCHSIA(this->handle, pImportSemaphoreZirconHandleInfo);
 	}
 	VkResult GetSemaphoreZirconHandleFUCHSIA(const  VkSemaphoreGetZirconHandleInfoFUCHSIA * pGetZirconHandleInfo, zx_handle_t * pZirconHandle) {
-		return pfn_vkGetSemaphoreZirconHandleFUCHSIA(handle, pGetZirconHandleInfo, pZirconHandle);
+		return pfn_vkGetSemaphoreZirconHandleFUCHSIA(this->handle, pGetZirconHandleInfo, pZirconHandle);
 	}
 #endif
 #ifdef VK_HUAWEI_invocation_mask
@@ -993,15 +993,15 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_EXT_hdr_metadata
 	void SetHdrMetadataEXT(uint32_t swapchainCount, const  VkSwapchainKHR * pSwapchains, const  VkHdrMetadataEXT * pMetadata) {
-		pfn_vkSetHdrMetadataEXT(handle, swapchainCount, pSwapchains, pMetadata);
+		pfn_vkSetHdrMetadataEXT(this->handle, swapchainCount, pSwapchains, pMetadata);
 	}
 #endif
 #ifdef VK_KHR_performance_query
 	VkResult AcquireProfilingLockKHR(const  VkAcquireProfilingLockInfoKHR * pInfo) {
-		return pfn_vkAcquireProfilingLockKHR(handle, pInfo);
+		return pfn_vkAcquireProfilingLockKHR(this->handle, pInfo);
 	}
 	void ReleaseProfilingLockKHR() {
-		pfn_vkReleaseProfilingLockKHR(handle);
+		pfn_vkReleaseProfilingLockKHR(this->handle);
 	}
 #endif
 #ifdef VK_KHR_xlib_surface
@@ -1016,10 +1016,10 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_KHR_external_semaphore_fd
 	VkResult ImportSemaphoreFdKHR(const  VkImportSemaphoreFdInfoKHR * pImportSemaphoreFdInfo) {
-		return pfn_vkImportSemaphoreFdKHR(handle, pImportSemaphoreFdInfo);
+		return pfn_vkImportSemaphoreFdKHR(this->handle, pImportSemaphoreFdInfo);
 	}
 	VkResult GetSemaphoreFdKHR(const  VkSemaphoreGetFdInfoKHR * pGetFdInfo, int * pFd) {
-		return pfn_vkGetSemaphoreFdKHR(handle, pGetFdInfo, pFd);
+		return pfn_vkGetSemaphoreFdKHR(this->handle, pGetFdInfo, pFd);
 	}
 #endif
 #ifdef VK_KHR_synchronization2
@@ -1028,7 +1028,7 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_EXT_calibrated_timestamps
 	VkResult GetCalibratedTimestampsEXT(uint32_t timestampCount, const  VkCalibratedTimestampInfoEXT * pTimestampInfos, uint64_t * pTimestamps, uint64_t * pMaxDeviation) {
-		return pfn_vkGetCalibratedTimestampsEXT(handle, timestampCount, pTimestampInfos, pTimestamps, pMaxDeviation);
+		return pfn_vkGetCalibratedTimestampsEXT(this->handle, timestampCount, pTimestampInfos, pTimestamps, pMaxDeviation);
 	}
 #endif
 #ifdef VK_EXT_metal_surface
@@ -1037,129 +1037,129 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_EXT_external_memory_host
 	VkResult GetMemoryHostPointerPropertiesEXT(VkExternalMemoryHandleTypeFlagBits handleType, const  void * pHostPointer, VkMemoryHostPointerPropertiesEXT * pMemoryHostPointerProperties) {
-		return pfn_vkGetMemoryHostPointerPropertiesEXT(handle, handleType, pHostPointer, pMemoryHostPointerProperties);
+		return pfn_vkGetMemoryHostPointerPropertiesEXT(this->handle, handleType, pHostPointer, pMemoryHostPointerProperties);
 	}
 #endif
 #ifdef VK_NVX_binary_import
 	VkResult CreateCuModuleNVX(const  VkCuModuleCreateInfoNVX * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkCuModuleNVX * pModule) {
-		return pfn_vkCreateCuModuleNVX(handle, pCreateInfo, pAllocator, pModule);
+		return pfn_vkCreateCuModuleNVX(this->handle, pCreateInfo, pAllocator, pModule);
 	}
 	VkResult CreateCuFunctionNVX(const  VkCuFunctionCreateInfoNVX * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkCuFunctionNVX * pFunction) {
-		return pfn_vkCreateCuFunctionNVX(handle, pCreateInfo, pAllocator, pFunction);
+		return pfn_vkCreateCuFunctionNVX(this->handle, pCreateInfo, pAllocator, pFunction);
 	}
 	void DestroyCuModuleNVX(VkCuModuleNVX module, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyCuModuleNVX(handle, module, pAllocator);
+		pfn_vkDestroyCuModuleNVX(this->handle, module, pAllocator);
 	}
 	void DestroyCuFunctionNVX(VkCuFunctionNVX function, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyCuFunctionNVX(handle, function, pAllocator);
+		pfn_vkDestroyCuFunctionNVX(this->handle, function, pAllocator);
 	}
 #endif
 #ifdef VK_EXT_line_rasterization
 #endif
 #ifdef VK_KHR_external_memory_win32
 	VkResult GetMemoryWin32HandleKHR(const  VkMemoryGetWin32HandleInfoKHR * pGetWin32HandleInfo, HANDLE * pHandle) {
-		return pfn_vkGetMemoryWin32HandleKHR(handle, pGetWin32HandleInfo, pHandle);
+		return pfn_vkGetMemoryWin32HandleKHR(this->handle, pGetWin32HandleInfo, pHandle);
 	}
 	VkResult GetMemoryWin32HandlePropertiesKHR(VkExternalMemoryHandleTypeFlagBits handleType, HANDLE handle, VkMemoryWin32HandlePropertiesKHR * pMemoryWin32HandleProperties) {
-		return pfn_vkGetMemoryWin32HandlePropertiesKHR(handle, handleType, handle, pMemoryWin32HandleProperties);
+		return pfn_vkGetMemoryWin32HandlePropertiesKHR(this->handle, handleType, handle, pMemoryWin32HandleProperties);
 	}
 #endif
 #ifdef VK_EXT_validation_cache
 	VkResult CreateValidationCacheEXT(const  VkValidationCacheCreateInfoEXT * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkValidationCacheEXT * pValidationCache) {
-		return pfn_vkCreateValidationCacheEXT(handle, pCreateInfo, pAllocator, pValidationCache);
+		return pfn_vkCreateValidationCacheEXT(this->handle, pCreateInfo, pAllocator, pValidationCache);
 	}
 	void DestroyValidationCacheEXT(VkValidationCacheEXT validationCache, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyValidationCacheEXT(handle, validationCache, pAllocator);
+		pfn_vkDestroyValidationCacheEXT(this->handle, validationCache, pAllocator);
 	}
 	VkResult MergeValidationCachesEXT(VkValidationCacheEXT dstCache, uint32_t srcCacheCount, const  VkValidationCacheEXT * pSrcCaches) {
-		return pfn_vkMergeValidationCachesEXT(handle, dstCache, srcCacheCount, pSrcCaches);
+		return pfn_vkMergeValidationCachesEXT(this->handle, dstCache, srcCacheCount, pSrcCaches);
 	}
 	VkResult GetValidationCacheDataEXT(VkValidationCacheEXT validationCache, size_t * pDataSize, void * pData) {
-		return pfn_vkGetValidationCacheDataEXT(handle, validationCache, pDataSize, pData);
+		return pfn_vkGetValidationCacheDataEXT(this->handle, validationCache, pDataSize, pData);
 	}
 #endif
 #ifdef VK_QNX_screen_surface
 #endif
 #ifdef VK_KHR_acceleration_structure
 	VkResult CreateAccelerationStructureKHR(const  VkAccelerationStructureCreateInfoKHR * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkAccelerationStructureKHR * pAccelerationStructure) {
-		return pfn_vkCreateAccelerationStructureKHR(handle, pCreateInfo, pAllocator, pAccelerationStructure);
+		return pfn_vkCreateAccelerationStructureKHR(this->handle, pCreateInfo, pAllocator, pAccelerationStructure);
 	}
 	void DestroyAccelerationStructureKHR(VkAccelerationStructureKHR accelerationStructure, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyAccelerationStructureKHR(handle, accelerationStructure, pAllocator);
+		pfn_vkDestroyAccelerationStructureKHR(this->handle, accelerationStructure, pAllocator);
 	}
 	VkResult BuildAccelerationStructuresKHR(VkDeferredOperationKHR deferredOperation, uint32_t infoCount, const  VkAccelerationStructureBuildGeometryInfoKHR * pInfos, const  VkAccelerationStructureBuildRangeInfoKHR * const * ppBuildRangeInfos) {
-		return pfn_vkBuildAccelerationStructuresKHR(handle, deferredOperation, infoCount, pInfos, ppBuildRangeInfos);
+		return pfn_vkBuildAccelerationStructuresKHR(this->handle, deferredOperation, infoCount, pInfos, ppBuildRangeInfos);
 	}
 	VkResult CopyAccelerationStructureKHR(VkDeferredOperationKHR deferredOperation, const  VkCopyAccelerationStructureInfoKHR * pInfo) {
-		return pfn_vkCopyAccelerationStructureKHR(handle, deferredOperation, pInfo);
+		return pfn_vkCopyAccelerationStructureKHR(this->handle, deferredOperation, pInfo);
 	}
 	VkResult CopyAccelerationStructureToMemoryKHR(VkDeferredOperationKHR deferredOperation, const  VkCopyAccelerationStructureToMemoryInfoKHR * pInfo) {
-		return pfn_vkCopyAccelerationStructureToMemoryKHR(handle, deferredOperation, pInfo);
+		return pfn_vkCopyAccelerationStructureToMemoryKHR(this->handle, deferredOperation, pInfo);
 	}
 	VkResult CopyMemoryToAccelerationStructureKHR(VkDeferredOperationKHR deferredOperation, const  VkCopyMemoryToAccelerationStructureInfoKHR * pInfo) {
-		return pfn_vkCopyMemoryToAccelerationStructureKHR(handle, deferredOperation, pInfo);
+		return pfn_vkCopyMemoryToAccelerationStructureKHR(this->handle, deferredOperation, pInfo);
 	}
 	VkResult WriteAccelerationStructuresPropertiesKHR(uint32_t accelerationStructureCount, const  VkAccelerationStructureKHR * pAccelerationStructures, VkQueryType queryType, size_t dataSize, void * pData, size_t stride) {
-		return pfn_vkWriteAccelerationStructuresPropertiesKHR(handle, accelerationStructureCount, pAccelerationStructures, queryType, dataSize, pData, stride);
+		return pfn_vkWriteAccelerationStructuresPropertiesKHR(this->handle, accelerationStructureCount, pAccelerationStructures, queryType, dataSize, pData, stride);
 	}
 	VkDeviceAddress GetAccelerationStructureDeviceAddressKHR(const  VkAccelerationStructureDeviceAddressInfoKHR * pInfo) {
-		return pfn_vkGetAccelerationStructureDeviceAddressKHR(handle, pInfo);
+		return pfn_vkGetAccelerationStructureDeviceAddressKHR(this->handle, pInfo);
 	}
 	void GetDeviceAccelerationStructureCompatibilityKHR(const  VkAccelerationStructureVersionInfoKHR * pVersionInfo, VkAccelerationStructureCompatibilityKHR * pCompatibility) {
-		pfn_vkGetDeviceAccelerationStructureCompatibilityKHR(handle, pVersionInfo, pCompatibility);
+		pfn_vkGetDeviceAccelerationStructureCompatibilityKHR(this->handle, pVersionInfo, pCompatibility);
 	}
 	void GetAccelerationStructureBuildSizesKHR(VkAccelerationStructureBuildTypeKHR buildType, const  VkAccelerationStructureBuildGeometryInfoKHR * pBuildInfo, const  uint32_t * pMaxPrimitiveCounts, VkAccelerationStructureBuildSizesInfoKHR * pSizeInfo) {
-		pfn_vkGetAccelerationStructureBuildSizesKHR(handle, buildType, pBuildInfo, pMaxPrimitiveCounts, pSizeInfo);
+		pfn_vkGetAccelerationStructureBuildSizesKHR(this->handle, buildType, pBuildInfo, pMaxPrimitiveCounts, pSizeInfo);
 	}
 #endif
 #ifdef VK_KHR_surface
 #endif
 #ifdef VK_KHR_swapchain
 	VkResult CreateSwapchainKHR(const  VkSwapchainCreateInfoKHR * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkSwapchainKHR * pSwapchain) {
-		return pfn_vkCreateSwapchainKHR(handle, pCreateInfo, pAllocator, pSwapchain);
+		return pfn_vkCreateSwapchainKHR(this->handle, pCreateInfo, pAllocator, pSwapchain);
 	}
 	void DestroySwapchainKHR(VkSwapchainKHR swapchain, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroySwapchainKHR(handle, swapchain, pAllocator);
+		pfn_vkDestroySwapchainKHR(this->handle, swapchain, pAllocator);
 	}
 	VkResult GetSwapchainImagesKHR(VkSwapchainKHR swapchain, uint32_t * pSwapchainImageCount, VkImage * pSwapchainImages) {
-		return pfn_vkGetSwapchainImagesKHR(handle, swapchain, pSwapchainImageCount, pSwapchainImages);
+		return pfn_vkGetSwapchainImagesKHR(this->handle, swapchain, pSwapchainImageCount, pSwapchainImages);
 	}
 	VkResult AcquireNextImageKHR(VkSwapchainKHR swapchain, uint64_t timeout, VkSemaphore semaphore, VkFence fence, uint32_t * pImageIndex) {
-		return pfn_vkAcquireNextImageKHR(handle, swapchain, timeout, semaphore, fence, pImageIndex);
+		return pfn_vkAcquireNextImageKHR(this->handle, swapchain, timeout, semaphore, fence, pImageIndex);
 	}
 	VkResult GetDeviceGroupPresentCapabilitiesKHR(VkDeviceGroupPresentCapabilitiesKHR * pDeviceGroupPresentCapabilities) {
-		return pfn_vkGetDeviceGroupPresentCapabilitiesKHR(handle, pDeviceGroupPresentCapabilities);
+		return pfn_vkGetDeviceGroupPresentCapabilitiesKHR(this->handle, pDeviceGroupPresentCapabilities);
 	}
 	VkResult GetDeviceGroupSurfacePresentModesKHR(VkSurfaceKHR surface, VkDeviceGroupPresentModeFlagsKHR * pModes) {
-		return pfn_vkGetDeviceGroupSurfacePresentModesKHR(handle, surface, pModes);
+		return pfn_vkGetDeviceGroupSurfacePresentModesKHR(this->handle, surface, pModes);
 	}
 	VkResult AcquireNextImage2KHR(const  VkAcquireNextImageInfoKHR * pAcquireInfo, uint32_t * pImageIndex) {
-		return pfn_vkAcquireNextImage2KHR(handle, pAcquireInfo, pImageIndex);
+		return pfn_vkAcquireNextImage2KHR(this->handle, pAcquireInfo, pImageIndex);
 	}
 #endif
 #ifdef VK_KHR_get_display_properties2
 #endif
 #ifdef VK_NV_ray_tracing
 	VkResult CreateAccelerationStructureNV(const  VkAccelerationStructureCreateInfoNV * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkAccelerationStructureNV * pAccelerationStructure) {
-		return pfn_vkCreateAccelerationStructureNV(handle, pCreateInfo, pAllocator, pAccelerationStructure);
+		return pfn_vkCreateAccelerationStructureNV(this->handle, pCreateInfo, pAllocator, pAccelerationStructure);
 	}
 	void DestroyAccelerationStructureNV(VkAccelerationStructureNV accelerationStructure, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyAccelerationStructureNV(handle, accelerationStructure, pAllocator);
+		pfn_vkDestroyAccelerationStructureNV(this->handle, accelerationStructure, pAllocator);
 	}
 	void GetAccelerationStructureMemoryRequirementsNV(const  VkAccelerationStructureMemoryRequirementsInfoNV * pInfo, VkMemoryRequirements2KHR * pMemoryRequirements) {
-		pfn_vkGetAccelerationStructureMemoryRequirementsNV(handle, pInfo, pMemoryRequirements);
+		pfn_vkGetAccelerationStructureMemoryRequirementsNV(this->handle, pInfo, pMemoryRequirements);
 	}
 	VkResult BindAccelerationStructureMemoryNV(uint32_t bindInfoCount, const  VkBindAccelerationStructureMemoryInfoNV * pBindInfos) {
-		return pfn_vkBindAccelerationStructureMemoryNV(handle, bindInfoCount, pBindInfos);
+		return pfn_vkBindAccelerationStructureMemoryNV(this->handle, bindInfoCount, pBindInfos);
 	}
 	VkResult CreateRayTracingPipelinesNV(VkPipelineCache pipelineCache, uint32_t createInfoCount, const  VkRayTracingPipelineCreateInfoNV * pCreateInfos, const  VkAllocationCallbacks * pAllocator, VkPipeline * pPipelines) {
-		return pfn_vkCreateRayTracingPipelinesNV(handle, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines);
+		return pfn_vkCreateRayTracingPipelinesNV(this->handle, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines);
 	}
 	VkResult GetAccelerationStructureHandleNV(VkAccelerationStructureNV accelerationStructure, size_t dataSize, void * pData) {
-		return pfn_vkGetAccelerationStructureHandleNV(handle, accelerationStructure, dataSize, pData);
+		return pfn_vkGetAccelerationStructureHandleNV(this->handle, accelerationStructure, dataSize, pData);
 	}
 	VkResult CompileDeferredNV(VkPipeline pipeline, uint32_t shader) {
-		return pfn_vkCompileDeferredNV(handle, pipeline, shader);
+		return pfn_vkCompileDeferredNV(this->handle, pipeline, shader);
 	}
 #endif
 #ifdef VK_EXT_discard_rectangles
@@ -1168,55 +1168,55 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_NV_external_memory_win32
 	VkResult GetMemoryWin32HandleNV(VkDeviceMemory memory, VkExternalMemoryHandleTypeFlagsNV handleType, HANDLE * pHandle) {
-		return pfn_vkGetMemoryWin32HandleNV(handle, memory, handleType, pHandle);
+		return pfn_vkGetMemoryWin32HandleNV(this->handle, memory, handleType, pHandle);
 	}
 #endif
 #ifdef VK_KHR_deferred_host_operations
 	VkResult CreateDeferredOperationKHR(const  VkAllocationCallbacks * pAllocator, VkDeferredOperationKHR * pDeferredOperation) {
-		return pfn_vkCreateDeferredOperationKHR(handle, pAllocator, pDeferredOperation);
+		return pfn_vkCreateDeferredOperationKHR(this->handle, pAllocator, pDeferredOperation);
 	}
 	void DestroyDeferredOperationKHR(VkDeferredOperationKHR operation, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyDeferredOperationKHR(handle, operation, pAllocator);
+		pfn_vkDestroyDeferredOperationKHR(this->handle, operation, pAllocator);
 	}
 	uint32_t GetDeferredOperationMaxConcurrencyKHR(VkDeferredOperationKHR operation) {
-		return pfn_vkGetDeferredOperationMaxConcurrencyKHR(handle, operation);
+		return pfn_vkGetDeferredOperationMaxConcurrencyKHR(this->handle, operation);
 	}
 	VkResult GetDeferredOperationResultKHR(VkDeferredOperationKHR operation) {
-		return pfn_vkGetDeferredOperationResultKHR(handle, operation);
+		return pfn_vkGetDeferredOperationResultKHR(this->handle, operation);
 	}
 	VkResult DeferredOperationJoinKHR(VkDeferredOperationKHR operation) {
-		return pfn_vkDeferredOperationJoinKHR(handle, operation);
+		return pfn_vkDeferredOperationJoinKHR(this->handle, operation);
 	}
 #endif
 #ifdef VK_NV_external_memory_rdma
 	VkResult GetMemoryRemoteAddressNV(const  VkMemoryGetRemoteAddressInfoNV * pMemoryGetRemoteAddressInfo, VkRemoteAddressNV * pAddress) {
-		return pfn_vkGetMemoryRemoteAddressNV(handle, pMemoryGetRemoteAddressInfo, pAddress);
+		return pfn_vkGetMemoryRemoteAddressNV(this->handle, pMemoryGetRemoteAddressInfo, pAddress);
 	}
 #endif
 #ifdef VK_NV_device_generated_commands
 	void GetGeneratedCommandsMemoryRequirementsNV(const  VkGeneratedCommandsMemoryRequirementsInfoNV * pInfo, VkMemoryRequirements2 * pMemoryRequirements) {
-		pfn_vkGetGeneratedCommandsMemoryRequirementsNV(handle, pInfo, pMemoryRequirements);
+		pfn_vkGetGeneratedCommandsMemoryRequirementsNV(this->handle, pInfo, pMemoryRequirements);
 	}
 	VkResult CreateIndirectCommandsLayoutNV(const  VkIndirectCommandsLayoutCreateInfoNV * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkIndirectCommandsLayoutNV * pIndirectCommandsLayout) {
-		return pfn_vkCreateIndirectCommandsLayoutNV(handle, pCreateInfo, pAllocator, pIndirectCommandsLayout);
+		return pfn_vkCreateIndirectCommandsLayoutNV(this->handle, pCreateInfo, pAllocator, pIndirectCommandsLayout);
 	}
 	void DestroyIndirectCommandsLayoutNV(VkIndirectCommandsLayoutNV indirectCommandsLayout, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyIndirectCommandsLayoutNV(handle, indirectCommandsLayout, pAllocator);
+		pfn_vkDestroyIndirectCommandsLayoutNV(this->handle, indirectCommandsLayout, pAllocator);
 	}
 #endif
 #ifdef VK_EXT_debug_report
 #endif
 #ifdef VK_KHR_display_swapchain
 	VkResult CreateSharedSwapchainsKHR(uint32_t swapchainCount, const  VkSwapchainCreateInfoKHR * pCreateInfos, const  VkAllocationCallbacks * pAllocator, VkSwapchainKHR * pSwapchains) {
-		return pfn_vkCreateSharedSwapchainsKHR(handle, swapchainCount, pCreateInfos, pAllocator, pSwapchains);
+		return pfn_vkCreateSharedSwapchainsKHR(this->handle, swapchainCount, pCreateInfos, pAllocator, pSwapchains);
 	}
 #endif
 #ifdef VK_EXT_debug_utils
 	VkResult SetDebugUtilsObjectNameEXT(const  VkDebugUtilsObjectNameInfoEXT * pNameInfo) {
-		return pfn_vkSetDebugUtilsObjectNameEXT(handle, pNameInfo);
+		return pfn_vkSetDebugUtilsObjectNameEXT(this->handle, pNameInfo);
 	}
 	VkResult SetDebugUtilsObjectTagEXT(const  VkDebugUtilsObjectTagInfoEXT * pTagInfo) {
-		return pfn_vkSetDebugUtilsObjectTagEXT(handle, pTagInfo);
+		return pfn_vkSetDebugUtilsObjectTagEXT(this->handle, pTagInfo);
 	}
 #endif
 #ifdef VK_KHR_video_decode_queue
@@ -1227,110 +1227,110 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_EXT_full_screen_exclusive
 	VkResult AcquireFullScreenExclusiveModeEXT(VkSwapchainKHR swapchain) {
-		return pfn_vkAcquireFullScreenExclusiveModeEXT(handle, swapchain);
+		return pfn_vkAcquireFullScreenExclusiveModeEXT(this->handle, swapchain);
 	}
 	VkResult ReleaseFullScreenExclusiveModeEXT(VkSwapchainKHR swapchain) {
-		return pfn_vkReleaseFullScreenExclusiveModeEXT(handle, swapchain);
+		return pfn_vkReleaseFullScreenExclusiveModeEXT(this->handle, swapchain);
 	}
 	VkResult GetDeviceGroupSurfacePresentModes2EXT(const  VkPhysicalDeviceSurfaceInfo2KHR * pSurfaceInfo, VkDeviceGroupPresentModeFlagsKHR * pModes) {
-		return pfn_vkGetDeviceGroupSurfacePresentModes2EXT(handle, pSurfaceInfo, pModes);
+		return pfn_vkGetDeviceGroupSurfacePresentModes2EXT(this->handle, pSurfaceInfo, pModes);
 	}
 #endif
 #ifdef VK_ANDROID_native_buffer
 	VkResult GetSwapchainGrallocUsageANDROID(VkFormat format, VkImageUsageFlags imageUsage, int * grallocUsage) {
-		return pfn_vkGetSwapchainGrallocUsageANDROID(handle, format, imageUsage, grallocUsage);
+		return pfn_vkGetSwapchainGrallocUsageANDROID(this->handle, format, imageUsage, grallocUsage);
 	}
 	VkResult AcquireImageANDROID(VkImage image, int nativeFenceFd, VkSemaphore semaphore, VkFence fence) {
-		return pfn_vkAcquireImageANDROID(handle, image, nativeFenceFd, semaphore, fence);
+		return pfn_vkAcquireImageANDROID(this->handle, image, nativeFenceFd, semaphore, fence);
 	}
 	VkResult GetSwapchainGrallocUsage2ANDROID(VkFormat format, VkImageUsageFlags imageUsage, VkSwapchainImageUsageFlagsANDROID swapchainImageUsage, uint64_t * grallocConsumerUsage, uint64_t * grallocProducerUsage) {
-		return pfn_vkGetSwapchainGrallocUsage2ANDROID(handle, format, imageUsage, swapchainImageUsage, grallocConsumerUsage, grallocProducerUsage);
+		return pfn_vkGetSwapchainGrallocUsage2ANDROID(this->handle, format, imageUsage, swapchainImageUsage, grallocConsumerUsage, grallocProducerUsage);
 	}
 #endif
 #ifdef VK_EXT_pageable_device_local_memory
 	void SetDeviceMemoryPriorityEXT(VkDeviceMemory memory, float priority) {
-		pfn_vkSetDeviceMemoryPriorityEXT(handle, memory, priority);
+		pfn_vkSetDeviceMemoryPriorityEXT(this->handle, memory, priority);
 	}
 #endif
 #ifdef VK_MVK_macos_surface
 #endif
 #ifdef VK_KHR_external_semaphore_win32
 	VkResult ImportSemaphoreWin32HandleKHR(const  VkImportSemaphoreWin32HandleInfoKHR * pImportSemaphoreWin32HandleInfo) {
-		return pfn_vkImportSemaphoreWin32HandleKHR(handle, pImportSemaphoreWin32HandleInfo);
+		return pfn_vkImportSemaphoreWin32HandleKHR(this->handle, pImportSemaphoreWin32HandleInfo);
 	}
 	VkResult GetSemaphoreWin32HandleKHR(const  VkSemaphoreGetWin32HandleInfoKHR * pGetWin32HandleInfo, HANDLE * pHandle) {
-		return pfn_vkGetSemaphoreWin32HandleKHR(handle, pGetWin32HandleInfo, pHandle);
+		return pfn_vkGetSemaphoreWin32HandleKHR(this->handle, pGetWin32HandleInfo, pHandle);
 	}
 #endif
 #ifdef VK_NV_mesh_shader
 #endif
 #ifdef VK_KHR_ray_tracing_pipeline
 	VkResult CreateRayTracingPipelinesKHR(VkDeferredOperationKHR deferredOperation, VkPipelineCache pipelineCache, uint32_t createInfoCount, const  VkRayTracingPipelineCreateInfoKHR * pCreateInfos, const  VkAllocationCallbacks * pAllocator, VkPipeline * pPipelines) {
-		return pfn_vkCreateRayTracingPipelinesKHR(handle, deferredOperation, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines);
+		return pfn_vkCreateRayTracingPipelinesKHR(this->handle, deferredOperation, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines);
 	}
 	VkResult GetRayTracingShaderGroupHandlesKHR(VkPipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void * pData) {
-		return pfn_vkGetRayTracingShaderGroupHandlesKHR(handle, pipeline, firstGroup, groupCount, dataSize, pData);
+		return pfn_vkGetRayTracingShaderGroupHandlesKHR(this->handle, pipeline, firstGroup, groupCount, dataSize, pData);
 	}
 	VkResult GetRayTracingCaptureReplayShaderGroupHandlesKHR(VkPipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void * pData) {
-		return pfn_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR(handle, pipeline, firstGroup, groupCount, dataSize, pData);
+		return pfn_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR(this->handle, pipeline, firstGroup, groupCount, dataSize, pData);
 	}
 	VkDeviceSize GetRayTracingShaderGroupStackSizeKHR(VkPipeline pipeline, uint32_t group, VkShaderGroupShaderKHR groupShader) {
-		return pfn_vkGetRayTracingShaderGroupStackSizeKHR(handle, pipeline, group, groupShader);
+		return pfn_vkGetRayTracingShaderGroupStackSizeKHR(this->handle, pipeline, group, groupShader);
 	}
 #endif
 #ifdef VK_KHR_external_memory_fd
 	VkResult GetMemoryFdKHR(const  VkMemoryGetFdInfoKHR * pGetFdInfo, int * pFd) {
-		return pfn_vkGetMemoryFdKHR(handle, pGetFdInfo, pFd);
+		return pfn_vkGetMemoryFdKHR(this->handle, pGetFdInfo, pFd);
 	}
 	VkResult GetMemoryFdPropertiesKHR(VkExternalMemoryHandleTypeFlagBits handleType, int fd, VkMemoryFdPropertiesKHR * pMemoryFdProperties) {
-		return pfn_vkGetMemoryFdPropertiesKHR(handle, handleType, fd, pMemoryFdProperties);
+		return pfn_vkGetMemoryFdPropertiesKHR(this->handle, handleType, fd, pMemoryFdProperties);
 	}
 #endif
 #ifdef VK_EXT_image_drm_format_modifier
 	VkResult GetImageDrmFormatModifierPropertiesEXT(VkImage image, VkImageDrmFormatModifierPropertiesEXT * pProperties) {
-		return pfn_vkGetImageDrmFormatModifierPropertiesEXT(handle, image, pProperties);
+		return pfn_vkGetImageDrmFormatModifierPropertiesEXT(this->handle, image, pProperties);
 	}
 #endif
 #ifdef VK_FUCHSIA_buffer_collection
 	VkResult CreateBufferCollectionFUCHSIA(const  VkBufferCollectionCreateInfoFUCHSIA * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkBufferCollectionFUCHSIA * pCollection) {
-		return pfn_vkCreateBufferCollectionFUCHSIA(handle, pCreateInfo, pAllocator, pCollection);
+		return pfn_vkCreateBufferCollectionFUCHSIA(this->handle, pCreateInfo, pAllocator, pCollection);
 	}
 	VkResult SetBufferCollectionImageConstraintsFUCHSIA(VkBufferCollectionFUCHSIA collection, const  VkImageConstraintsInfoFUCHSIA * pImageConstraintsInfo) {
-		return pfn_vkSetBufferCollectionImageConstraintsFUCHSIA(handle, collection, pImageConstraintsInfo);
+		return pfn_vkSetBufferCollectionImageConstraintsFUCHSIA(this->handle, collection, pImageConstraintsInfo);
 	}
 	VkResult SetBufferCollectionBufferConstraintsFUCHSIA(VkBufferCollectionFUCHSIA collection, const  VkBufferConstraintsInfoFUCHSIA * pBufferConstraintsInfo) {
-		return pfn_vkSetBufferCollectionBufferConstraintsFUCHSIA(handle, collection, pBufferConstraintsInfo);
+		return pfn_vkSetBufferCollectionBufferConstraintsFUCHSIA(this->handle, collection, pBufferConstraintsInfo);
 	}
 	void DestroyBufferCollectionFUCHSIA(VkBufferCollectionFUCHSIA collection, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyBufferCollectionFUCHSIA(handle, collection, pAllocator);
+		pfn_vkDestroyBufferCollectionFUCHSIA(this->handle, collection, pAllocator);
 	}
 	VkResult GetBufferCollectionPropertiesFUCHSIA(VkBufferCollectionFUCHSIA collection, VkBufferCollectionPropertiesFUCHSIA * pProperties) {
-		return pfn_vkGetBufferCollectionPropertiesFUCHSIA(handle, collection, pProperties);
+		return pfn_vkGetBufferCollectionPropertiesFUCHSIA(this->handle, collection, pProperties);
 	}
 #endif
 #ifdef VK_EXT_transform_feedback
 #endif
 #ifdef VK_KHR_video_queue
 	VkResult CreateVideoSessionKHR(const  VkVideoSessionCreateInfoKHR * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkVideoSessionKHR * pVideoSession) {
-		return pfn_vkCreateVideoSessionKHR(handle, pCreateInfo, pAllocator, pVideoSession);
+		return pfn_vkCreateVideoSessionKHR(this->handle, pCreateInfo, pAllocator, pVideoSession);
 	}
 	void DestroyVideoSessionKHR(VkVideoSessionKHR videoSession, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyVideoSessionKHR(handle, videoSession, pAllocator);
+		pfn_vkDestroyVideoSessionKHR(this->handle, videoSession, pAllocator);
 	}
 	VkResult GetVideoSessionMemoryRequirementsKHR(VkVideoSessionKHR videoSession, uint32_t * pVideoSessionMemoryRequirementsCount, VkVideoGetMemoryPropertiesKHR * pVideoSessionMemoryRequirements) {
-		return pfn_vkGetVideoSessionMemoryRequirementsKHR(handle, videoSession, pVideoSessionMemoryRequirementsCount, pVideoSessionMemoryRequirements);
+		return pfn_vkGetVideoSessionMemoryRequirementsKHR(this->handle, videoSession, pVideoSessionMemoryRequirementsCount, pVideoSessionMemoryRequirements);
 	}
 	VkResult BindVideoSessionMemoryKHR(VkVideoSessionKHR videoSession, uint32_t videoSessionBindMemoryCount, const  VkVideoBindMemoryKHR * pVideoSessionBindMemories) {
-		return pfn_vkBindVideoSessionMemoryKHR(handle, videoSession, videoSessionBindMemoryCount, pVideoSessionBindMemories);
+		return pfn_vkBindVideoSessionMemoryKHR(this->handle, videoSession, videoSessionBindMemoryCount, pVideoSessionBindMemories);
 	}
 	VkResult CreateVideoSessionParametersKHR(const  VkVideoSessionParametersCreateInfoKHR * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkVideoSessionParametersKHR * pVideoSessionParameters) {
-		return pfn_vkCreateVideoSessionParametersKHR(handle, pCreateInfo, pAllocator, pVideoSessionParameters);
+		return pfn_vkCreateVideoSessionParametersKHR(this->handle, pCreateInfo, pAllocator, pVideoSessionParameters);
 	}
 	VkResult UpdateVideoSessionParametersKHR(VkVideoSessionParametersKHR videoSessionParameters, const  VkVideoSessionParametersUpdateInfoKHR * pUpdateInfo) {
-		return pfn_vkUpdateVideoSessionParametersKHR(handle, videoSessionParameters, pUpdateInfo);
+		return pfn_vkUpdateVideoSessionParametersKHR(this->handle, videoSessionParameters, pUpdateInfo);
 	}
 	void DestroyVideoSessionParametersKHR(VkVideoSessionParametersKHR videoSessionParameters, const  VkAllocationCallbacks * pAllocator) {
-		pfn_vkDestroyVideoSessionParametersKHR(handle, videoSessionParameters, pAllocator);
+		pfn_vkDestroyVideoSessionParametersKHR(this->handle, videoSessionParameters, pAllocator);
 	}
 #endif
 #ifdef VK_EXT_directfb_surface
@@ -1345,15 +1345,15 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_GOOGLE_display_timing
 	VkResult GetRefreshCycleDurationGOOGLE(VkSwapchainKHR swapchain, VkRefreshCycleDurationGOOGLE * pDisplayTimingProperties) {
-		return pfn_vkGetRefreshCycleDurationGOOGLE(handle, swapchain, pDisplayTimingProperties);
+		return pfn_vkGetRefreshCycleDurationGOOGLE(this->handle, swapchain, pDisplayTimingProperties);
 	}
 	VkResult GetPastPresentationTimingGOOGLE(VkSwapchainKHR swapchain, uint32_t * pPresentationTimingCount, VkPastPresentationTimingGOOGLE * pPresentationTimings) {
-		return pfn_vkGetPastPresentationTimingGOOGLE(handle, swapchain, pPresentationTimingCount, pPresentationTimings);
+		return pfn_vkGetPastPresentationTimingGOOGLE(this->handle, swapchain, pPresentationTimingCount, pPresentationTimings);
 	}
 #endif
 #ifdef VK_KHR_present_wait
 	VkResult WaitForPresentKHR(VkSwapchainKHR swapchain, uint64_t presentId, uint64_t timeout) {
-		return pfn_vkWaitForPresentKHR(handle, swapchain, presentId, timeout);
+		return pfn_vkWaitForPresentKHR(this->handle, swapchain, presentId, timeout);
 	}
 #endif
 #endif
@@ -1363,508 +1363,508 @@ struct VklCommandFunctions {
 	VklDeviceFunctions* fnptrs;
 	VkCommandBuffer handle;
 	void Dispatch(uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ) {
-		fnptrs->pfn_vkCmdDispatch(handle, groupCountX, groupCountY, groupCountZ);
+		fnptrs->pfn_vkCmdDispatch(this->handle, groupCountX, groupCountY, groupCountZ);
 	}
 	void WaitEvents(uint32_t eventCount, const  VkEvent * pEvents, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, uint32_t memoryBarrierCount, const  VkMemoryBarrier * pMemoryBarriers, uint32_t bufferMemoryBarrierCount, const  VkBufferMemoryBarrier * pBufferMemoryBarriers, uint32_t imageMemoryBarrierCount, const  VkImageMemoryBarrier * pImageMemoryBarriers) {
-		fnptrs->pfn_vkCmdWaitEvents(handle, eventCount, pEvents, srcStageMask, dstStageMask, memoryBarrierCount, pMemoryBarriers, bufferMemoryBarrierCount, pBufferMemoryBarriers, imageMemoryBarrierCount, pImageMemoryBarriers);
+		fnptrs->pfn_vkCmdWaitEvents(this->handle, eventCount, pEvents, srcStageMask, dstStageMask, memoryBarrierCount, pMemoryBarriers, bufferMemoryBarrierCount, pBufferMemoryBarriers, imageMemoryBarrierCount, pImageMemoryBarriers);
 	}
 	void SetDepthCompareOp(VkCompareOp depthCompareOp) {
-		fnptrs->pfn_vkCmdSetDepthCompareOp(handle, depthCompareOp);
+		fnptrs->pfn_vkCmdSetDepthCompareOp(this->handle, depthCompareOp);
 	}
 	void SetRasterizerDiscardEnable(VkBool32 rasterizerDiscardEnable) {
-		fnptrs->pfn_vkCmdSetRasterizerDiscardEnable(handle, rasterizerDiscardEnable);
+		fnptrs->pfn_vkCmdSetRasterizerDiscardEnable(this->handle, rasterizerDiscardEnable);
 	}
 	void ClearColorImage(VkImage image, VkImageLayout imageLayout, const  VkClearColorValue * pColor, uint32_t rangeCount, const  VkImageSubresourceRange * pRanges) {
-		fnptrs->pfn_vkCmdClearColorImage(handle, image, imageLayout, pColor, rangeCount, pRanges);
+		fnptrs->pfn_vkCmdClearColorImage(this->handle, image, imageLayout, pColor, rangeCount, pRanges);
 	}
 	void SetDepthBias(float depthBiasConstantFactor, float depthBiasClamp, float depthBiasSlopeFactor) {
-		fnptrs->pfn_vkCmdSetDepthBias(handle, depthBiasConstantFactor, depthBiasClamp, depthBiasSlopeFactor);
+		fnptrs->pfn_vkCmdSetDepthBias(this->handle, depthBiasConstantFactor, depthBiasClamp, depthBiasSlopeFactor);
 	}
 	void CopyImage(VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, const  VkImageCopy * pRegions) {
-		fnptrs->pfn_vkCmdCopyImage(handle, srcImage, srcImageLayout, dstImage, dstImageLayout, regionCount, pRegions);
+		fnptrs->pfn_vkCmdCopyImage(this->handle, srcImage, srcImageLayout, dstImage, dstImageLayout, regionCount, pRegions);
 	}
 	void ExecuteCommands(uint32_t commandBufferCount, const  VkCommandBuffer * pCommandBuffers) {
-		fnptrs->pfn_vkCmdExecuteCommands(handle, commandBufferCount, pCommandBuffers);
+		fnptrs->pfn_vkCmdExecuteCommands(this->handle, commandBufferCount, pCommandBuffers);
 	}
 	void DrawIndirectCount(VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride) {
-		fnptrs->pfn_vkCmdDrawIndirectCount(handle, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+		fnptrs->pfn_vkCmdDrawIndirectCount(this->handle, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
 	}
 	void CopyQueryPoolResults(VkQueryPool queryPool, uint32_t firstQuery, uint32_t queryCount, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize stride, VkQueryResultFlags flags) {
-		fnptrs->pfn_vkCmdCopyQueryPoolResults(handle, queryPool, firstQuery, queryCount, dstBuffer, dstOffset, stride, flags);
+		fnptrs->pfn_vkCmdCopyQueryPoolResults(this->handle, queryPool, firstQuery, queryCount, dstBuffer, dstOffset, stride, flags);
 	}
 	void CopyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, uint32_t regionCount, const  VkBufferCopy * pRegions) {
-		fnptrs->pfn_vkCmdCopyBuffer(handle, srcBuffer, dstBuffer, regionCount, pRegions);
+		fnptrs->pfn_vkCmdCopyBuffer(this->handle, srcBuffer, dstBuffer, regionCount, pRegions);
 	}
 	void BindPipeline(VkPipelineBindPoint pipelineBindPoint, VkPipeline pipeline) {
-		fnptrs->pfn_vkCmdBindPipeline(handle, pipelineBindPoint, pipeline);
+		fnptrs->pfn_vkCmdBindPipeline(this->handle, pipelineBindPoint, pipeline);
 	}
 	void CopyBufferToImage(VkBuffer srcBuffer, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, const  VkBufferImageCopy * pRegions) {
-		fnptrs->pfn_vkCmdCopyBufferToImage(handle, srcBuffer, dstImage, dstImageLayout, regionCount, pRegions);
+		fnptrs->pfn_vkCmdCopyBufferToImage(this->handle, srcBuffer, dstImage, dstImageLayout, regionCount, pRegions);
 	}
 	void ClearAttachments(uint32_t attachmentCount, const  VkClearAttachment * pAttachments, uint32_t rectCount, const  VkClearRect * pRects) {
-		fnptrs->pfn_vkCmdClearAttachments(handle, attachmentCount, pAttachments, rectCount, pRects);
+		fnptrs->pfn_vkCmdClearAttachments(this->handle, attachmentCount, pAttachments, rectCount, pRects);
 	}
 	void SetStencilReference(VkStencilFaceFlags faceMask, uint32_t reference) {
-		fnptrs->pfn_vkCmdSetStencilReference(handle, faceMask, reference);
+		fnptrs->pfn_vkCmdSetStencilReference(this->handle, faceMask, reference);
 	}
 	void SetCullMode(VkCullModeFlags cullMode) {
-		fnptrs->pfn_vkCmdSetCullMode(handle, cullMode);
+		fnptrs->pfn_vkCmdSetCullMode(this->handle, cullMode);
 	}
 	void ResetQueryPool(VkQueryPool queryPool, uint32_t firstQuery, uint32_t queryCount) {
-		fnptrs->pfn_vkCmdResetQueryPool(handle, queryPool, firstQuery, queryCount);
+		fnptrs->pfn_vkCmdResetQueryPool(this->handle, queryPool, firstQuery, queryCount);
 	}
 	void SetBlendConstants(const  float blendConstants[4]) {
-		fnptrs->pfn_vkCmdSetBlendConstants(handle, blendConstants);
+		fnptrs->pfn_vkCmdSetBlendConstants(this->handle, blendConstants);
 	}
 	void ResetEvent2(VkEvent event, VkPipelineStageFlags2 stageMask) {
-		fnptrs->pfn_vkCmdResetEvent2(handle, event, stageMask);
+		fnptrs->pfn_vkCmdResetEvent2(this->handle, event, stageMask);
 	}
 	void SetLineWidth(float lineWidth) {
-		fnptrs->pfn_vkCmdSetLineWidth(handle, lineWidth);
+		fnptrs->pfn_vkCmdSetLineWidth(this->handle, lineWidth);
 	}
 	void CopyBufferToImage2(const  VkCopyBufferToImageInfo2 * pCopyBufferToImageInfo) {
-		fnptrs->pfn_vkCmdCopyBufferToImage2(handle, pCopyBufferToImageInfo);
+		fnptrs->pfn_vkCmdCopyBufferToImage2(this->handle, pCopyBufferToImageInfo);
 	}
 	void WriteTimestamp(VkPipelineStageFlagBits pipelineStage, VkQueryPool queryPool, uint32_t query) {
-		fnptrs->pfn_vkCmdWriteTimestamp(handle, pipelineStage, queryPool, query);
+		fnptrs->pfn_vkCmdWriteTimestamp(this->handle, pipelineStage, queryPool, query);
 	}
 	void CopyBuffer2(const  VkCopyBufferInfo2 * pCopyBufferInfo) {
-		fnptrs->pfn_vkCmdCopyBuffer2(handle, pCopyBufferInfo);
+		fnptrs->pfn_vkCmdCopyBuffer2(this->handle, pCopyBufferInfo);
 	}
 	void SetScissor(uint32_t firstScissor, uint32_t scissorCount, const  VkRect2D * pScissors) {
-		fnptrs->pfn_vkCmdSetScissor(handle, firstScissor, scissorCount, pScissors);
+		fnptrs->pfn_vkCmdSetScissor(this->handle, firstScissor, scissorCount, pScissors);
 	}
 	void UpdateBuffer(VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, const  void * pData) {
-		fnptrs->pfn_vkCmdUpdateBuffer(handle, dstBuffer, dstOffset, dataSize, pData);
+		fnptrs->pfn_vkCmdUpdateBuffer(this->handle, dstBuffer, dstOffset, dataSize, pData);
 	}
 	VkResult Begin(const  VkCommandBufferBeginInfo * pBeginInfo) {
-		return fnptrs->pfn_vkBeginCommandBuffer(handle, pBeginInfo);
+		return fnptrs->pfn_vkBeginCommandBuffer(this->handle, pBeginInfo);
 	}
 	void PipelineBarrier(VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, VkDependencyFlags dependencyFlags, uint32_t memoryBarrierCount, const  VkMemoryBarrier * pMemoryBarriers, uint32_t bufferMemoryBarrierCount, const  VkBufferMemoryBarrier * pBufferMemoryBarriers, uint32_t imageMemoryBarrierCount, const  VkImageMemoryBarrier * pImageMemoryBarriers) {
-		fnptrs->pfn_vkCmdPipelineBarrier(handle, srcStageMask, dstStageMask, dependencyFlags, memoryBarrierCount, pMemoryBarriers, bufferMemoryBarrierCount, pBufferMemoryBarriers, imageMemoryBarrierCount, pImageMemoryBarriers);
+		fnptrs->pfn_vkCmdPipelineBarrier(this->handle, srcStageMask, dstStageMask, dependencyFlags, memoryBarrierCount, pMemoryBarriers, bufferMemoryBarrierCount, pBufferMemoryBarriers, imageMemoryBarrierCount, pImageMemoryBarriers);
 	}
 	void NextSubpass2(const  VkSubpassBeginInfo * pSubpassBeginInfo, const  VkSubpassEndInfo * pSubpassEndInfo) {
-		fnptrs->pfn_vkCmdNextSubpass2(handle, pSubpassBeginInfo, pSubpassEndInfo);
+		fnptrs->pfn_vkCmdNextSubpass2(this->handle, pSubpassBeginInfo, pSubpassEndInfo);
 	}
 	void CopyImageToBuffer(VkImage srcImage, VkImageLayout srcImageLayout, VkBuffer dstBuffer, uint32_t regionCount, const  VkBufferImageCopy * pRegions) {
-		fnptrs->pfn_vkCmdCopyImageToBuffer(handle, srcImage, srcImageLayout, dstBuffer, regionCount, pRegions);
+		fnptrs->pfn_vkCmdCopyImageToBuffer(this->handle, srcImage, srcImageLayout, dstBuffer, regionCount, pRegions);
 	}
 	void DispatchIndirect(VkBuffer buffer, VkDeviceSize offset) {
-		fnptrs->pfn_vkCmdDispatchIndirect(handle, buffer, offset);
+		fnptrs->pfn_vkCmdDispatchIndirect(this->handle, buffer, offset);
 	}
 	void EndQuery(VkQueryPool queryPool, uint32_t query) {
-		fnptrs->pfn_vkCmdEndQuery(handle, queryPool, query);
+		fnptrs->pfn_vkCmdEndQuery(this->handle, queryPool, query);
 	}
 	void SetFrontFace(VkFrontFace frontFace) {
-		fnptrs->pfn_vkCmdSetFrontFace(handle, frontFace);
+		fnptrs->pfn_vkCmdSetFrontFace(this->handle, frontFace);
 	}
 	void SetStencilCompareMask(VkStencilFaceFlags faceMask, uint32_t compareMask) {
-		fnptrs->pfn_vkCmdSetStencilCompareMask(handle, faceMask, compareMask);
+		fnptrs->pfn_vkCmdSetStencilCompareMask(this->handle, faceMask, compareMask);
 	}
 	void SetDepthBounds(float minDepthBounds, float maxDepthBounds) {
-		fnptrs->pfn_vkCmdSetDepthBounds(handle, minDepthBounds, maxDepthBounds);
+		fnptrs->pfn_vkCmdSetDepthBounds(this->handle, minDepthBounds, maxDepthBounds);
 	}
 	void BeginRendering(const  VkRenderingInfo * pRenderingInfo) {
-		fnptrs->pfn_vkCmdBeginRendering(handle, pRenderingInfo);
+		fnptrs->pfn_vkCmdBeginRendering(this->handle, pRenderingInfo);
 	}
 	void BindIndexBuffer(VkBuffer buffer, VkDeviceSize offset, VkIndexType indexType) {
-		fnptrs->pfn_vkCmdBindIndexBuffer(handle, buffer, offset, indexType);
+		fnptrs->pfn_vkCmdBindIndexBuffer(this->handle, buffer, offset, indexType);
 	}
 	void DrawIndexedIndirect(VkBuffer buffer, VkDeviceSize offset, uint32_t drawCount, uint32_t stride) {
-		fnptrs->pfn_vkCmdDrawIndexedIndirect(handle, buffer, offset, drawCount, stride);
+		fnptrs->pfn_vkCmdDrawIndexedIndirect(this->handle, buffer, offset, drawCount, stride);
 	}
 	void EndRenderPass() {
-		fnptrs->pfn_vkCmdEndRenderPass(handle);
+		fnptrs->pfn_vkCmdEndRenderPass(this->handle);
 	}
 	void SetViewport(uint32_t firstViewport, uint32_t viewportCount, const  VkViewport * pViewports) {
-		fnptrs->pfn_vkCmdSetViewport(handle, firstViewport, viewportCount, pViewports);
+		fnptrs->pfn_vkCmdSetViewport(this->handle, firstViewport, viewportCount, pViewports);
 	}
 	void DrawIndirect(VkBuffer buffer, VkDeviceSize offset, uint32_t drawCount, uint32_t stride) {
-		fnptrs->pfn_vkCmdDrawIndirect(handle, buffer, offset, drawCount, stride);
+		fnptrs->pfn_vkCmdDrawIndirect(this->handle, buffer, offset, drawCount, stride);
 	}
 	void ResolveImage2(const  VkResolveImageInfo2 * pResolveImageInfo) {
-		fnptrs->pfn_vkCmdResolveImage2(handle, pResolveImageInfo);
+		fnptrs->pfn_vkCmdResolveImage2(this->handle, pResolveImageInfo);
 	}
 	void ClearDepthStencilImage(VkImage image, VkImageLayout imageLayout, const  VkClearDepthStencilValue * pDepthStencil, uint32_t rangeCount, const  VkImageSubresourceRange * pRanges) {
-		fnptrs->pfn_vkCmdClearDepthStencilImage(handle, image, imageLayout, pDepthStencil, rangeCount, pRanges);
+		fnptrs->pfn_vkCmdClearDepthStencilImage(this->handle, image, imageLayout, pDepthStencil, rangeCount, pRanges);
 	}
 	void NextSubpass(VkSubpassContents contents) {
-		fnptrs->pfn_vkCmdNextSubpass(handle, contents);
+		fnptrs->pfn_vkCmdNextSubpass(this->handle, contents);
 	}
 	void SetEvent(VkEvent event, VkPipelineStageFlags stageMask) {
-		fnptrs->pfn_vkCmdSetEvent(handle, event, stageMask);
+		fnptrs->pfn_vkCmdSetEvent(this->handle, event, stageMask);
 	}
 	void CopyImageToBuffer2(const  VkCopyImageToBufferInfo2 * pCopyImageToBufferInfo) {
-		fnptrs->pfn_vkCmdCopyImageToBuffer2(handle, pCopyImageToBufferInfo);
+		fnptrs->pfn_vkCmdCopyImageToBuffer2(this->handle, pCopyImageToBufferInfo);
 	}
 	void DrawIndexed(uint32_t indexCount, uint32_t instanceCount, uint32_t firstIndex, int32_t vertexOffset, uint32_t firstInstance) {
-		fnptrs->pfn_vkCmdDrawIndexed(handle, indexCount, instanceCount, firstIndex, vertexOffset, firstInstance);
+		fnptrs->pfn_vkCmdDrawIndexed(this->handle, indexCount, instanceCount, firstIndex, vertexOffset, firstInstance);
 	}
 	void EndRendering() {
-		fnptrs->pfn_vkCmdEndRendering(handle);
+		fnptrs->pfn_vkCmdEndRendering(this->handle);
 	}
 	void WaitEvents2(uint32_t eventCount, const  VkEvent * pEvents, const  VkDependencyInfo * pDependencyInfos) {
-		fnptrs->pfn_vkCmdWaitEvents2(handle, eventCount, pEvents, pDependencyInfos);
+		fnptrs->pfn_vkCmdWaitEvents2(this->handle, eventCount, pEvents, pDependencyInfos);
 	}
 	void BindVertexBuffers(uint32_t firstBinding, uint32_t bindingCount, const  VkBuffer * pBuffers, const  VkDeviceSize * pOffsets) {
-		fnptrs->pfn_vkCmdBindVertexBuffers(handle, firstBinding, bindingCount, pBuffers, pOffsets);
+		fnptrs->pfn_vkCmdBindVertexBuffers(this->handle, firstBinding, bindingCount, pBuffers, pOffsets);
 	}
 	void BlitImage2(const  VkBlitImageInfo2 * pBlitImageInfo) {
-		fnptrs->pfn_vkCmdBlitImage2(handle, pBlitImageInfo);
+		fnptrs->pfn_vkCmdBlitImage2(this->handle, pBlitImageInfo);
 	}
 	void SetStencilTestEnable(VkBool32 stencilTestEnable) {
-		fnptrs->pfn_vkCmdSetStencilTestEnable(handle, stencilTestEnable);
+		fnptrs->pfn_vkCmdSetStencilTestEnable(this->handle, stencilTestEnable);
 	}
 	void BeginRenderPass2(const  VkRenderPassBeginInfo * pRenderPassBegin, const  VkSubpassBeginInfo * pSubpassBeginInfo) {
-		fnptrs->pfn_vkCmdBeginRenderPass2(handle, pRenderPassBegin, pSubpassBeginInfo);
+		fnptrs->pfn_vkCmdBeginRenderPass2(this->handle, pRenderPassBegin, pSubpassBeginInfo);
 	}
 	VkResult End() {
-		return fnptrs->pfn_vkEndCommandBuffer(handle);
+		return fnptrs->pfn_vkEndCommandBuffer(this->handle);
 	}
 	void SetScissorWithCount(uint32_t scissorCount, const  VkRect2D * pScissors) {
-		fnptrs->pfn_vkCmdSetScissorWithCount(handle, scissorCount, pScissors);
+		fnptrs->pfn_vkCmdSetScissorWithCount(this->handle, scissorCount, pScissors);
 	}
 	void FillBuffer(VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize size, uint32_t data) {
-		fnptrs->pfn_vkCmdFillBuffer(handle, dstBuffer, dstOffset, size, data);
+		fnptrs->pfn_vkCmdFillBuffer(this->handle, dstBuffer, dstOffset, size, data);
 	}
 	void BeginRenderPass(const  VkRenderPassBeginInfo * pRenderPassBegin, VkSubpassContents contents) {
-		fnptrs->pfn_vkCmdBeginRenderPass(handle, pRenderPassBegin, contents);
+		fnptrs->pfn_vkCmdBeginRenderPass(this->handle, pRenderPassBegin, contents);
 	}
 	void ResolveImage(VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, const  VkImageResolve * pRegions) {
-		fnptrs->pfn_vkCmdResolveImage(handle, srcImage, srcImageLayout, dstImage, dstImageLayout, regionCount, pRegions);
+		fnptrs->pfn_vkCmdResolveImage(this->handle, srcImage, srcImageLayout, dstImage, dstImageLayout, regionCount, pRegions);
 	}
 	void BeginQuery(VkQueryPool queryPool, uint32_t query, VkQueryControlFlags flags) {
-		fnptrs->pfn_vkCmdBeginQuery(handle, queryPool, query, flags);
+		fnptrs->pfn_vkCmdBeginQuery(this->handle, queryPool, query, flags);
 	}
 	void SetEvent2(VkEvent event, const  VkDependencyInfo * pDependencyInfo) {
-		fnptrs->pfn_vkCmdSetEvent2(handle, event, pDependencyInfo);
+		fnptrs->pfn_vkCmdSetEvent2(this->handle, event, pDependencyInfo);
 	}
 	void DrawIndexedIndirectCount(VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride) {
-		fnptrs->pfn_vkCmdDrawIndexedIndirectCount(handle, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+		fnptrs->pfn_vkCmdDrawIndexedIndirectCount(this->handle, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
 	}
 	void BindVertexBuffers2(uint32_t firstBinding, uint32_t bindingCount, const  VkBuffer * pBuffers, const  VkDeviceSize * pOffsets, const  VkDeviceSize * pSizes, const  VkDeviceSize * pStrides) {
-		fnptrs->pfn_vkCmdBindVertexBuffers2(handle, firstBinding, bindingCount, pBuffers, pOffsets, pSizes, pStrides);
+		fnptrs->pfn_vkCmdBindVertexBuffers2(this->handle, firstBinding, bindingCount, pBuffers, pOffsets, pSizes, pStrides);
 	}
 	void PushConstants(VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, const  void * pValues) {
-		fnptrs->pfn_vkCmdPushConstants(handle, layout, stageFlags, offset, size, pValues);
+		fnptrs->pfn_vkCmdPushConstants(this->handle, layout, stageFlags, offset, size, pValues);
 	}
 	void SetDepthWriteEnable(VkBool32 depthWriteEnable) {
-		fnptrs->pfn_vkCmdSetDepthWriteEnable(handle, depthWriteEnable);
+		fnptrs->pfn_vkCmdSetDepthWriteEnable(this->handle, depthWriteEnable);
 	}
 	void SetPrimitiveRestartEnable(VkBool32 primitiveRestartEnable) {
-		fnptrs->pfn_vkCmdSetPrimitiveRestartEnable(handle, primitiveRestartEnable);
+		fnptrs->pfn_vkCmdSetPrimitiveRestartEnable(this->handle, primitiveRestartEnable);
 	}
 	void Draw(uint32_t vertexCount, uint32_t instanceCount, uint32_t firstVertex, uint32_t firstInstance) {
-		fnptrs->pfn_vkCmdDraw(handle, vertexCount, instanceCount, firstVertex, firstInstance);
+		fnptrs->pfn_vkCmdDraw(this->handle, vertexCount, instanceCount, firstVertex, firstInstance);
 	}
 	void SetPrimitiveTopology(VkPrimitiveTopology primitiveTopology) {
-		fnptrs->pfn_vkCmdSetPrimitiveTopology(handle, primitiveTopology);
+		fnptrs->pfn_vkCmdSetPrimitiveTopology(this->handle, primitiveTopology);
 	}
 	void EndRenderPass2(const  VkSubpassEndInfo * pSubpassEndInfo) {
-		fnptrs->pfn_vkCmdEndRenderPass2(handle, pSubpassEndInfo);
+		fnptrs->pfn_vkCmdEndRenderPass2(this->handle, pSubpassEndInfo);
 	}
 	void SetStencilOp(VkStencilFaceFlags faceMask, VkStencilOp failOp, VkStencilOp passOp, VkStencilOp depthFailOp, VkCompareOp compareOp) {
-		fnptrs->pfn_vkCmdSetStencilOp(handle, faceMask, failOp, passOp, depthFailOp, compareOp);
+		fnptrs->pfn_vkCmdSetStencilOp(this->handle, faceMask, failOp, passOp, depthFailOp, compareOp);
 	}
 	void SetViewportWithCount(uint32_t viewportCount, const  VkViewport * pViewports) {
-		fnptrs->pfn_vkCmdSetViewportWithCount(handle, viewportCount, pViewports);
+		fnptrs->pfn_vkCmdSetViewportWithCount(this->handle, viewportCount, pViewports);
 	}
 	void CopyImage2(const  VkCopyImageInfo2 * pCopyImageInfo) {
-		fnptrs->pfn_vkCmdCopyImage2(handle, pCopyImageInfo);
+		fnptrs->pfn_vkCmdCopyImage2(this->handle, pCopyImageInfo);
 	}
 	void SetDepthTestEnable(VkBool32 depthTestEnable) {
-		fnptrs->pfn_vkCmdSetDepthTestEnable(handle, depthTestEnable);
+		fnptrs->pfn_vkCmdSetDepthTestEnable(this->handle, depthTestEnable);
 	}
 	void BindDescriptorSets(VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, uint32_t descriptorSetCount, const  VkDescriptorSet * pDescriptorSets, uint32_t dynamicOffsetCount, const  uint32_t * pDynamicOffsets) {
-		fnptrs->pfn_vkCmdBindDescriptorSets(handle, pipelineBindPoint, layout, firstSet, descriptorSetCount, pDescriptorSets, dynamicOffsetCount, pDynamicOffsets);
+		fnptrs->pfn_vkCmdBindDescriptorSets(this->handle, pipelineBindPoint, layout, firstSet, descriptorSetCount, pDescriptorSets, dynamicOffsetCount, pDynamicOffsets);
 	}
 	void BlitImage(VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, const  VkImageBlit * pRegions, VkFilter filter) {
-		fnptrs->pfn_vkCmdBlitImage(handle, srcImage, srcImageLayout, dstImage, dstImageLayout, regionCount, pRegions, filter);
+		fnptrs->pfn_vkCmdBlitImage(this->handle, srcImage, srcImageLayout, dstImage, dstImageLayout, regionCount, pRegions, filter);
 	}
 	VkResult Reset(VkCommandBufferResetFlags flags) {
-		return fnptrs->pfn_vkResetCommandBuffer(handle, flags);
+		return fnptrs->pfn_vkResetCommandBuffer(this->handle, flags);
 	}
 	void ResetEvent(VkEvent event, VkPipelineStageFlags stageMask) {
-		fnptrs->pfn_vkCmdResetEvent(handle, event, stageMask);
+		fnptrs->pfn_vkCmdResetEvent(this->handle, event, stageMask);
 	}
 	void DispatchBase(uint32_t baseGroupX, uint32_t baseGroupY, uint32_t baseGroupZ, uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ) {
-		fnptrs->pfn_vkCmdDispatchBase(handle, baseGroupX, baseGroupY, baseGroupZ, groupCountX, groupCountY, groupCountZ);
+		fnptrs->pfn_vkCmdDispatchBase(this->handle, baseGroupX, baseGroupY, baseGroupZ, groupCountX, groupCountY, groupCountZ);
 	}
 	void SetDeviceMask(uint32_t deviceMask) {
-		fnptrs->pfn_vkCmdSetDeviceMask(handle, deviceMask);
+		fnptrs->pfn_vkCmdSetDeviceMask(this->handle, deviceMask);
 	}
 	void SetDepthBiasEnable(VkBool32 depthBiasEnable) {
-		fnptrs->pfn_vkCmdSetDepthBiasEnable(handle, depthBiasEnable);
+		fnptrs->pfn_vkCmdSetDepthBiasEnable(this->handle, depthBiasEnable);
 	}
 	void PipelineBarrier2(const  VkDependencyInfo * pDependencyInfo) {
-		fnptrs->pfn_vkCmdPipelineBarrier2(handle, pDependencyInfo);
+		fnptrs->pfn_vkCmdPipelineBarrier2(this->handle, pDependencyInfo);
 	}
 	void SetDepthBoundsTestEnable(VkBool32 depthBoundsTestEnable) {
-		fnptrs->pfn_vkCmdSetDepthBoundsTestEnable(handle, depthBoundsTestEnable);
+		fnptrs->pfn_vkCmdSetDepthBoundsTestEnable(this->handle, depthBoundsTestEnable);
 	}
 	void SetStencilWriteMask(VkStencilFaceFlags faceMask, uint32_t writeMask) {
-		fnptrs->pfn_vkCmdSetStencilWriteMask(handle, faceMask, writeMask);
+		fnptrs->pfn_vkCmdSetStencilWriteMask(this->handle, faceMask, writeMask);
 	}
 	void WriteTimestamp2(VkPipelineStageFlags2 stage, VkQueryPool queryPool, uint32_t query) {
-		fnptrs->pfn_vkCmdWriteTimestamp2(handle, stage, queryPool, query);
+		fnptrs->pfn_vkCmdWriteTimestamp2(this->handle, stage, queryPool, query);
 	}
 #ifdef VK_AMD_buffer_marker
 	void WriteBufferMarkerAMD(VkPipelineStageFlagBits pipelineStage, VkBuffer dstBuffer, VkDeviceSize dstOffset, uint32_t marker) {
-		fnptrs->pfn_vkCmdWriteBufferMarkerAMD(handle, pipelineStage, dstBuffer, dstOffset, marker);
+		fnptrs->pfn_vkCmdWriteBufferMarkerAMD(this->handle, pipelineStage, dstBuffer, dstOffset, marker);
 	}
 #endif
 #ifdef VK_EXT_debug_marker
 	void DebugMarkerBeginEXT(const  VkDebugMarkerMarkerInfoEXT * pMarkerInfo) {
-		fnptrs->pfn_vkCmdDebugMarkerBeginEXT(handle, pMarkerInfo);
+		fnptrs->pfn_vkCmdDebugMarkerBeginEXT(this->handle, pMarkerInfo);
 	}
 	void DebugMarkerEndEXT() {
-		fnptrs->pfn_vkCmdDebugMarkerEndEXT(handle);
+		fnptrs->pfn_vkCmdDebugMarkerEndEXT(this->handle);
 	}
 	void DebugMarkerInsertEXT(const  VkDebugMarkerMarkerInfoEXT * pMarkerInfo) {
-		fnptrs->pfn_vkCmdDebugMarkerInsertEXT(handle, pMarkerInfo);
+		fnptrs->pfn_vkCmdDebugMarkerInsertEXT(this->handle, pMarkerInfo);
 	}
 #endif
 #ifdef VK_NV_shading_rate_image
 	void BindShadingRateImageNV(VkImageView imageView, VkImageLayout imageLayout) {
-		fnptrs->pfn_vkCmdBindShadingRateImageNV(handle, imageView, imageLayout);
+		fnptrs->pfn_vkCmdBindShadingRateImageNV(this->handle, imageView, imageLayout);
 	}
 	void SetViewportShadingRatePaletteNV(uint32_t firstViewport, uint32_t viewportCount, const  VkShadingRatePaletteNV * pShadingRatePalettes) {
-		fnptrs->pfn_vkCmdSetViewportShadingRatePaletteNV(handle, firstViewport, viewportCount, pShadingRatePalettes);
+		fnptrs->pfn_vkCmdSetViewportShadingRatePaletteNV(this->handle, firstViewport, viewportCount, pShadingRatePalettes);
 	}
 	void SetCoarseSampleOrderNV(VkCoarseSampleOrderTypeNV sampleOrderType, uint32_t customSampleOrderCount, const  VkCoarseSampleOrderCustomNV * pCustomSampleOrders) {
-		fnptrs->pfn_vkCmdSetCoarseSampleOrderNV(handle, sampleOrderType, customSampleOrderCount, pCustomSampleOrders);
+		fnptrs->pfn_vkCmdSetCoarseSampleOrderNV(this->handle, sampleOrderType, customSampleOrderCount, pCustomSampleOrders);
 	}
 #endif
 #ifdef VK_INTEL_performance_query
 	VkResult SetPerformanceMarkerINTEL(const  VkPerformanceMarkerInfoINTEL * pMarkerInfo) {
-		return fnptrs->pfn_vkCmdSetPerformanceMarkerINTEL(handle, pMarkerInfo);
+		return fnptrs->pfn_vkCmdSetPerformanceMarkerINTEL(this->handle, pMarkerInfo);
 	}
 	VkResult SetPerformanceStreamMarkerINTEL(const  VkPerformanceStreamMarkerInfoINTEL * pMarkerInfo) {
-		return fnptrs->pfn_vkCmdSetPerformanceStreamMarkerINTEL(handle, pMarkerInfo);
+		return fnptrs->pfn_vkCmdSetPerformanceStreamMarkerINTEL(this->handle, pMarkerInfo);
 	}
 	VkResult SetPerformanceOverrideINTEL(const  VkPerformanceOverrideInfoINTEL * pOverrideInfo) {
-		return fnptrs->pfn_vkCmdSetPerformanceOverrideINTEL(handle, pOverrideInfo);
+		return fnptrs->pfn_vkCmdSetPerformanceOverrideINTEL(this->handle, pOverrideInfo);
 	}
 #endif
 #ifdef VK_NV_scissor_exclusive
 	void SetExclusiveScissorNV(uint32_t firstExclusiveScissor, uint32_t exclusiveScissorCount, const  VkRect2D * pExclusiveScissors) {
-		fnptrs->pfn_vkCmdSetExclusiveScissorNV(handle, firstExclusiveScissor, exclusiveScissorCount, pExclusiveScissors);
+		fnptrs->pfn_vkCmdSetExclusiveScissorNV(this->handle, firstExclusiveScissor, exclusiveScissorCount, pExclusiveScissors);
 	}
 #endif
 #ifdef VK_KHR_video_encode_queue
 	void EncodeVideoKHR(const  VkVideoEncodeInfoKHR * pEncodeInfo) {
-		fnptrs->pfn_vkCmdEncodeVideoKHR(handle, pEncodeInfo);
+		fnptrs->pfn_vkCmdEncodeVideoKHR(this->handle, pEncodeInfo);
 	}
 #endif
 #ifdef VK_HUAWEI_subpass_shading
 	void SubpassShadingHUAWEI() {
-		fnptrs->pfn_vkCmdSubpassShadingHUAWEI(handle);
+		fnptrs->pfn_vkCmdSubpassShadingHUAWEI(this->handle);
 	}
 #endif
 #ifdef VK_EXT_conditional_rendering
 	void BeginConditionalRenderingEXT(const  VkConditionalRenderingBeginInfoEXT * pConditionalRenderingBegin) {
-		fnptrs->pfn_vkCmdBeginConditionalRenderingEXT(handle, pConditionalRenderingBegin);
+		fnptrs->pfn_vkCmdBeginConditionalRenderingEXT(this->handle, pConditionalRenderingBegin);
 	}
 	void EndConditionalRenderingEXT() {
-		fnptrs->pfn_vkCmdEndConditionalRenderingEXT(handle);
+		fnptrs->pfn_vkCmdEndConditionalRenderingEXT(this->handle);
 	}
 #endif
 #ifdef VK_NV_clip_space_w_scaling
 	void SetViewportWScalingNV(uint32_t firstViewport, uint32_t viewportCount, const  VkViewportWScalingNV * pViewportWScalings) {
-		fnptrs->pfn_vkCmdSetViewportWScalingNV(handle, firstViewport, viewportCount, pViewportWScalings);
+		fnptrs->pfn_vkCmdSetViewportWScalingNV(this->handle, firstViewport, viewportCount, pViewportWScalings);
 	}
 #endif
 #ifdef VK_NV_fragment_shading_rate_enums
 	void SetFragmentShadingRateEnumNV(VkFragmentShadingRateNV shadingRate, const  VkFragmentShadingRateCombinerOpKHR combinerOps[2]) {
-		fnptrs->pfn_vkCmdSetFragmentShadingRateEnumNV(handle, shadingRate, combinerOps);
+		fnptrs->pfn_vkCmdSetFragmentShadingRateEnumNV(this->handle, shadingRate, combinerOps);
 	}
 #endif
 #ifdef VK_KHR_fragment_shading_rate
 	void SetFragmentShadingRateKHR(const  VkExtent2D * pFragmentSize, const  VkFragmentShadingRateCombinerOpKHR combinerOps[2]) {
-		fnptrs->pfn_vkCmdSetFragmentShadingRateKHR(handle, pFragmentSize, combinerOps);
+		fnptrs->pfn_vkCmdSetFragmentShadingRateKHR(this->handle, pFragmentSize, combinerOps);
 	}
 #endif
 #ifdef VK_HUAWEI_invocation_mask
 	void BindInvocationMaskHUAWEI(VkImageView imageView, VkImageLayout imageLayout) {
-		fnptrs->pfn_vkCmdBindInvocationMaskHUAWEI(handle, imageView, imageLayout);
+		fnptrs->pfn_vkCmdBindInvocationMaskHUAWEI(this->handle, imageView, imageLayout);
 	}
 #endif
 #ifdef VK_KHR_push_descriptor
 	void PushDescriptorSetKHR(VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t set, uint32_t descriptorWriteCount, const  VkWriteDescriptorSet * pDescriptorWrites) {
-		fnptrs->pfn_vkCmdPushDescriptorSetKHR(handle, pipelineBindPoint, layout, set, descriptorWriteCount, pDescriptorWrites);
+		fnptrs->pfn_vkCmdPushDescriptorSetKHR(this->handle, pipelineBindPoint, layout, set, descriptorWriteCount, pDescriptorWrites);
 	}
 	void PushDescriptorSetWithTemplateKHR(VkDescriptorUpdateTemplate descriptorUpdateTemplate, VkPipelineLayout layout, uint32_t set, const  void * pData) {
-		fnptrs->pfn_vkCmdPushDescriptorSetWithTemplateKHR(handle, descriptorUpdateTemplate, layout, set, pData);
+		fnptrs->pfn_vkCmdPushDescriptorSetWithTemplateKHR(this->handle, descriptorUpdateTemplate, layout, set, pData);
 	}
 #endif
 #ifdef VK_EXT_multi_draw
 	void DrawMultiEXT(uint32_t drawCount, const  VkMultiDrawInfoEXT * pVertexInfo, uint32_t instanceCount, uint32_t firstInstance, uint32_t stride) {
-		fnptrs->pfn_vkCmdDrawMultiEXT(handle, drawCount, pVertexInfo, instanceCount, firstInstance, stride);
+		fnptrs->pfn_vkCmdDrawMultiEXT(this->handle, drawCount, pVertexInfo, instanceCount, firstInstance, stride);
 	}
 	void DrawMultiIndexedEXT(uint32_t drawCount, const  VkMultiDrawIndexedInfoEXT * pIndexInfo, uint32_t instanceCount, uint32_t firstInstance, uint32_t stride, const  int32_t * pVertexOffset) {
-		fnptrs->pfn_vkCmdDrawMultiIndexedEXT(handle, drawCount, pIndexInfo, instanceCount, firstInstance, stride, pVertexOffset);
+		fnptrs->pfn_vkCmdDrawMultiIndexedEXT(this->handle, drawCount, pIndexInfo, instanceCount, firstInstance, stride, pVertexOffset);
 	}
 #endif
 #ifdef VK_EXT_sample_locations
 	void SetSampleLocationsEXT(const  VkSampleLocationsInfoEXT * pSampleLocationsInfo) {
-		fnptrs->pfn_vkCmdSetSampleLocationsEXT(handle, pSampleLocationsInfo);
+		fnptrs->pfn_vkCmdSetSampleLocationsEXT(this->handle, pSampleLocationsInfo);
 	}
 #endif
 #ifdef VK_KHR_synchronization2
 	void WriteBufferMarker2AMD(VkPipelineStageFlags2 stage, VkBuffer dstBuffer, VkDeviceSize dstOffset, uint32_t marker) {
-		fnptrs->pfn_vkCmdWriteBufferMarker2AMD(handle, stage, dstBuffer, dstOffset, marker);
+		fnptrs->pfn_vkCmdWriteBufferMarker2AMD(this->handle, stage, dstBuffer, dstOffset, marker);
 	}
 #endif
 #ifdef VK_EXT_extended_dynamic_state2
 	void SetPatchControlPointsEXT(uint32_t patchControlPoints) {
-		fnptrs->pfn_vkCmdSetPatchControlPointsEXT(handle, patchControlPoints);
+		fnptrs->pfn_vkCmdSetPatchControlPointsEXT(this->handle, patchControlPoints);
 	}
 	void SetLogicOpEXT(VkLogicOp logicOp) {
-		fnptrs->pfn_vkCmdSetLogicOpEXT(handle, logicOp);
+		fnptrs->pfn_vkCmdSetLogicOpEXT(this->handle, logicOp);
 	}
 #endif
 #ifdef VK_NVX_binary_import
 	void CuLaunchKernelNVX(const  VkCuLaunchInfoNVX * pLaunchInfo) {
-		fnptrs->pfn_vkCmdCuLaunchKernelNVX(handle, pLaunchInfo);
+		fnptrs->pfn_vkCmdCuLaunchKernelNVX(this->handle, pLaunchInfo);
 	}
 #endif
 #ifdef VK_EXT_line_rasterization
 	void SetLineStippleEXT(uint32_t lineStippleFactor, uint16_t lineStipplePattern) {
-		fnptrs->pfn_vkCmdSetLineStippleEXT(handle, lineStippleFactor, lineStipplePattern);
+		fnptrs->pfn_vkCmdSetLineStippleEXT(this->handle, lineStippleFactor, lineStipplePattern);
 	}
 #endif
 #ifdef VK_KHR_acceleration_structure
 	void BuildAccelerationStructuresKHR(uint32_t infoCount, const  VkAccelerationStructureBuildGeometryInfoKHR * pInfos, const  VkAccelerationStructureBuildRangeInfoKHR * const * ppBuildRangeInfos) {
-		fnptrs->pfn_vkCmdBuildAccelerationStructuresKHR(handle, infoCount, pInfos, ppBuildRangeInfos);
+		fnptrs->pfn_vkCmdBuildAccelerationStructuresKHR(this->handle, infoCount, pInfos, ppBuildRangeInfos);
 	}
 	void BuildAccelerationStructuresIndirectKHR(uint32_t infoCount, const  VkAccelerationStructureBuildGeometryInfoKHR * pInfos, const  VkDeviceAddress * pIndirectDeviceAddresses, const  uint32_t * pIndirectStrides, const  uint32_t * const * ppMaxPrimitiveCounts) {
-		fnptrs->pfn_vkCmdBuildAccelerationStructuresIndirectKHR(handle, infoCount, pInfos, pIndirectDeviceAddresses, pIndirectStrides, ppMaxPrimitiveCounts);
+		fnptrs->pfn_vkCmdBuildAccelerationStructuresIndirectKHR(this->handle, infoCount, pInfos, pIndirectDeviceAddresses, pIndirectStrides, ppMaxPrimitiveCounts);
 	}
 	void CopyAccelerationStructureKHR(const  VkCopyAccelerationStructureInfoKHR * pInfo) {
-		fnptrs->pfn_vkCmdCopyAccelerationStructureKHR(handle, pInfo);
+		fnptrs->pfn_vkCmdCopyAccelerationStructureKHR(this->handle, pInfo);
 	}
 	void CopyAccelerationStructureToMemoryKHR(const  VkCopyAccelerationStructureToMemoryInfoKHR * pInfo) {
-		fnptrs->pfn_vkCmdCopyAccelerationStructureToMemoryKHR(handle, pInfo);
+		fnptrs->pfn_vkCmdCopyAccelerationStructureToMemoryKHR(this->handle, pInfo);
 	}
 	void CopyMemoryToAccelerationStructureKHR(const  VkCopyMemoryToAccelerationStructureInfoKHR * pInfo) {
-		fnptrs->pfn_vkCmdCopyMemoryToAccelerationStructureKHR(handle, pInfo);
+		fnptrs->pfn_vkCmdCopyMemoryToAccelerationStructureKHR(this->handle, pInfo);
 	}
 	void WriteAccelerationStructuresPropertiesKHR(uint32_t accelerationStructureCount, const  VkAccelerationStructureKHR * pAccelerationStructures, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery) {
-		fnptrs->pfn_vkCmdWriteAccelerationStructuresPropertiesKHR(handle, accelerationStructureCount, pAccelerationStructures, queryType, queryPool, firstQuery);
+		fnptrs->pfn_vkCmdWriteAccelerationStructuresPropertiesKHR(this->handle, accelerationStructureCount, pAccelerationStructures, queryType, queryPool, firstQuery);
 	}
 #endif
 #ifdef VK_NV_ray_tracing
 	void BuildAccelerationStructureNV(const  VkAccelerationStructureInfoNV * pInfo, VkBuffer instanceData, VkDeviceSize instanceOffset, VkBool32 update, VkAccelerationStructureNV dst, VkAccelerationStructureNV src, VkBuffer scratch, VkDeviceSize scratchOffset) {
-		fnptrs->pfn_vkCmdBuildAccelerationStructureNV(handle, pInfo, instanceData, instanceOffset, update, dst, src, scratch, scratchOffset);
+		fnptrs->pfn_vkCmdBuildAccelerationStructureNV(this->handle, pInfo, instanceData, instanceOffset, update, dst, src, scratch, scratchOffset);
 	}
 	void CopyAccelerationStructureNV(VkAccelerationStructureNV dst, VkAccelerationStructureNV src, VkCopyAccelerationStructureModeKHR mode) {
-		fnptrs->pfn_vkCmdCopyAccelerationStructureNV(handle, dst, src, mode);
+		fnptrs->pfn_vkCmdCopyAccelerationStructureNV(this->handle, dst, src, mode);
 	}
 	void TraceRaysNV(VkBuffer raygenShaderBindingTableBuffer, VkDeviceSize raygenShaderBindingOffset, VkBuffer missShaderBindingTableBuffer, VkDeviceSize missShaderBindingOffset, VkDeviceSize missShaderBindingStride, VkBuffer hitShaderBindingTableBuffer, VkDeviceSize hitShaderBindingOffset, VkDeviceSize hitShaderBindingStride, VkBuffer callableShaderBindingTableBuffer, VkDeviceSize callableShaderBindingOffset, VkDeviceSize callableShaderBindingStride, uint32_t width, uint32_t height, uint32_t depth) {
-		fnptrs->pfn_vkCmdTraceRaysNV(handle, raygenShaderBindingTableBuffer, raygenShaderBindingOffset, missShaderBindingTableBuffer, missShaderBindingOffset, missShaderBindingStride, hitShaderBindingTableBuffer, hitShaderBindingOffset, hitShaderBindingStride, callableShaderBindingTableBuffer, callableShaderBindingOffset, callableShaderBindingStride, width, height, depth);
+		fnptrs->pfn_vkCmdTraceRaysNV(this->handle, raygenShaderBindingTableBuffer, raygenShaderBindingOffset, missShaderBindingTableBuffer, missShaderBindingOffset, missShaderBindingStride, hitShaderBindingTableBuffer, hitShaderBindingOffset, hitShaderBindingStride, callableShaderBindingTableBuffer, callableShaderBindingOffset, callableShaderBindingStride, width, height, depth);
 	}
 	void WriteAccelerationStructuresPropertiesNV(uint32_t accelerationStructureCount, const  VkAccelerationStructureNV * pAccelerationStructures, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery) {
-		fnptrs->pfn_vkCmdWriteAccelerationStructuresPropertiesNV(handle, accelerationStructureCount, pAccelerationStructures, queryType, queryPool, firstQuery);
+		fnptrs->pfn_vkCmdWriteAccelerationStructuresPropertiesNV(this->handle, accelerationStructureCount, pAccelerationStructures, queryType, queryPool, firstQuery);
 	}
 #endif
 #ifdef VK_EXT_discard_rectangles
 	void SetDiscardRectangleEXT(uint32_t firstDiscardRectangle, uint32_t discardRectangleCount, const  VkRect2D * pDiscardRectangles) {
-		fnptrs->pfn_vkCmdSetDiscardRectangleEXT(handle, firstDiscardRectangle, discardRectangleCount, pDiscardRectangles);
+		fnptrs->pfn_vkCmdSetDiscardRectangleEXT(this->handle, firstDiscardRectangle, discardRectangleCount, pDiscardRectangles);
 	}
 #endif
 #ifdef VK_EXT_color_write_enable
 	void SetColorWriteEnableEXT(uint32_t attachmentCount, const  VkBool32 * pColorWriteEnables) {
-		fnptrs->pfn_vkCmdSetColorWriteEnableEXT(handle, attachmentCount, pColorWriteEnables);
+		fnptrs->pfn_vkCmdSetColorWriteEnableEXT(this->handle, attachmentCount, pColorWriteEnables);
 	}
 #endif
 #ifdef VK_NV_device_generated_commands
 	void PreprocessGeneratedCommandsNV(const  VkGeneratedCommandsInfoNV * pGeneratedCommandsInfo) {
-		fnptrs->pfn_vkCmdPreprocessGeneratedCommandsNV(handle, pGeneratedCommandsInfo);
+		fnptrs->pfn_vkCmdPreprocessGeneratedCommandsNV(this->handle, pGeneratedCommandsInfo);
 	}
 	void ExecuteGeneratedCommandsNV(VkBool32 isPreprocessed, const  VkGeneratedCommandsInfoNV * pGeneratedCommandsInfo) {
-		fnptrs->pfn_vkCmdExecuteGeneratedCommandsNV(handle, isPreprocessed, pGeneratedCommandsInfo);
+		fnptrs->pfn_vkCmdExecuteGeneratedCommandsNV(this->handle, isPreprocessed, pGeneratedCommandsInfo);
 	}
 	void BindPipelineShaderGroupNV(VkPipelineBindPoint pipelineBindPoint, VkPipeline pipeline, uint32_t groupIndex) {
-		fnptrs->pfn_vkCmdBindPipelineShaderGroupNV(handle, pipelineBindPoint, pipeline, groupIndex);
+		fnptrs->pfn_vkCmdBindPipelineShaderGroupNV(this->handle, pipelineBindPoint, pipeline, groupIndex);
 	}
 #endif
 #ifdef VK_EXT_debug_utils
 	void BeginDebugUtilsLabelEXT(const  VkDebugUtilsLabelEXT * pLabelInfo) {
-		fnptrs->pfn_vkCmdBeginDebugUtilsLabelEXT(handle, pLabelInfo);
+		fnptrs->pfn_vkCmdBeginDebugUtilsLabelEXT(this->handle, pLabelInfo);
 	}
 	void EndDebugUtilsLabelEXT() {
-		fnptrs->pfn_vkCmdEndDebugUtilsLabelEXT(handle);
+		fnptrs->pfn_vkCmdEndDebugUtilsLabelEXT(this->handle);
 	}
 	void InsertDebugUtilsLabelEXT(const  VkDebugUtilsLabelEXT * pLabelInfo) {
-		fnptrs->pfn_vkCmdInsertDebugUtilsLabelEXT(handle, pLabelInfo);
+		fnptrs->pfn_vkCmdInsertDebugUtilsLabelEXT(this->handle, pLabelInfo);
 	}
 #endif
 #ifdef VK_KHR_video_decode_queue
 	void DecodeVideoKHR(const  VkVideoDecodeInfoKHR * pFrameInfo) {
-		fnptrs->pfn_vkCmdDecodeVideoKHR(handle, pFrameInfo);
+		fnptrs->pfn_vkCmdDecodeVideoKHR(this->handle, pFrameInfo);
 	}
 #endif
 #ifdef VK_NV_device_diagnostic_checkpoints
 	void SetCheckpointNV(const  void * pCheckpointMarker) {
-		fnptrs->pfn_vkCmdSetCheckpointNV(handle, pCheckpointMarker);
+		fnptrs->pfn_vkCmdSetCheckpointNV(this->handle, pCheckpointMarker);
 	}
 #endif
 #ifdef VK_NV_mesh_shader
 	void DrawMeshTasksNV(uint32_t taskCount, uint32_t firstTask) {
-		fnptrs->pfn_vkCmdDrawMeshTasksNV(handle, taskCount, firstTask);
+		fnptrs->pfn_vkCmdDrawMeshTasksNV(this->handle, taskCount, firstTask);
 	}
 	void DrawMeshTasksIndirectNV(VkBuffer buffer, VkDeviceSize offset, uint32_t drawCount, uint32_t stride) {
-		fnptrs->pfn_vkCmdDrawMeshTasksIndirectNV(handle, buffer, offset, drawCount, stride);
+		fnptrs->pfn_vkCmdDrawMeshTasksIndirectNV(this->handle, buffer, offset, drawCount, stride);
 	}
 	void DrawMeshTasksIndirectCountNV(VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride) {
-		fnptrs->pfn_vkCmdDrawMeshTasksIndirectCountNV(handle, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+		fnptrs->pfn_vkCmdDrawMeshTasksIndirectCountNV(this->handle, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
 	}
 #endif
 #ifdef VK_KHR_ray_tracing_pipeline
 	void TraceRaysKHR(const  VkStridedDeviceAddressRegionKHR * pRaygenShaderBindingTable, const  VkStridedDeviceAddressRegionKHR * pMissShaderBindingTable, const  VkStridedDeviceAddressRegionKHR * pHitShaderBindingTable, const  VkStridedDeviceAddressRegionKHR * pCallableShaderBindingTable, uint32_t width, uint32_t height, uint32_t depth) {
-		fnptrs->pfn_vkCmdTraceRaysKHR(handle, pRaygenShaderBindingTable, pMissShaderBindingTable, pHitShaderBindingTable, pCallableShaderBindingTable, width, height, depth);
+		fnptrs->pfn_vkCmdTraceRaysKHR(this->handle, pRaygenShaderBindingTable, pMissShaderBindingTable, pHitShaderBindingTable, pCallableShaderBindingTable, width, height, depth);
 	}
 	void TraceRaysIndirectKHR(const  VkStridedDeviceAddressRegionKHR * pRaygenShaderBindingTable, const  VkStridedDeviceAddressRegionKHR * pMissShaderBindingTable, const  VkStridedDeviceAddressRegionKHR * pHitShaderBindingTable, const  VkStridedDeviceAddressRegionKHR * pCallableShaderBindingTable, VkDeviceAddress indirectDeviceAddress) {
-		fnptrs->pfn_vkCmdTraceRaysIndirectKHR(handle, pRaygenShaderBindingTable, pMissShaderBindingTable, pHitShaderBindingTable, pCallableShaderBindingTable, indirectDeviceAddress);
+		fnptrs->pfn_vkCmdTraceRaysIndirectKHR(this->handle, pRaygenShaderBindingTable, pMissShaderBindingTable, pHitShaderBindingTable, pCallableShaderBindingTable, indirectDeviceAddress);
 	}
 	void SetRayTracingPipelineStackSizeKHR(uint32_t pipelineStackSize) {
-		fnptrs->pfn_vkCmdSetRayTracingPipelineStackSizeKHR(handle, pipelineStackSize);
+		fnptrs->pfn_vkCmdSetRayTracingPipelineStackSizeKHR(this->handle, pipelineStackSize);
 	}
 #endif
 #ifdef VK_EXT_transform_feedback
 	void BindTransformFeedbackBuffersEXT(uint32_t firstBinding, uint32_t bindingCount, const  VkBuffer * pBuffers, const  VkDeviceSize * pOffsets, const  VkDeviceSize * pSizes) {
-		fnptrs->pfn_vkCmdBindTransformFeedbackBuffersEXT(handle, firstBinding, bindingCount, pBuffers, pOffsets, pSizes);
+		fnptrs->pfn_vkCmdBindTransformFeedbackBuffersEXT(this->handle, firstBinding, bindingCount, pBuffers, pOffsets, pSizes);
 	}
 	void BeginTransformFeedbackEXT(uint32_t firstCounterBuffer, uint32_t counterBufferCount, const  VkBuffer * pCounterBuffers, const  VkDeviceSize * pCounterBufferOffsets) {
-		fnptrs->pfn_vkCmdBeginTransformFeedbackEXT(handle, firstCounterBuffer, counterBufferCount, pCounterBuffers, pCounterBufferOffsets);
+		fnptrs->pfn_vkCmdBeginTransformFeedbackEXT(this->handle, firstCounterBuffer, counterBufferCount, pCounterBuffers, pCounterBufferOffsets);
 	}
 	void EndTransformFeedbackEXT(uint32_t firstCounterBuffer, uint32_t counterBufferCount, const  VkBuffer * pCounterBuffers, const  VkDeviceSize * pCounterBufferOffsets) {
-		fnptrs->pfn_vkCmdEndTransformFeedbackEXT(handle, firstCounterBuffer, counterBufferCount, pCounterBuffers, pCounterBufferOffsets);
+		fnptrs->pfn_vkCmdEndTransformFeedbackEXT(this->handle, firstCounterBuffer, counterBufferCount, pCounterBuffers, pCounterBufferOffsets);
 	}
 	void BeginQueryIndexedEXT(VkQueryPool queryPool, uint32_t query, VkQueryControlFlags flags, uint32_t index) {
-		fnptrs->pfn_vkCmdBeginQueryIndexedEXT(handle, queryPool, query, flags, index);
+		fnptrs->pfn_vkCmdBeginQueryIndexedEXT(this->handle, queryPool, query, flags, index);
 	}
 	void EndQueryIndexedEXT(VkQueryPool queryPool, uint32_t query, uint32_t index) {
-		fnptrs->pfn_vkCmdEndQueryIndexedEXT(handle, queryPool, query, index);
+		fnptrs->pfn_vkCmdEndQueryIndexedEXT(this->handle, queryPool, query, index);
 	}
 	void DrawIndirectByteCountEXT(uint32_t instanceCount, uint32_t firstInstance, VkBuffer counterBuffer, VkDeviceSize counterBufferOffset, uint32_t counterOffset, uint32_t vertexStride) {
-		fnptrs->pfn_vkCmdDrawIndirectByteCountEXT(handle, instanceCount, firstInstance, counterBuffer, counterBufferOffset, counterOffset, vertexStride);
+		fnptrs->pfn_vkCmdDrawIndirectByteCountEXT(this->handle, instanceCount, firstInstance, counterBuffer, counterBufferOffset, counterOffset, vertexStride);
 	}
 #endif
 #ifdef VK_KHR_video_queue
 	void BeginVideoCodingKHR(const  VkVideoBeginCodingInfoKHR * pBeginInfo) {
-		fnptrs->pfn_vkCmdBeginVideoCodingKHR(handle, pBeginInfo);
+		fnptrs->pfn_vkCmdBeginVideoCodingKHR(this->handle, pBeginInfo);
 	}
 	void EndVideoCodingKHR(const  VkVideoEndCodingInfoKHR * pEndCodingInfo) {
-		fnptrs->pfn_vkCmdEndVideoCodingKHR(handle, pEndCodingInfo);
+		fnptrs->pfn_vkCmdEndVideoCodingKHR(this->handle, pEndCodingInfo);
 	}
 	void ControlVideoCodingKHR(const  VkVideoCodingControlInfoKHR * pCodingControlInfo) {
-		fnptrs->pfn_vkCmdControlVideoCodingKHR(handle, pCodingControlInfo);
+		fnptrs->pfn_vkCmdControlVideoCodingKHR(this->handle, pCodingControlInfo);
 	}
 #endif
 #ifdef VK_EXT_vertex_input_dynamic_state
 	void SetVertexInputEXT(uint32_t vertexBindingDescriptionCount, const  VkVertexInputBindingDescription2EXT * pVertexBindingDescriptions, uint32_t vertexAttributeDescriptionCount, const  VkVertexInputAttributeDescription2EXT * pVertexAttributeDescriptions) {
-		fnptrs->pfn_vkCmdSetVertexInputEXT(handle, vertexBindingDescriptionCount, pVertexBindingDescriptions, vertexAttributeDescriptionCount, pVertexAttributeDescriptions);
+		fnptrs->pfn_vkCmdSetVertexInputEXT(this->handle, vertexBindingDescriptionCount, pVertexBindingDescriptions, vertexAttributeDescriptionCount, pVertexAttributeDescriptions);
 	}
 #endif
 };
@@ -1874,51 +1874,51 @@ struct VklQueueFunctions {
 	VklDeviceFunctions* fnptrs;
 	VkQueue handle;
 	VkResult Submit2(uint32_t submitCount, const  VkSubmitInfo2 * pSubmits, VkFence fence) {
-		return fnptrs->pfn_vkQueueSubmit2(handle, submitCount, pSubmits, fence);
+		return fnptrs->pfn_vkQueueSubmit2(this->handle, submitCount, pSubmits, fence);
 	}
 	VkResult BindSparse(uint32_t bindInfoCount, const  VkBindSparseInfo * pBindInfo, VkFence fence) {
-		return fnptrs->pfn_vkQueueBindSparse(handle, bindInfoCount, pBindInfo, fence);
+		return fnptrs->pfn_vkQueueBindSparse(this->handle, bindInfoCount, pBindInfo, fence);
 	}
 	VkResult Submit(uint32_t submitCount, const  VkSubmitInfo * pSubmits, VkFence fence) {
-		return fnptrs->pfn_vkQueueSubmit(handle, submitCount, pSubmits, fence);
+		return fnptrs->pfn_vkQueueSubmit(this->handle, submitCount, pSubmits, fence);
 	}
 	VkResult WaitIdle() {
-		return fnptrs->pfn_vkQueueWaitIdle(handle);
+		return fnptrs->pfn_vkQueueWaitIdle(this->handle);
 	}
 #ifdef VK_INTEL_performance_query
 	VkResult SetPerformanceConfigurationINTEL(VkPerformanceConfigurationINTEL configuration) {
-		return fnptrs->pfn_vkQueueSetPerformanceConfigurationINTEL(handle, configuration);
+		return fnptrs->pfn_vkQueueSetPerformanceConfigurationINTEL(this->handle, configuration);
 	}
 #endif
 #ifdef VK_KHR_synchronization2
 	void GetCheckpointData2NV(uint32_t * pCheckpointDataCount, VkCheckpointData2NV * pCheckpointData) {
-		fnptrs->pfn_vkGetQueueCheckpointData2NV(handle, pCheckpointDataCount, pCheckpointData);
+		fnptrs->pfn_vkGetQueueCheckpointData2NV(this->handle, pCheckpointDataCount, pCheckpointData);
 	}
 #endif
 #ifdef VK_KHR_swapchain
 	VkResult PresentKHR(const  VkPresentInfoKHR * pPresentInfo) {
-		return fnptrs->pfn_vkQueuePresentKHR(handle, pPresentInfo);
+		return fnptrs->pfn_vkQueuePresentKHR(this->handle, pPresentInfo);
 	}
 #endif
 #ifdef VK_EXT_debug_utils
 	void BeginDebugUtilsLabelEXT(const  VkDebugUtilsLabelEXT * pLabelInfo) {
-		fnptrs->pfn_vkQueueBeginDebugUtilsLabelEXT(handle, pLabelInfo);
+		fnptrs->pfn_vkQueueBeginDebugUtilsLabelEXT(this->handle, pLabelInfo);
 	}
 	void EndDebugUtilsLabelEXT() {
-		fnptrs->pfn_vkQueueEndDebugUtilsLabelEXT(handle);
+		fnptrs->pfn_vkQueueEndDebugUtilsLabelEXT(this->handle);
 	}
 	void InsertDebugUtilsLabelEXT(const  VkDebugUtilsLabelEXT * pLabelInfo) {
-		fnptrs->pfn_vkQueueInsertDebugUtilsLabelEXT(handle, pLabelInfo);
+		fnptrs->pfn_vkQueueInsertDebugUtilsLabelEXT(this->handle, pLabelInfo);
 	}
 #endif
 #ifdef VK_NV_device_diagnostic_checkpoints
 	void GetCheckpointDataNV(uint32_t * pCheckpointDataCount, VkCheckpointDataNV * pCheckpointData) {
-		fnptrs->pfn_vkGetQueueCheckpointDataNV(handle, pCheckpointDataCount, pCheckpointData);
+		fnptrs->pfn_vkGetQueueCheckpointDataNV(this->handle, pCheckpointDataCount, pCheckpointData);
 	}
 #endif
 #ifdef VK_ANDROID_native_buffer
 	VkResult SignalReleaseImageANDROID(uint32_t waitSemaphoreCount, const  VkSemaphore * pWaitSemaphores, VkImage image, int * pNativeFenceFd) {
-		return fnptrs->pfn_vkQueueSignalReleaseImageANDROID(handle, waitSemaphoreCount, pWaitSemaphores, image, pNativeFenceFd);
+		return fnptrs->pfn_vkQueueSignalReleaseImageANDROID(this->handle, waitSemaphoreCount, pWaitSemaphores, image, pNativeFenceFd);
 	}
 #endif
 };
