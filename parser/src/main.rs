@@ -220,6 +220,7 @@ fn main() {
 
     println!("#ifndef A21E2F7E_5464_4B27_8400_EC0EB967B70B");
     println!("#define A21E2F7E_5464_4B27_8400_EC0EB967B70B");
+    println!("#include <assert.h>");
     println!("#include <vulkan/vulkan.h>");
     println!(
         r#"
@@ -318,6 +319,22 @@ trait VkFunction {
         !self.is_instance_function() && !self.is_global_function()
     }
 
+    fn get_glob_assert(&self) -> String {
+        format!(
+            "assert({} && \"{} is not loaded\");",
+            self.get_glob(),
+            self.get_name()
+        )
+    }
+
+    fn get_assert(&self, prefix: &str) -> String {
+        format!(
+            "assert({0}pfn_{1} && \"{1} is not loaded\")",
+            prefix,
+            self.get_name()
+        )
+    }
+
     fn get_glob(&self) -> String {
         let st = if self.is_device_function() {
             "dfn."
@@ -333,10 +350,11 @@ trait VkFunction {
         let args = self.get_args();
 
         println!(
-            "VKAPI_ATTR {} VKAPI_CALL {}({}) {{\n\t{} {}({});\n}}",
+            "\nVKAPI_ATTR {} VKAPI_CALL {}({}) {{\n\t{}\n\t{} {}({});\n}}\n",
             re,
             name,
             collect_pairs(args.iter(), false),
+            self.get_glob_assert(),
             if re != "void" { "return " } else { "" },
             self.get_glob(),
             collect_pairs(args.iter(), true)
@@ -360,11 +378,13 @@ trait VkFunction {
         let re = self.get_re();
         let args = self.get_args();
         let dev = if args.len() > 1 { ", " } else { "" };
+
         println!(
-            "\t{} {}({}) {{\n\t\t{}pfn_{}(this->handle{}{});\n\t}}",
+            "\t{} {}({}) {{\n\t\t{};\n\t\t{}pfn_{}(this->handle{}{});\n\t}}\n",
             re,
             &name[2..],
             collect_pairs(args.iter().skip(1), false),
+            self.get_assert(""),
             if re != "void" { "return " } else { "" },
             name,
             dev,
@@ -399,10 +419,11 @@ trait VkFunction {
         let name2 = name.replace(&handle_name[2..], "");
 
         println!(
-            "\t{} {}({}) {{\n\t\t{}fnptrs->pfn_{}(this->handle{}{});\n\t}}",
+            "\t{} {}({}) {{\n\t\t{};\n\t\t{}fnptrs->pfn_{}(this->handle{}{});\n\t}}\n",
             re,
             &name2[2 + ((name2.starts_with(prefix) as usize) * (prefix.len() - 2))..],
             collect_pairs(args.iter().skip(1), false),
+            self.get_assert("fnptrs->"),
             if re != "void" { "return " } else { "" },
             name,
             dev,
@@ -502,11 +523,14 @@ fn write_cmds(
         }
 
         for (ext, v) in map.iter() {
-            println!("#ifdef {}", ext);
-            for f in v {
-                f.write_device_cmd();
+            let it = v.iter().filter(|f| f.can_write_device_cmd());
+            if it.clone().count() > 0 {
+                println!("#ifdef {}", ext);
+                for f in it {
+                    f.write_device_cmd();
+                }
+                println!("#endif");
             }
-            println!("#endif");
         }
 
         println!("#endif");
@@ -534,7 +558,7 @@ fn write_cmds(
                 for f in it {
                     f.write_cmd_cmd(handle, prefix);
                 }
-                println!("#endif");
+                println!("#endif\n");
             }
         }
 
@@ -607,11 +631,14 @@ fn write_cmds(
             f.write_cmd();
         }
         for (ext, v) in map.iter() {
-            println!("#ifdef {}", ext);
-            for f in v {
-                f.write_cmd();
+            if !v.is_empty() {
+                println!("#ifdef {}", ext);
+                for f in v {
+                    f.write_cmd();
+                    println!("");
+                }
+                println!("#endif");
             }
-            println!("#endif");
         }
     }
 
@@ -734,7 +761,6 @@ fn write_structs(ext: &Vec<&XmlNode>, mut map: Map<String, String>) {
             }
             if !structs.is_empty() {
                 println!("#ifdef {}", base.find_attr("name").unwrap());
-
                 for (st, stype) in structs {
                     writer(st, stype);
                 }
