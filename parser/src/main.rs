@@ -7,13 +7,15 @@ use fxhash::*;
 
 use std::fs::File;
 use std::io::BufReader;
+use std::io::Read;
+
 use std::mem::transmute;
 type Set<T> = FxHashSet<T>;
 type Map<T, U> = FxHashMap<T, U>;
 
-use Default;
-
+use gag::BufferRedirect;
 use xml::reader::{EventReader, XmlEvent};
+use Default;
 
 #[derive(Debug, Default, Eq, PartialEq, Hash)]
 pub struct XmlNode {
@@ -191,8 +193,6 @@ pub enum Len {
 fn main() {
     let args: Vec<String> = std::env::args().collect();
 
-    std::io::stdout();
-
     let reg = parser_xml(args[1].as_str());
     let ext = reg
         .children()
@@ -218,27 +218,10 @@ fn main() {
         }
     }
 
-    println!("#ifndef A21E2F7E_5464_4B27_8400_EC0EB967B70B");
-    println!("#define A21E2F7E_5464_4B27_8400_EC0EB967B70B");
-    println!("#include <assert.h>");
-    println!("#include <vulkan/vulkan.h>");
-    println!(
-        r#"
-typedef uint8_t u8;
-typedef uint16_t u16;
-typedef uint32_t u32;
-typedef uint64_t u64;
+    let mut header = BufferRedirect::stdout().unwrap();
 
-typedef int8_t i8;
-typedef int16_t i16;
-typedef int32_t i32;
-typedef int64_t i64;
-
-typedef float f32;
-typedef double f64;
-
-"#
-    );
+    println!("#pragma once");
+    println!("#include <prelude.h>");
 
     let fp = tokens::ParamParserParser::new();
 
@@ -274,8 +257,6 @@ extern "C" {{
         "void vkl_load_device_functions(VkDevice device, struct VklDeviceFunctions* fnptrs);\n\n"
     );
 
-    write_cmds(&ext, commands);
-
     println!(
         r#"
 #ifdef __cplusplus
@@ -283,7 +264,8 @@ extern "C" {{
 #endif
 "#
     );
-    println!("#endif //A21E2F7E_5464_4B27_8400_EC0EB967B70B");
+    write_cmds(&ext, commands, &mut header);
+
     //write_structs(&ext, structs);
 }
 
@@ -472,6 +454,7 @@ impl VkFunction for &(String, String, Vec<(String, String, String)>) {
 fn write_cmds(
     ext: &Vec<&XmlNode>,
     mut inmap: Map<String, (String, Vec<(String, String, String)>)>,
+    header: &mut gag::BufferRedirect,
 ) {
     //let extx = ext.into_iter().flat_map(|base| base.children().into_iter().flat_map(|req| req.children())).collect::<Vec<_>>();
     let mut map = Map::<String, Vec<(String, String, Vec<(String, String, String)>)>>::default();
@@ -624,7 +607,23 @@ fn write_cmds(
         println!("\tVklDeviceFunctions dfn;");
         println!("}};");
     }
-    println!("#ifdef VKL_IMPL");
+
+    {
+        let mut output = String::new();
+        header.read_to_string(&mut output).unwrap();
+        std::fs::write("../vkl.h", output);
+    }
+
+    println!("#include <vkl.h>\n");
+
+    println!(
+        r#"
+#ifdef __cplusplus
+extern "C" {{
+#endif
+"#
+    );
+    
     println!("static struct VklFunctions g_vkl_fnptrs;");
     {
         for f in inmap.iter() {
@@ -734,7 +733,19 @@ fn write_cmds(
         );
         println!("}}");
     }
-    println!("#endif");
+    println!(
+        r#"
+#ifdef __cplusplus
+}}
+#endif
+"#
+    );
+    {
+        let mut output = String::new();
+        header.read_to_string(&mut output).unwrap();
+
+        std::fs::write("../vkl.cpp", output);
+    }
 }
 
 fn write_structs(ext: &Vec<&XmlNode>, mut map: Map<String, String>) {

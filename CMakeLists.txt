@@ -11,5 +11,11 @@ add_library(vkl SHARED ${CMAKE_CURRENT_SOURCE_DIR}/vkl.cpp)
 target_include_directories(vkl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(vkl PUBLIC Vulkan-Headers)
 
-add_executable(test ${CMAKE_CURRENT_SOURCE_DIR}/test.cpp)
-target_link_libraries(test PUBLIC vkl)
+if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
+  if(WIN32)
+    add_executable(test ${CMAKE_CURRENT_SOURCE_DIR}/test.cpp)
+    target_link_libraries(test PUBLIC vkl)
+  endif()
+endif()
+
+

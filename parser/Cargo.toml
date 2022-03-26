@@ -10,6 +10,7 @@ edition = "2018"
 fxhash = "0.2.1"
 lalrpop-util = "0.19.1"
 xml-rs = "0.8.3"
+gag = "1.0.0"
 
 [build-dependencies]
 lalrpop = {version = "0.19.1", features = ["lexer"]}
