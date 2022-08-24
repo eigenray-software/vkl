@@ -14,6 +14,6 @@ cd ..
 
 mkdir -p build
 cd build
-cmake .. -GNinja
+cmake ..
 cmake --build .
-./test.exe
+./Debug/test.exe

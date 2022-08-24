@@ -269,6 +269,10 @@ struct VklDeviceFunctions {
 	PFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI pfn_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI;
 	PFN_vkCmdSubpassShadingHUAWEI pfn_vkCmdSubpassShadingHUAWEI;
 #endif
+#ifdef VK_QCOM_tile_properties
+	PFN_vkGetFramebufferTilePropertiesQCOM pfn_vkGetFramebufferTilePropertiesQCOM;
+	PFN_vkGetDynamicRenderingTilePropertiesQCOM pfn_vkGetDynamicRenderingTilePropertiesQCOM;
+#endif
 #ifdef VK_EXT_conditional_rendering
 	PFN_vkCmdBeginConditionalRenderingEXT pfn_vkCmdBeginConditionalRenderingEXT;
 	PFN_vkCmdEndConditionalRenderingEXT pfn_vkCmdEndConditionalRenderingEXT;
@@ -311,6 +315,9 @@ struct VklDeviceFunctions {
 	PFN_vkAcquireProfilingLockKHR pfn_vkAcquireProfilingLockKHR;
 	PFN_vkReleaseProfilingLockKHR pfn_vkReleaseProfilingLockKHR;
 #endif
+#ifdef VK_KHR_ray_tracing_maintenance1
+	PFN_vkCmdTraceRaysIndirect2KHR pfn_vkCmdTraceRaysIndirect2KHR;
+#endif
 #ifdef VK_EXT_multi_draw
 	PFN_vkCmdDrawMultiEXT pfn_vkCmdDrawMultiEXT;
 	PFN_vkCmdDrawMultiIndexedEXT pfn_vkCmdDrawMultiIndexedEXT;
@@ -326,12 +333,18 @@ struct VklDeviceFunctions {
 	PFN_vkCmdWriteBufferMarker2AMD pfn_vkCmdWriteBufferMarker2AMD;
 	PFN_vkGetQueueCheckpointData2NV pfn_vkGetQueueCheckpointData2NV;
 #endif
+#ifdef VK_EXT_image_compression_control
+	PFN_vkGetImageSubresourceLayout2EXT pfn_vkGetImageSubresourceLayout2EXT;
+#endif
 #ifdef VK_EXT_extended_dynamic_state2
 	PFN_vkCmdSetPatchControlPointsEXT pfn_vkCmdSetPatchControlPointsEXT;
 	PFN_vkCmdSetLogicOpEXT pfn_vkCmdSetLogicOpEXT;
 #endif
 #ifdef VK_EXT_calibrated_timestamps
 	PFN_vkGetCalibratedTimestampsEXT pfn_vkGetCalibratedTimestampsEXT;
+#endif
+#ifdef VK_EXT_metal_objects
+	PFN_vkExportMetalObjectsEXT pfn_vkExportMetalObjectsEXT;
 #endif
 #ifdef VK_EXT_external_memory_host
 	PFN_vkGetMemoryHostPointerPropertiesEXT pfn_vkGetMemoryHostPointerPropertiesEXT;
@@ -400,8 +413,15 @@ struct VklDeviceFunctions {
 #ifdef VK_EXT_discard_rectangles
 	PFN_vkCmdSetDiscardRectangleEXT pfn_vkCmdSetDiscardRectangleEXT;
 #endif
+#ifdef VK_EXT_pipeline_properties
+	PFN_vkGetPipelinePropertiesEXT pfn_vkGetPipelinePropertiesEXT;
+#endif
 #ifdef VK_EXT_color_write_enable
 	PFN_vkCmdSetColorWriteEnableEXT pfn_vkCmdSetColorWriteEnableEXT;
+#endif
+#ifdef VK_EXT_shader_module_identifier
+	PFN_vkGetShaderModuleIdentifierEXT pfn_vkGetShaderModuleIdentifierEXT;
+	PFN_vkGetShaderModuleCreateInfoIdentifierEXT pfn_vkGetShaderModuleCreateInfoIdentifierEXT;
 #endif
 #ifdef VK_NV_external_memory_win32
 	PFN_vkGetMemoryWin32HandleNV pfn_vkGetMemoryWin32HandleNV;
@@ -1155,6 +1175,18 @@ struct VklDeviceFunctions {
 	}
 
 #endif
+#ifdef VK_QCOM_tile_properties
+	VkResult GetFramebufferTilePropertiesQCOM(VkFramebuffer framebuffer, uint32_t * pPropertiesCount, VkTilePropertiesQCOM * pProperties) {
+		assert(pfn_vkGetFramebufferTilePropertiesQCOM && "vkGetFramebufferTilePropertiesQCOM is not loaded");
+		return pfn_vkGetFramebufferTilePropertiesQCOM(this->handle, framebuffer, pPropertiesCount, pProperties);
+	}
+
+	VkResult GetDynamicRenderingTilePropertiesQCOM(const  VkRenderingInfo * pRenderingInfo, VkTilePropertiesQCOM * pProperties) {
+		assert(pfn_vkGetDynamicRenderingTilePropertiesQCOM && "vkGetDynamicRenderingTilePropertiesQCOM is not loaded");
+		return pfn_vkGetDynamicRenderingTilePropertiesQCOM(this->handle, pRenderingInfo, pProperties);
+	}
+
+#endif
 #ifdef VK_AMD_display_native_hdr
 	void SetLocalDimmingAMD(VkSwapchainKHR swapChain, VkBool32 localDimmingEnable) {
 		assert(pfn_vkSetLocalDimmingAMD && "vkSetLocalDimmingAMD is not loaded");
@@ -1229,10 +1261,24 @@ struct VklDeviceFunctions {
 	}
 
 #endif
+#ifdef VK_EXT_image_compression_control
+	void GetImageSubresourceLayout2EXT(VkImage image, const  VkImageSubresource2EXT * pSubresource, VkSubresourceLayout2EXT * pLayout) {
+		assert(pfn_vkGetImageSubresourceLayout2EXT && "vkGetImageSubresourceLayout2EXT is not loaded");
+		pfn_vkGetImageSubresourceLayout2EXT(this->handle, image, pSubresource, pLayout);
+	}
+
+#endif
 #ifdef VK_EXT_calibrated_timestamps
 	VkResult GetCalibratedTimestampsEXT(uint32_t timestampCount, const  VkCalibratedTimestampInfoEXT * pTimestampInfos, uint64_t * pTimestamps, uint64_t * pMaxDeviation) {
 		assert(pfn_vkGetCalibratedTimestampsEXT && "vkGetCalibratedTimestampsEXT is not loaded");
 		return pfn_vkGetCalibratedTimestampsEXT(this->handle, timestampCount, pTimestampInfos, pTimestamps, pMaxDeviation);
+	}
+
+#endif
+#ifdef VK_EXT_metal_objects
+	void ExportMetalObjectsEXT(VkExportMetalObjectsInfoEXT * pMetalObjectsInfo) {
+		assert(pfn_vkExportMetalObjectsEXT && "vkExportMetalObjectsEXT is not loaded");
+		pfn_vkExportMetalObjectsEXT(this->handle, pMetalObjectsInfo);
 	}
 
 #endif
@@ -1422,6 +1468,25 @@ struct VklDeviceFunctions {
 	VkResult CompileDeferredNV(VkPipeline pipeline, uint32_t shader) {
 		assert(pfn_vkCompileDeferredNV && "vkCompileDeferredNV is not loaded");
 		return pfn_vkCompileDeferredNV(this->handle, pipeline, shader);
+	}
+
+#endif
+#ifdef VK_EXT_pipeline_properties
+	VkResult GetPipelinePropertiesEXT(const  VkPipelineInfoEXT * pPipelineInfo, VkBaseOutStructure * pPipelineProperties) {
+		assert(pfn_vkGetPipelinePropertiesEXT && "vkGetPipelinePropertiesEXT is not loaded");
+		return pfn_vkGetPipelinePropertiesEXT(this->handle, pPipelineInfo, pPipelineProperties);
+	}
+
+#endif
+#ifdef VK_EXT_shader_module_identifier
+	void GetShaderModuleIdentifierEXT(VkShaderModule shaderModule, VkShaderModuleIdentifierEXT * pIdentifier) {
+		assert(pfn_vkGetShaderModuleIdentifierEXT && "vkGetShaderModuleIdentifierEXT is not loaded");
+		pfn_vkGetShaderModuleIdentifierEXT(this->handle, shaderModule, pIdentifier);
+	}
+
+	void GetShaderModuleCreateInfoIdentifierEXT(const  VkShaderModuleCreateInfo * pCreateInfo, VkShaderModuleIdentifierEXT * pIdentifier) {
+		assert(pfn_vkGetShaderModuleCreateInfoIdentifierEXT && "vkGetShaderModuleCreateInfoIdentifierEXT is not loaded");
+		pfn_vkGetShaderModuleCreateInfoIdentifierEXT(this->handle, pCreateInfo, pIdentifier);
 	}
 
 #endif
@@ -1634,14 +1699,14 @@ struct VklDeviceFunctions {
 		pfn_vkDestroyVideoSessionKHR(this->handle, videoSession, pAllocator);
 	}
 
-	VkResult GetVideoSessionMemoryRequirementsKHR(VkVideoSessionKHR videoSession, uint32_t * pVideoSessionMemoryRequirementsCount, VkVideoGetMemoryPropertiesKHR * pVideoSessionMemoryRequirements) {
+	VkResult GetVideoSessionMemoryRequirementsKHR(VkVideoSessionKHR videoSession, uint32_t * pMemoryRequirementsCount, VkVideoSessionMemoryRequirementsKHR * pMemoryRequirements) {
 		assert(pfn_vkGetVideoSessionMemoryRequirementsKHR && "vkGetVideoSessionMemoryRequirementsKHR is not loaded");
-		return pfn_vkGetVideoSessionMemoryRequirementsKHR(this->handle, videoSession, pVideoSessionMemoryRequirementsCount, pVideoSessionMemoryRequirements);
+		return pfn_vkGetVideoSessionMemoryRequirementsKHR(this->handle, videoSession, pMemoryRequirementsCount, pMemoryRequirements);
 	}
 
-	VkResult BindVideoSessionMemoryKHR(VkVideoSessionKHR videoSession, uint32_t videoSessionBindMemoryCount, const  VkVideoBindMemoryKHR * pVideoSessionBindMemories) {
+	VkResult BindVideoSessionMemoryKHR(VkVideoSessionKHR videoSession, uint32_t bindSessionMemoryInfoCount, const  VkBindVideoSessionMemoryInfoKHR * pBindSessionMemoryInfos) {
 		assert(pfn_vkBindVideoSessionMemoryKHR && "vkBindVideoSessionMemoryKHR is not loaded");
-		return pfn_vkBindVideoSessionMemoryKHR(this->handle, videoSession, videoSessionBindMemoryCount, pVideoSessionBindMemories);
+		return pfn_vkBindVideoSessionMemoryKHR(this->handle, videoSession, bindSessionMemoryInfoCount, pBindSessionMemoryInfos);
 	}
 
 	VkResult CreateVideoSessionParametersKHR(const  VkVideoSessionParametersCreateInfoKHR * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkVideoSessionParametersKHR * pVideoSessionParameters) {
@@ -2247,6 +2312,14 @@ struct VklCommandFunctions {
 	void PushDescriptorSetWithTemplateKHR(VkDescriptorUpdateTemplate descriptorUpdateTemplate, VkPipelineLayout layout, uint32_t set, const  void * pData) {
 		assert(fnptrs->pfn_vkCmdPushDescriptorSetWithTemplateKHR && "vkCmdPushDescriptorSetWithTemplateKHR is not loaded");
 		fnptrs->pfn_vkCmdPushDescriptorSetWithTemplateKHR(this->handle, descriptorUpdateTemplate, layout, set, pData);
+	}
+
+#endif
+
+#ifdef VK_KHR_ray_tracing_maintenance1
+	void TraceRaysIndirect2KHR(VkDeviceAddress indirectDeviceAddress) {
+		assert(fnptrs->pfn_vkCmdTraceRaysIndirect2KHR && "vkCmdTraceRaysIndirect2KHR is not loaded");
+		fnptrs->pfn_vkCmdTraceRaysIndirect2KHR(this->handle, indirectDeviceAddress);
 	}
 
 #endif

@@ -1676,6 +1676,22 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSubpassShadingHUAWEI(VkCommandBuffer commandBuff
 
 
 #endif
+#ifdef VK_QCOM_tile_properties
+
+VKAPI_ATTR VkResult VKAPI_CALL vkGetFramebufferTilePropertiesQCOM(VkDevice device, VkFramebuffer framebuffer, uint32_t * pPropertiesCount, VkTilePropertiesQCOM * pProperties) {
+	assert(g_vkl_fnptrs.dfn.pfn_vkGetFramebufferTilePropertiesQCOM && "vkGetFramebufferTilePropertiesQCOM is not loaded");
+	return  g_vkl_fnptrs.dfn.pfn_vkGetFramebufferTilePropertiesQCOM(device, framebuffer, pPropertiesCount, pProperties);
+}
+
+
+
+VKAPI_ATTR VkResult VKAPI_CALL vkGetDynamicRenderingTilePropertiesQCOM(VkDevice device, const  VkRenderingInfo * pRenderingInfo, VkTilePropertiesQCOM * pProperties) {
+	assert(g_vkl_fnptrs.dfn.pfn_vkGetDynamicRenderingTilePropertiesQCOM && "vkGetDynamicRenderingTilePropertiesQCOM is not loaded");
+	return  g_vkl_fnptrs.dfn.pfn_vkGetDynamicRenderingTilePropertiesQCOM(device, pRenderingInfo, pProperties);
+}
+
+
+#endif
 #ifdef VK_EXT_conditional_rendering
 
 VKAPI_ATTR void VKAPI_CALL vkCmdBeginConditionalRenderingEXT(VkCommandBuffer commandBuffer, const  VkConditionalRenderingBeginInfoEXT * pConditionalRenderingBegin) {
@@ -1948,6 +1964,15 @@ VKAPI_ATTR VkBool32 VKAPI_CALL vkGetPhysicalDeviceXlibPresentationSupportKHR(VkP
 
 
 #endif
+#ifdef VK_KHR_ray_tracing_maintenance1
+
+VKAPI_ATTR void VKAPI_CALL vkCmdTraceRaysIndirect2KHR(VkCommandBuffer commandBuffer, VkDeviceAddress indirectDeviceAddress) {
+	assert(g_vkl_fnptrs.dfn.pfn_vkCmdTraceRaysIndirect2KHR && "vkCmdTraceRaysIndirect2KHR is not loaded");
+	 g_vkl_fnptrs.dfn.pfn_vkCmdTraceRaysIndirect2KHR(commandBuffer, indirectDeviceAddress);
+}
+
+
+#endif
 #ifdef VK_EXT_multi_draw
 
 VKAPI_ATTR void VKAPI_CALL vkCmdDrawMultiEXT(VkCommandBuffer commandBuffer, uint32_t drawCount, const  VkMultiDrawInfoEXT * pVertexInfo, uint32_t instanceCount, uint32_t firstInstance, uint32_t stride) {
@@ -2037,6 +2062,15 @@ VKAPI_ATTR void VKAPI_CALL vkGetQueueCheckpointData2NV(VkQueue queue, uint32_t *
 
 
 #endif
+#ifdef VK_EXT_image_compression_control
+
+VKAPI_ATTR void VKAPI_CALL vkGetImageSubresourceLayout2EXT(VkDevice device, VkImage image, const  VkImageSubresource2EXT * pSubresource, VkSubresourceLayout2EXT * pLayout) {
+	assert(g_vkl_fnptrs.dfn.pfn_vkGetImageSubresourceLayout2EXT && "vkGetImageSubresourceLayout2EXT is not loaded");
+	 g_vkl_fnptrs.dfn.pfn_vkGetImageSubresourceLayout2EXT(device, image, pSubresource, pLayout);
+}
+
+
+#endif
 #ifdef VK_EXT_extended_dynamic_state2
 
 VKAPI_ATTR void VKAPI_CALL vkCmdSetPatchControlPointsEXT(VkCommandBuffer commandBuffer, uint32_t patchControlPoints) {
@@ -2090,6 +2124,15 @@ VKAPI_ATTR VkResult VKAPI_CALL vkAcquireDrmDisplayEXT(VkPhysicalDevice physicalD
 VKAPI_ATTR VkResult VKAPI_CALL vkGetDrmDisplayEXT(VkPhysicalDevice physicalDevice, int32_t drmFd, uint32_t connectorId, VkDisplayKHR * display) {
 	assert(g_vkl_fnptrs.pfn_vkGetDrmDisplayEXT && "vkGetDrmDisplayEXT is not loaded");
 	return  g_vkl_fnptrs.pfn_vkGetDrmDisplayEXT(physicalDevice, drmFd, connectorId, display);
+}
+
+
+#endif
+#ifdef VK_EXT_metal_objects
+
+VKAPI_ATTR void VKAPI_CALL vkExportMetalObjectsEXT(VkDevice device, VkExportMetalObjectsInfoEXT * pMetalObjectsInfo) {
+	assert(g_vkl_fnptrs.dfn.pfn_vkExportMetalObjectsEXT && "vkExportMetalObjectsEXT is not loaded");
+	 g_vkl_fnptrs.dfn.pfn_vkExportMetalObjectsEXT(device, pMetalObjectsInfo);
 }
 
 
@@ -2545,11 +2588,36 @@ VKAPI_ATTR void VKAPI_CALL vkCmdSetDiscardRectangleEXT(VkCommandBuffer commandBu
 
 
 #endif
+#ifdef VK_EXT_pipeline_properties
+
+VKAPI_ATTR VkResult VKAPI_CALL vkGetPipelinePropertiesEXT(VkDevice device, const  VkPipelineInfoEXT * pPipelineInfo, VkBaseOutStructure * pPipelineProperties) {
+	assert(g_vkl_fnptrs.dfn.pfn_vkGetPipelinePropertiesEXT && "vkGetPipelinePropertiesEXT is not loaded");
+	return  g_vkl_fnptrs.dfn.pfn_vkGetPipelinePropertiesEXT(device, pPipelineInfo, pPipelineProperties);
+}
+
+
+#endif
 #ifdef VK_EXT_color_write_enable
 
 VKAPI_ATTR void VKAPI_CALL vkCmdSetColorWriteEnableEXT(VkCommandBuffer commandBuffer, uint32_t attachmentCount, const  VkBool32 * pColorWriteEnables) {
 	assert(g_vkl_fnptrs.dfn.pfn_vkCmdSetColorWriteEnableEXT && "vkCmdSetColorWriteEnableEXT is not loaded");
 	 g_vkl_fnptrs.dfn.pfn_vkCmdSetColorWriteEnableEXT(commandBuffer, attachmentCount, pColorWriteEnables);
+}
+
+
+#endif
+#ifdef VK_EXT_shader_module_identifier
+
+VKAPI_ATTR void VKAPI_CALL vkGetShaderModuleIdentifierEXT(VkDevice device, VkShaderModule shaderModule, VkShaderModuleIdentifierEXT * pIdentifier) {
+	assert(g_vkl_fnptrs.dfn.pfn_vkGetShaderModuleIdentifierEXT && "vkGetShaderModuleIdentifierEXT is not loaded");
+	 g_vkl_fnptrs.dfn.pfn_vkGetShaderModuleIdentifierEXT(device, shaderModule, pIdentifier);
+}
+
+
+
+VKAPI_ATTR void VKAPI_CALL vkGetShaderModuleCreateInfoIdentifierEXT(VkDevice device, const  VkShaderModuleCreateInfo * pCreateInfo, VkShaderModuleIdentifierEXT * pIdentifier) {
+	assert(g_vkl_fnptrs.dfn.pfn_vkGetShaderModuleCreateInfoIdentifierEXT && "vkGetShaderModuleCreateInfoIdentifierEXT is not loaded");
+	 g_vkl_fnptrs.dfn.pfn_vkGetShaderModuleCreateInfoIdentifierEXT(device, pCreateInfo, pIdentifier);
 }
 
 
@@ -3074,7 +3142,7 @@ VKAPI_ATTR void VKAPI_CALL vkCmdDrawIndirectByteCountEXT(VkCommandBuffer command
 #endif
 #ifdef VK_KHR_video_queue
 
-VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceVideoCapabilitiesKHR(VkPhysicalDevice physicalDevice, const  VkVideoProfileKHR * pVideoProfile, VkVideoCapabilitiesKHR * pCapabilities) {
+VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceVideoCapabilitiesKHR(VkPhysicalDevice physicalDevice, const  VkVideoProfileInfoKHR * pVideoProfile, VkVideoCapabilitiesKHR * pCapabilities) {
 	assert(g_vkl_fnptrs.pfn_vkGetPhysicalDeviceVideoCapabilitiesKHR && "vkGetPhysicalDeviceVideoCapabilitiesKHR is not loaded");
 	return  g_vkl_fnptrs.pfn_vkGetPhysicalDeviceVideoCapabilitiesKHR(physicalDevice, pVideoProfile, pCapabilities);
 }
@@ -3102,16 +3170,16 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyVideoSessionKHR(VkDevice device, VkVideoSess
 
 
 
-VKAPI_ATTR VkResult VKAPI_CALL vkGetVideoSessionMemoryRequirementsKHR(VkDevice device, VkVideoSessionKHR videoSession, uint32_t * pVideoSessionMemoryRequirementsCount, VkVideoGetMemoryPropertiesKHR * pVideoSessionMemoryRequirements) {
+VKAPI_ATTR VkResult VKAPI_CALL vkGetVideoSessionMemoryRequirementsKHR(VkDevice device, VkVideoSessionKHR videoSession, uint32_t * pMemoryRequirementsCount, VkVideoSessionMemoryRequirementsKHR * pMemoryRequirements) {
 	assert(g_vkl_fnptrs.dfn.pfn_vkGetVideoSessionMemoryRequirementsKHR && "vkGetVideoSessionMemoryRequirementsKHR is not loaded");
-	return  g_vkl_fnptrs.dfn.pfn_vkGetVideoSessionMemoryRequirementsKHR(device, videoSession, pVideoSessionMemoryRequirementsCount, pVideoSessionMemoryRequirements);
+	return  g_vkl_fnptrs.dfn.pfn_vkGetVideoSessionMemoryRequirementsKHR(device, videoSession, pMemoryRequirementsCount, pMemoryRequirements);
 }
 
 
 
-VKAPI_ATTR VkResult VKAPI_CALL vkBindVideoSessionMemoryKHR(VkDevice device, VkVideoSessionKHR videoSession, uint32_t videoSessionBindMemoryCount, const  VkVideoBindMemoryKHR * pVideoSessionBindMemories) {
+VKAPI_ATTR VkResult VKAPI_CALL vkBindVideoSessionMemoryKHR(VkDevice device, VkVideoSessionKHR videoSession, uint32_t bindSessionMemoryInfoCount, const  VkBindVideoSessionMemoryInfoKHR * pBindSessionMemoryInfos) {
 	assert(g_vkl_fnptrs.dfn.pfn_vkBindVideoSessionMemoryKHR && "vkBindVideoSessionMemoryKHR is not loaded");
-	return  g_vkl_fnptrs.dfn.pfn_vkBindVideoSessionMemoryKHR(device, videoSession, videoSessionBindMemoryCount, pVideoSessionBindMemories);
+	return  g_vkl_fnptrs.dfn.pfn_vkBindVideoSessionMemoryKHR(device, videoSession, bindSessionMemoryInfoCount, pBindSessionMemoryInfos);
 }
 
 
@@ -3361,6 +3429,8 @@ void vkl_load_instance_functions(VkInstance instance) {
 #endif
 #ifdef VK_HUAWEI_subpass_shading
 #endif
+#ifdef VK_QCOM_tile_properties
+#endif
 #ifdef VK_EXT_conditional_rendering
 #endif
 #ifdef VK_NV_clip_space_w_scaling
@@ -3411,6 +3481,8 @@ void vkl_load_instance_functions(VkInstance instance) {
 	g_vkl_fnptrs.pfn_vkCreateXlibSurfaceKHR = (PFN_vkCreateXlibSurfaceKHR)g_vkl_fnptrs.pfn_vkGetInstanceProcAddr(instance, "vkCreateXlibSurfaceKHR");
 	g_vkl_fnptrs.pfn_vkGetPhysicalDeviceXlibPresentationSupportKHR = (PFN_vkGetPhysicalDeviceXlibPresentationSupportKHR)g_vkl_fnptrs.pfn_vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceXlibPresentationSupportKHR");
 #endif
+#ifdef VK_KHR_ray_tracing_maintenance1
+#endif
 #ifdef VK_EXT_multi_draw
 #endif
 #ifdef VK_NN_vi_surface
@@ -3427,6 +3499,8 @@ void vkl_load_instance_functions(VkInstance instance) {
 #endif
 #ifdef VK_KHR_synchronization2
 #endif
+#ifdef VK_EXT_image_compression_control
+#endif
 #ifdef VK_EXT_extended_dynamic_state2
 #endif
 #ifdef VK_EXT_calibrated_timestamps
@@ -3438,6 +3512,8 @@ void vkl_load_instance_functions(VkInstance instance) {
 #ifdef VK_EXT_acquire_drm_display
 	g_vkl_fnptrs.pfn_vkAcquireDrmDisplayEXT = (PFN_vkAcquireDrmDisplayEXT)g_vkl_fnptrs.pfn_vkGetInstanceProcAddr(instance, "vkAcquireDrmDisplayEXT");
 	g_vkl_fnptrs.pfn_vkGetDrmDisplayEXT = (PFN_vkGetDrmDisplayEXT)g_vkl_fnptrs.pfn_vkGetInstanceProcAddr(instance, "vkGetDrmDisplayEXT");
+#endif
+#ifdef VK_EXT_metal_objects
 #endif
 #ifdef VK_EXT_external_memory_host
 #endif
@@ -3475,7 +3551,11 @@ void vkl_load_instance_functions(VkInstance instance) {
 #endif
 #ifdef VK_EXT_discard_rectangles
 #endif
+#ifdef VK_EXT_pipeline_properties
+#endif
 #ifdef VK_EXT_color_write_enable
+#endif
+#ifdef VK_EXT_shader_module_identifier
 #endif
 #ifdef VK_NV_external_memory_win32
 #endif
@@ -3825,6 +3905,10 @@ void vkl_load_device_functions_impl(VkDevice device, PFN_vkGetDeviceProcAddr pfn
 	fnptrs->pfn_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI = (PFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI)pfn_load_dev_fn(device, "vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI");
 	fnptrs->pfn_vkCmdSubpassShadingHUAWEI = (PFN_vkCmdSubpassShadingHUAWEI)pfn_load_dev_fn(device, "vkCmdSubpassShadingHUAWEI");
 #endif
+#ifdef VK_QCOM_tile_properties
+	fnptrs->pfn_vkGetFramebufferTilePropertiesQCOM = (PFN_vkGetFramebufferTilePropertiesQCOM)pfn_load_dev_fn(device, "vkGetFramebufferTilePropertiesQCOM");
+	fnptrs->pfn_vkGetDynamicRenderingTilePropertiesQCOM = (PFN_vkGetDynamicRenderingTilePropertiesQCOM)pfn_load_dev_fn(device, "vkGetDynamicRenderingTilePropertiesQCOM");
+#endif
 #ifdef VK_EXT_conditional_rendering
 	fnptrs->pfn_vkCmdBeginConditionalRenderingEXT = (PFN_vkCmdBeginConditionalRenderingEXT)pfn_load_dev_fn(device, "vkCmdBeginConditionalRenderingEXT");
 	fnptrs->pfn_vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)pfn_load_dev_fn(device, "vkCmdEndConditionalRenderingEXT");
@@ -3877,6 +3961,9 @@ void vkl_load_device_functions_impl(VkDevice device, PFN_vkGetDeviceProcAddr pfn
 #endif
 #ifdef VK_KHR_xlib_surface
 #endif
+#ifdef VK_KHR_ray_tracing_maintenance1
+	fnptrs->pfn_vkCmdTraceRaysIndirect2KHR = (PFN_vkCmdTraceRaysIndirect2KHR)pfn_load_dev_fn(device, "vkCmdTraceRaysIndirect2KHR");
+#endif
 #ifdef VK_EXT_multi_draw
 	fnptrs->pfn_vkCmdDrawMultiEXT = (PFN_vkCmdDrawMultiEXT)pfn_load_dev_fn(device, "vkCmdDrawMultiEXT");
 	fnptrs->pfn_vkCmdDrawMultiIndexedEXT = (PFN_vkCmdDrawMultiIndexedEXT)pfn_load_dev_fn(device, "vkCmdDrawMultiIndexedEXT");
@@ -3896,6 +3983,9 @@ void vkl_load_device_functions_impl(VkDevice device, PFN_vkGetDeviceProcAddr pfn
 	fnptrs->pfn_vkCmdWriteBufferMarker2AMD = (PFN_vkCmdWriteBufferMarker2AMD)pfn_load_dev_fn(device, "vkCmdWriteBufferMarker2AMD");
 	fnptrs->pfn_vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)pfn_load_dev_fn(device, "vkGetQueueCheckpointData2NV");
 #endif
+#ifdef VK_EXT_image_compression_control
+	fnptrs->pfn_vkGetImageSubresourceLayout2EXT = (PFN_vkGetImageSubresourceLayout2EXT)pfn_load_dev_fn(device, "vkGetImageSubresourceLayout2EXT");
+#endif
 #ifdef VK_EXT_extended_dynamic_state2
 	fnptrs->pfn_vkCmdSetPatchControlPointsEXT = (PFN_vkCmdSetPatchControlPointsEXT)pfn_load_dev_fn(device, "vkCmdSetPatchControlPointsEXT");
 	fnptrs->pfn_vkCmdSetLogicOpEXT = (PFN_vkCmdSetLogicOpEXT)pfn_load_dev_fn(device, "vkCmdSetLogicOpEXT");
@@ -3906,6 +3996,9 @@ void vkl_load_device_functions_impl(VkDevice device, PFN_vkGetDeviceProcAddr pfn
 #ifdef VK_EXT_metal_surface
 #endif
 #ifdef VK_EXT_acquire_drm_display
+#endif
+#ifdef VK_EXT_metal_objects
+	fnptrs->pfn_vkExportMetalObjectsEXT = (PFN_vkExportMetalObjectsEXT)pfn_load_dev_fn(device, "vkExportMetalObjectsEXT");
 #endif
 #ifdef VK_EXT_external_memory_host
 	fnptrs->pfn_vkGetMemoryHostPointerPropertiesEXT = (PFN_vkGetMemoryHostPointerPropertiesEXT)pfn_load_dev_fn(device, "vkGetMemoryHostPointerPropertiesEXT");
@@ -3980,8 +4073,15 @@ void vkl_load_device_functions_impl(VkDevice device, PFN_vkGetDeviceProcAddr pfn
 #ifdef VK_EXT_discard_rectangles
 	fnptrs->pfn_vkCmdSetDiscardRectangleEXT = (PFN_vkCmdSetDiscardRectangleEXT)pfn_load_dev_fn(device, "vkCmdSetDiscardRectangleEXT");
 #endif
+#ifdef VK_EXT_pipeline_properties
+	fnptrs->pfn_vkGetPipelinePropertiesEXT = (PFN_vkGetPipelinePropertiesEXT)pfn_load_dev_fn(device, "vkGetPipelinePropertiesEXT");
+#endif
 #ifdef VK_EXT_color_write_enable
 	fnptrs->pfn_vkCmdSetColorWriteEnableEXT = (PFN_vkCmdSetColorWriteEnableEXT)pfn_load_dev_fn(device, "vkCmdSetColorWriteEnableEXT");
+#endif
+#ifdef VK_EXT_shader_module_identifier
+	fnptrs->pfn_vkGetShaderModuleIdentifierEXT = (PFN_vkGetShaderModuleIdentifierEXT)pfn_load_dev_fn(device, "vkGetShaderModuleIdentifierEXT");
+	fnptrs->pfn_vkGetShaderModuleCreateInfoIdentifierEXT = (PFN_vkGetShaderModuleCreateInfoIdentifierEXT)pfn_load_dev_fn(device, "vkGetShaderModuleCreateInfoIdentifierEXT");
 #endif
 #ifdef VK_NV_external_memory_win32
 	fnptrs->pfn_vkGetMemoryWin32HandleNV = (PFN_vkGetMemoryWin32HandleNV)pfn_load_dev_fn(device, "vkGetMemoryWin32HandleNV");

@@ -20,6 +20,7 @@ set_target_properties(vkl PROPERTIES PUBLIC_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/
 
 if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
   if(WIN32)
+    set(CMAKE_CXX_STANDARD 20)
     add_executable(test ${CMAKE_CURRENT_SOURCE_DIR}/test.cpp)
     target_link_libraries(test PUBLIC vkl)
   endif()
