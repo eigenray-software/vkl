@@ -69,8 +69,8 @@ struct VklDeviceFunctions {
 	PFN_vkCreateGraphicsPipelines pfn_vkCreateGraphicsPipelines;
 	PFN_vkDestroyImageView pfn_vkDestroyImageView;
 	PFN_vkGetImageSparseMemoryRequirements2 pfn_vkGetImageSparseMemoryRequirements2;
-	PFN_vkCmdCopyBuffer2 pfn_vkCmdCopyBuffer2;
 	PFN_vkCmdSetScissor pfn_vkCmdSetScissor;
+	PFN_vkCmdCopyBuffer2 pfn_vkCmdCopyBuffer2;
 	PFN_vkCreateDescriptorUpdateTemplate pfn_vkCreateDescriptorUpdateTemplate;
 	PFN_vkCmdUpdateBuffer pfn_vkCmdUpdateBuffer;
 	PFN_vkCreatePipelineCache pfn_vkCreatePipelineCache;
@@ -245,6 +245,7 @@ struct VklDeviceFunctions {
 	PFN_vkGetMemoryAndroidHardwareBufferANDROID pfn_vkGetMemoryAndroidHardwareBufferANDROID;
 #endif
 #ifdef VK_NV_scissor_exclusive
+	PFN_vkCmdSetExclusiveScissorEnableNV pfn_vkCmdSetExclusiveScissorEnableNV;
 	PFN_vkCmdSetExclusiveScissorNV pfn_vkCmdSetExclusiveScissorNV;
 #endif
 #ifdef VK_KHR_pipeline_executable_properties
@@ -252,14 +253,17 @@ struct VklDeviceFunctions {
 	PFN_vkGetPipelineExecutableStatisticsKHR pfn_vkGetPipelineExecutableStatisticsKHR;
 	PFN_vkGetPipelineExecutableInternalRepresentationsKHR pfn_vkGetPipelineExecutableInternalRepresentationsKHR;
 #endif
-#ifdef VK_KHR_video_encode_queue
-	PFN_vkCmdEncodeVideoKHR pfn_vkCmdEncodeVideoKHR;
+#ifdef VK_EXT_swapchain_maintenance1
+	PFN_vkReleaseSwapchainImagesEXT pfn_vkReleaseSwapchainImagesEXT;
 #endif
 #ifdef VK_EXT_display_control
 	PFN_vkDisplayPowerControlEXT pfn_vkDisplayPowerControlEXT;
 	PFN_vkRegisterDeviceEventEXT pfn_vkRegisterDeviceEventEXT;
 	PFN_vkRegisterDisplayEventEXT pfn_vkRegisterDisplayEventEXT;
 	PFN_vkGetSwapchainCounterEXT pfn_vkGetSwapchainCounterEXT;
+#endif
+#ifdef VK_KHR_video_encode_queue
+	PFN_vkCmdEncodeVideoKHR pfn_vkCmdEncodeVideoKHR;
 #endif
 #ifdef VK_FUCHSIA_external_memory
 	PFN_vkGetMemoryZirconHandleFUCHSIA pfn_vkGetMemoryZirconHandleFUCHSIA;
@@ -269,13 +273,13 @@ struct VklDeviceFunctions {
 	PFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI pfn_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI;
 	PFN_vkCmdSubpassShadingHUAWEI pfn_vkCmdSubpassShadingHUAWEI;
 #endif
-#ifdef VK_QCOM_tile_properties
-	PFN_vkGetFramebufferTilePropertiesQCOM pfn_vkGetFramebufferTilePropertiesQCOM;
-	PFN_vkGetDynamicRenderingTilePropertiesQCOM pfn_vkGetDynamicRenderingTilePropertiesQCOM;
-#endif
 #ifdef VK_EXT_conditional_rendering
 	PFN_vkCmdBeginConditionalRenderingEXT pfn_vkCmdBeginConditionalRenderingEXT;
 	PFN_vkCmdEndConditionalRenderingEXT pfn_vkCmdEndConditionalRenderingEXT;
+#endif
+#ifdef VK_HUAWEI_cluster_culling_shader
+	PFN_vkCmdDrawClusterHUAWEI pfn_vkCmdDrawClusterHUAWEI;
+	PFN_vkCmdDrawClusterIndirectHUAWEI pfn_vkCmdDrawClusterIndirectHUAWEI;
 #endif
 #ifdef VK_NV_clip_space_w_scaling
 	PFN_vkCmdSetViewportWScalingNV pfn_vkCmdSetViewportWScalingNV;
@@ -322,12 +326,31 @@ struct VklDeviceFunctions {
 	PFN_vkCmdDrawMultiEXT pfn_vkCmdDrawMultiEXT;
 	PFN_vkCmdDrawMultiIndexedEXT pfn_vkCmdDrawMultiIndexedEXT;
 #endif
+#ifdef VK_EXT_opacity_micromap
+	PFN_vkCreateMicromapEXT pfn_vkCreateMicromapEXT;
+	PFN_vkDestroyMicromapEXT pfn_vkDestroyMicromapEXT;
+	PFN_vkCmdBuildMicromapsEXT pfn_vkCmdBuildMicromapsEXT;
+	PFN_vkBuildMicromapsEXT pfn_vkBuildMicromapsEXT;
+	PFN_vkCopyMicromapEXT pfn_vkCopyMicromapEXT;
+	PFN_vkCopyMicromapToMemoryEXT pfn_vkCopyMicromapToMemoryEXT;
+	PFN_vkCopyMemoryToMicromapEXT pfn_vkCopyMemoryToMicromapEXT;
+	PFN_vkWriteMicromapsPropertiesEXT pfn_vkWriteMicromapsPropertiesEXT;
+	PFN_vkCmdCopyMicromapEXT pfn_vkCmdCopyMicromapEXT;
+	PFN_vkCmdCopyMicromapToMemoryEXT pfn_vkCmdCopyMicromapToMemoryEXT;
+	PFN_vkCmdCopyMemoryToMicromapEXT pfn_vkCmdCopyMemoryToMicromapEXT;
+	PFN_vkCmdWriteMicromapsPropertiesEXT pfn_vkCmdWriteMicromapsPropertiesEXT;
+	PFN_vkGetDeviceMicromapCompatibilityEXT pfn_vkGetDeviceMicromapCompatibilityEXT;
+	PFN_vkGetMicromapBuildSizesEXT pfn_vkGetMicromapBuildSizesEXT;
+#endif
 #ifdef VK_EXT_sample_locations
 	PFN_vkCmdSetSampleLocationsEXT pfn_vkCmdSetSampleLocationsEXT;
 #endif
 #ifdef VK_KHR_external_semaphore_fd
 	PFN_vkImportSemaphoreFdKHR pfn_vkImportSemaphoreFdKHR;
 	PFN_vkGetSemaphoreFdKHR pfn_vkGetSemaphoreFdKHR;
+#endif
+#ifdef VK_KHR_object_refresh
+	PFN_vkCmdRefreshObjectsKHR pfn_vkCmdRefreshObjectsKHR;
 #endif
 #ifdef VK_KHR_synchronization2
 	PFN_vkCmdWriteBufferMarker2AMD pfn_vkCmdWriteBufferMarker2AMD;
@@ -336,15 +359,19 @@ struct VklDeviceFunctions {
 #ifdef VK_EXT_image_compression_control
 	PFN_vkGetImageSubresourceLayout2EXT pfn_vkGetImageSubresourceLayout2EXT;
 #endif
+#ifdef VK_EXT_calibrated_timestamps
+	PFN_vkGetCalibratedTimestampsEXT pfn_vkGetCalibratedTimestampsEXT;
+#endif
 #ifdef VK_EXT_extended_dynamic_state2
 	PFN_vkCmdSetPatchControlPointsEXT pfn_vkCmdSetPatchControlPointsEXT;
 	PFN_vkCmdSetLogicOpEXT pfn_vkCmdSetLogicOpEXT;
 #endif
-#ifdef VK_EXT_calibrated_timestamps
-	PFN_vkGetCalibratedTimestampsEXT pfn_vkGetCalibratedTimestampsEXT;
-#endif
 #ifdef VK_EXT_metal_objects
 	PFN_vkExportMetalObjectsEXT pfn_vkExportMetalObjectsEXT;
+#endif
+#ifdef VK_NV_memory_decompression
+	PFN_vkCmdDecompressMemoryNV pfn_vkCmdDecompressMemoryNV;
+	PFN_vkCmdDecompressMemoryIndirectCountNV pfn_vkCmdDecompressMemoryIndirectCountNV;
 #endif
 #ifdef VK_EXT_external_memory_host
 	PFN_vkGetMemoryHostPointerPropertiesEXT pfn_vkGetMemoryHostPointerPropertiesEXT;
@@ -412,6 +439,8 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_EXT_discard_rectangles
 	PFN_vkCmdSetDiscardRectangleEXT pfn_vkCmdSetDiscardRectangleEXT;
+	PFN_vkCmdSetDiscardRectangleEnableEXT pfn_vkCmdSetDiscardRectangleEnableEXT;
+	PFN_vkCmdSetDiscardRectangleModeEXT pfn_vkCmdSetDiscardRectangleModeEXT;
 #endif
 #ifdef VK_EXT_pipeline_properties
 	PFN_vkGetPipelinePropertiesEXT pfn_vkGetPipelinePropertiesEXT;
@@ -419,9 +448,54 @@ struct VklDeviceFunctions {
 #ifdef VK_EXT_color_write_enable
 	PFN_vkCmdSetColorWriteEnableEXT pfn_vkCmdSetColorWriteEnableEXT;
 #endif
-#ifdef VK_EXT_shader_module_identifier
-	PFN_vkGetShaderModuleIdentifierEXT pfn_vkGetShaderModuleIdentifierEXT;
-	PFN_vkGetShaderModuleCreateInfoIdentifierEXT pfn_vkGetShaderModuleCreateInfoIdentifierEXT;
+#ifdef VK_NV_external_memory_sci_buf
+	PFN_vkGetMemorySciBufNV pfn_vkGetMemorySciBufNV;
+#endif
+#ifdef VK_EXT_extended_dynamic_state3
+	PFN_vkCmdSetTessellationDomainOriginEXT pfn_vkCmdSetTessellationDomainOriginEXT;
+	PFN_vkCmdSetDepthClampEnableEXT pfn_vkCmdSetDepthClampEnableEXT;
+	PFN_vkCmdSetPolygonModeEXT pfn_vkCmdSetPolygonModeEXT;
+	PFN_vkCmdSetRasterizationSamplesEXT pfn_vkCmdSetRasterizationSamplesEXT;
+	PFN_vkCmdSetSampleMaskEXT pfn_vkCmdSetSampleMaskEXT;
+	PFN_vkCmdSetAlphaToCoverageEnableEXT pfn_vkCmdSetAlphaToCoverageEnableEXT;
+	PFN_vkCmdSetAlphaToOneEnableEXT pfn_vkCmdSetAlphaToOneEnableEXT;
+	PFN_vkCmdSetLogicOpEnableEXT pfn_vkCmdSetLogicOpEnableEXT;
+	PFN_vkCmdSetColorBlendEnableEXT pfn_vkCmdSetColorBlendEnableEXT;
+	PFN_vkCmdSetColorBlendEquationEXT pfn_vkCmdSetColorBlendEquationEXT;
+	PFN_vkCmdSetColorWriteMaskEXT pfn_vkCmdSetColorWriteMaskEXT;
+	PFN_vkCmdSetRasterizationStreamEXT pfn_vkCmdSetRasterizationStreamEXT;
+	PFN_vkCmdSetConservativeRasterizationModeEXT pfn_vkCmdSetConservativeRasterizationModeEXT;
+	PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT pfn_vkCmdSetExtraPrimitiveOverestimationSizeEXT;
+	PFN_vkCmdSetDepthClipEnableEXT pfn_vkCmdSetDepthClipEnableEXT;
+	PFN_vkCmdSetSampleLocationsEnableEXT pfn_vkCmdSetSampleLocationsEnableEXT;
+	PFN_vkCmdSetColorBlendAdvancedEXT pfn_vkCmdSetColorBlendAdvancedEXT;
+	PFN_vkCmdSetProvokingVertexModeEXT pfn_vkCmdSetProvokingVertexModeEXT;
+	PFN_vkCmdSetLineRasterizationModeEXT pfn_vkCmdSetLineRasterizationModeEXT;
+	PFN_vkCmdSetLineStippleEnableEXT pfn_vkCmdSetLineStippleEnableEXT;
+	PFN_vkCmdSetDepthClipNegativeOneToOneEXT pfn_vkCmdSetDepthClipNegativeOneToOneEXT;
+	PFN_vkCmdSetViewportWScalingEnableNV pfn_vkCmdSetViewportWScalingEnableNV;
+	PFN_vkCmdSetViewportSwizzleNV pfn_vkCmdSetViewportSwizzleNV;
+	PFN_vkCmdSetCoverageToColorEnableNV pfn_vkCmdSetCoverageToColorEnableNV;
+	PFN_vkCmdSetCoverageToColorLocationNV pfn_vkCmdSetCoverageToColorLocationNV;
+	PFN_vkCmdSetCoverageModulationModeNV pfn_vkCmdSetCoverageModulationModeNV;
+	PFN_vkCmdSetCoverageModulationTableEnableNV pfn_vkCmdSetCoverageModulationTableEnableNV;
+	PFN_vkCmdSetCoverageModulationTableNV pfn_vkCmdSetCoverageModulationTableNV;
+	PFN_vkCmdSetShadingRateImageEnableNV pfn_vkCmdSetShadingRateImageEnableNV;
+	PFN_vkCmdSetRepresentativeFragmentTestEnableNV pfn_vkCmdSetRepresentativeFragmentTestEnableNV;
+	PFN_vkCmdSetCoverageReductionModeNV pfn_vkCmdSetCoverageReductionModeNV;
+#endif
+#ifdef VK_EXT_descriptor_buffer
+	PFN_vkGetDescriptorSetLayoutSizeEXT pfn_vkGetDescriptorSetLayoutSizeEXT;
+	PFN_vkGetDescriptorSetLayoutBindingOffsetEXT pfn_vkGetDescriptorSetLayoutBindingOffsetEXT;
+	PFN_vkGetDescriptorEXT pfn_vkGetDescriptorEXT;
+	PFN_vkCmdBindDescriptorBuffersEXT pfn_vkCmdBindDescriptorBuffersEXT;
+	PFN_vkCmdSetDescriptorBufferOffsetsEXT pfn_vkCmdSetDescriptorBufferOffsetsEXT;
+	PFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT pfn_vkCmdBindDescriptorBufferEmbeddedSamplersEXT;
+	PFN_vkGetBufferOpaqueCaptureDescriptorDataEXT pfn_vkGetBufferOpaqueCaptureDescriptorDataEXT;
+	PFN_vkGetImageOpaqueCaptureDescriptorDataEXT pfn_vkGetImageOpaqueCaptureDescriptorDataEXT;
+	PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT pfn_vkGetImageViewOpaqueCaptureDescriptorDataEXT;
+	PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT;
+	PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT pfn_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT;
 #endif
 #ifdef VK_NV_external_memory_win32
 	PFN_vkGetMemoryWin32HandleNV pfn_vkGetMemoryWin32HandleNV;
@@ -435,6 +509,10 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_NV_external_memory_rdma
 	PFN_vkGetMemoryRemoteAddressNV pfn_vkGetMemoryRemoteAddressNV;
+#endif
+#ifdef VK_EXT_shader_module_identifier
+	PFN_vkGetShaderModuleIdentifierEXT pfn_vkGetShaderModuleIdentifierEXT;
+	PFN_vkGetShaderModuleCreateInfoIdentifierEXT pfn_vkGetShaderModuleCreateInfoIdentifierEXT;
 #endif
 #ifdef VK_NV_device_generated_commands
 	PFN_vkGetGeneratedCommandsMemoryRequirementsNV pfn_vkGetGeneratedCommandsMemoryRequirementsNV;
@@ -469,6 +547,14 @@ struct VklDeviceFunctions {
 	PFN_vkReleaseFullScreenExclusiveModeEXT pfn_vkReleaseFullScreenExclusiveModeEXT;
 	PFN_vkGetDeviceGroupSurfacePresentModes2EXT pfn_vkGetDeviceGroupSurfacePresentModes2EXT;
 #endif
+#ifdef VK_EXT_mesh_shader
+	PFN_vkCmdDrawMeshTasksEXT pfn_vkCmdDrawMeshTasksEXT;
+	PFN_vkCmdDrawMeshTasksIndirectEXT pfn_vkCmdDrawMeshTasksIndirectEXT;
+	PFN_vkCmdDrawMeshTasksIndirectCountEXT pfn_vkCmdDrawMeshTasksIndirectCountEXT;
+#endif
+#ifdef VK_EXT_device_fault
+	PFN_vkGetDeviceFaultInfoEXT pfn_vkGetDeviceFaultInfoEXT;
+#endif
 #ifdef VK_ANDROID_native_buffer
 	PFN_vkGetSwapchainGrallocUsageANDROID pfn_vkGetSwapchainGrallocUsageANDROID;
 	PFN_vkAcquireImageANDROID pfn_vkAcquireImageANDROID;
@@ -478,6 +564,16 @@ struct VklDeviceFunctions {
 #ifdef VK_EXT_pageable_device_local_memory
 	PFN_vkSetDeviceMemoryPriorityEXT pfn_vkSetDeviceMemoryPriorityEXT;
 #endif
+#ifdef VK_NV_optical_flow
+	PFN_vkCreateOpticalFlowSessionNV pfn_vkCreateOpticalFlowSessionNV;
+	PFN_vkDestroyOpticalFlowSessionNV pfn_vkDestroyOpticalFlowSessionNV;
+	PFN_vkBindOpticalFlowSessionImageNV pfn_vkBindOpticalFlowSessionImageNV;
+	PFN_vkCmdOpticalFlowExecuteNV pfn_vkCmdOpticalFlowExecuteNV;
+#endif
+#ifdef VK_NV_external_sci_sync2
+	PFN_vkCreateSemaphoreSciSyncPoolNV pfn_vkCreateSemaphoreSciSyncPoolNV;
+	PFN_vkDestroySemaphoreSciSyncPoolNV pfn_vkDestroySemaphoreSciSyncPoolNV;
+#endif
 #ifdef VK_KHR_external_semaphore_win32
 	PFN_vkImportSemaphoreWin32HandleKHR pfn_vkImportSemaphoreWin32HandleKHR;
 	PFN_vkGetSemaphoreWin32HandleKHR pfn_vkGetSemaphoreWin32HandleKHR;
@@ -486,6 +582,10 @@ struct VklDeviceFunctions {
 	PFN_vkCmdDrawMeshTasksNV pfn_vkCmdDrawMeshTasksNV;
 	PFN_vkCmdDrawMeshTasksIndirectNV pfn_vkCmdDrawMeshTasksIndirectNV;
 	PFN_vkCmdDrawMeshTasksIndirectCountNV pfn_vkCmdDrawMeshTasksIndirectCountNV;
+#endif
+#ifdef VK_NV_copy_memory_indirect
+	PFN_vkCmdCopyMemoryIndirectNV pfn_vkCmdCopyMemoryIndirectNV;
+	PFN_vkCmdCopyMemoryToImageIndirectNV pfn_vkCmdCopyMemoryToImageIndirectNV;
 #endif
 #ifdef VK_KHR_ray_tracing_pipeline
 	PFN_vkCmdTraceRaysKHR pfn_vkCmdTraceRaysKHR;
@@ -502,6 +602,18 @@ struct VklDeviceFunctions {
 #endif
 #ifdef VK_EXT_image_drm_format_modifier
 	PFN_vkGetImageDrmFormatModifierPropertiesEXT pfn_vkGetImageDrmFormatModifierPropertiesEXT;
+#endif
+#ifdef VK_NV_external_sci_sync
+	PFN_vkGetFenceSciSyncFenceNV pfn_vkGetFenceSciSyncFenceNV;
+	PFN_vkGetFenceSciSyncObjNV pfn_vkGetFenceSciSyncObjNV;
+	PFN_vkImportFenceSciSyncFenceNV pfn_vkImportFenceSciSyncFenceNV;
+	PFN_vkImportFenceSciSyncObjNV pfn_vkImportFenceSciSyncObjNV;
+	PFN_vkGetSemaphoreSciSyncObjNV pfn_vkGetSemaphoreSciSyncObjNV;
+	PFN_vkImportSemaphoreSciSyncObjNV pfn_vkImportSemaphoreSciSyncObjNV;
+#endif
+#ifdef VK_QCOM_tile_properties
+	PFN_vkGetFramebufferTilePropertiesQCOM pfn_vkGetFramebufferTilePropertiesQCOM;
+	PFN_vkGetDynamicRenderingTilePropertiesQCOM pfn_vkGetDynamicRenderingTilePropertiesQCOM;
 #endif
 #ifdef VK_FUCHSIA_buffer_collection
 	PFN_vkCreateBufferCollectionFUCHSIA pfn_vkCreateBufferCollectionFUCHSIA;
@@ -1134,6 +1246,13 @@ struct VklDeviceFunctions {
 	}
 
 #endif
+#ifdef VK_EXT_swapchain_maintenance1
+	VkResult ReleaseSwapchainImagesEXT(const  VkReleaseSwapchainImagesInfoEXT * pReleaseInfo) {
+		assert(pfn_vkReleaseSwapchainImagesEXT && "vkReleaseSwapchainImagesEXT is not loaded");
+		return pfn_vkReleaseSwapchainImagesEXT(this->handle, pReleaseInfo);
+	}
+
+#endif
 #ifdef VK_EXT_display_control
 	VkResult DisplayPowerControlEXT(VkDisplayKHR display, const  VkDisplayPowerInfoEXT * pDisplayPowerInfo) {
 		assert(pfn_vkDisplayPowerControlEXT && "vkDisplayPowerControlEXT is not loaded");
@@ -1172,18 +1291,6 @@ struct VklDeviceFunctions {
 	VkResult GetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI(VkRenderPass renderpass, VkExtent2D * pMaxWorkgroupSize) {
 		assert(pfn_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI && "vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI is not loaded");
 		return pfn_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI(this->handle, renderpass, pMaxWorkgroupSize);
-	}
-
-#endif
-#ifdef VK_QCOM_tile_properties
-	VkResult GetFramebufferTilePropertiesQCOM(VkFramebuffer framebuffer, uint32_t * pPropertiesCount, VkTilePropertiesQCOM * pProperties) {
-		assert(pfn_vkGetFramebufferTilePropertiesQCOM && "vkGetFramebufferTilePropertiesQCOM is not loaded");
-		return pfn_vkGetFramebufferTilePropertiesQCOM(this->handle, framebuffer, pPropertiesCount, pProperties);
-	}
-
-	VkResult GetDynamicRenderingTilePropertiesQCOM(const  VkRenderingInfo * pRenderingInfo, VkTilePropertiesQCOM * pProperties) {
-		assert(pfn_vkGetDynamicRenderingTilePropertiesQCOM && "vkGetDynamicRenderingTilePropertiesQCOM is not loaded");
-		return pfn_vkGetDynamicRenderingTilePropertiesQCOM(this->handle, pRenderingInfo, pProperties);
 	}
 
 #endif
@@ -1246,6 +1353,53 @@ struct VklDeviceFunctions {
 	void ReleaseProfilingLockKHR() {
 		assert(pfn_vkReleaseProfilingLockKHR && "vkReleaseProfilingLockKHR is not loaded");
 		pfn_vkReleaseProfilingLockKHR(this->handle);
+	}
+
+#endif
+#ifdef VK_EXT_opacity_micromap
+	VkResult CreateMicromapEXT(const  VkMicromapCreateInfoEXT * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkMicromapEXT * pMicromap) {
+		assert(pfn_vkCreateMicromapEXT && "vkCreateMicromapEXT is not loaded");
+		return pfn_vkCreateMicromapEXT(this->handle, pCreateInfo, pAllocator, pMicromap);
+	}
+
+	void DestroyMicromapEXT(VkMicromapEXT micromap, const  VkAllocationCallbacks * pAllocator) {
+		assert(pfn_vkDestroyMicromapEXT && "vkDestroyMicromapEXT is not loaded");
+		pfn_vkDestroyMicromapEXT(this->handle, micromap, pAllocator);
+	}
+
+	VkResult BuildMicromapsEXT(VkDeferredOperationKHR deferredOperation, uint32_t infoCount, const  VkMicromapBuildInfoEXT * pInfos) {
+		assert(pfn_vkBuildMicromapsEXT && "vkBuildMicromapsEXT is not loaded");
+		return pfn_vkBuildMicromapsEXT(this->handle, deferredOperation, infoCount, pInfos);
+	}
+
+	VkResult CopyMicromapEXT(VkDeferredOperationKHR deferredOperation, const  VkCopyMicromapInfoEXT * pInfo) {
+		assert(pfn_vkCopyMicromapEXT && "vkCopyMicromapEXT is not loaded");
+		return pfn_vkCopyMicromapEXT(this->handle, deferredOperation, pInfo);
+	}
+
+	VkResult CopyMicromapToMemoryEXT(VkDeferredOperationKHR deferredOperation, const  VkCopyMicromapToMemoryInfoEXT * pInfo) {
+		assert(pfn_vkCopyMicromapToMemoryEXT && "vkCopyMicromapToMemoryEXT is not loaded");
+		return pfn_vkCopyMicromapToMemoryEXT(this->handle, deferredOperation, pInfo);
+	}
+
+	VkResult CopyMemoryToMicromapEXT(VkDeferredOperationKHR deferredOperation, const  VkCopyMemoryToMicromapInfoEXT * pInfo) {
+		assert(pfn_vkCopyMemoryToMicromapEXT && "vkCopyMemoryToMicromapEXT is not loaded");
+		return pfn_vkCopyMemoryToMicromapEXT(this->handle, deferredOperation, pInfo);
+	}
+
+	VkResult WriteMicromapsPropertiesEXT(uint32_t micromapCount, const  VkMicromapEXT * pMicromaps, VkQueryType queryType, size_t dataSize, void * pData, size_t stride) {
+		assert(pfn_vkWriteMicromapsPropertiesEXT && "vkWriteMicromapsPropertiesEXT is not loaded");
+		return pfn_vkWriteMicromapsPropertiesEXT(this->handle, micromapCount, pMicromaps, queryType, dataSize, pData, stride);
+	}
+
+	void GetDeviceMicromapCompatibilityEXT(const  VkMicromapVersionInfoEXT * pVersionInfo, VkAccelerationStructureCompatibilityKHR * pCompatibility) {
+		assert(pfn_vkGetDeviceMicromapCompatibilityEXT && "vkGetDeviceMicromapCompatibilityEXT is not loaded");
+		pfn_vkGetDeviceMicromapCompatibilityEXT(this->handle, pVersionInfo, pCompatibility);
+	}
+
+	void GetMicromapBuildSizesEXT(VkAccelerationStructureBuildTypeKHR buildType, const  VkMicromapBuildInfoEXT * pBuildInfo, VkMicromapBuildSizesInfoEXT * pSizeInfo) {
+		assert(pfn_vkGetMicromapBuildSizesEXT && "vkGetMicromapBuildSizesEXT is not loaded");
+		pfn_vkGetMicromapBuildSizesEXT(this->handle, buildType, pBuildInfo, pSizeInfo);
 	}
 
 #endif
@@ -1478,15 +1632,52 @@ struct VklDeviceFunctions {
 	}
 
 #endif
-#ifdef VK_EXT_shader_module_identifier
-	void GetShaderModuleIdentifierEXT(VkShaderModule shaderModule, VkShaderModuleIdentifierEXT * pIdentifier) {
-		assert(pfn_vkGetShaderModuleIdentifierEXT && "vkGetShaderModuleIdentifierEXT is not loaded");
-		pfn_vkGetShaderModuleIdentifierEXT(this->handle, shaderModule, pIdentifier);
+#ifdef VK_NV_external_memory_sci_buf
+	VkResult GetMemorySciBufNV(const  VkMemoryGetSciBufInfoNV * pGetSciBufInfo, NvSciBufObj * pHandle) {
+		assert(pfn_vkGetMemorySciBufNV && "vkGetMemorySciBufNV is not loaded");
+		return pfn_vkGetMemorySciBufNV(this->handle, pGetSciBufInfo, pHandle);
 	}
 
-	void GetShaderModuleCreateInfoIdentifierEXT(const  VkShaderModuleCreateInfo * pCreateInfo, VkShaderModuleIdentifierEXT * pIdentifier) {
-		assert(pfn_vkGetShaderModuleCreateInfoIdentifierEXT && "vkGetShaderModuleCreateInfoIdentifierEXT is not loaded");
-		pfn_vkGetShaderModuleCreateInfoIdentifierEXT(this->handle, pCreateInfo, pIdentifier);
+#endif
+#ifdef VK_EXT_descriptor_buffer
+	void GetDescriptorSetLayoutSizeEXT(VkDescriptorSetLayout layout, VkDeviceSize * pLayoutSizeInBytes) {
+		assert(pfn_vkGetDescriptorSetLayoutSizeEXT && "vkGetDescriptorSetLayoutSizeEXT is not loaded");
+		pfn_vkGetDescriptorSetLayoutSizeEXT(this->handle, layout, pLayoutSizeInBytes);
+	}
+
+	void GetDescriptorSetLayoutBindingOffsetEXT(VkDescriptorSetLayout layout, uint32_t binding, VkDeviceSize * pOffset) {
+		assert(pfn_vkGetDescriptorSetLayoutBindingOffsetEXT && "vkGetDescriptorSetLayoutBindingOffsetEXT is not loaded");
+		pfn_vkGetDescriptorSetLayoutBindingOffsetEXT(this->handle, layout, binding, pOffset);
+	}
+
+	void GetDescriptorEXT(const  VkDescriptorGetInfoEXT * pDescriptorInfo, size_t dataSize, void * pDescriptor) {
+		assert(pfn_vkGetDescriptorEXT && "vkGetDescriptorEXT is not loaded");
+		pfn_vkGetDescriptorEXT(this->handle, pDescriptorInfo, dataSize, pDescriptor);
+	}
+
+	VkResult GetBufferOpaqueCaptureDescriptorDataEXT(const  VkBufferCaptureDescriptorDataInfoEXT * pInfo, void * pData) {
+		assert(pfn_vkGetBufferOpaqueCaptureDescriptorDataEXT && "vkGetBufferOpaqueCaptureDescriptorDataEXT is not loaded");
+		return pfn_vkGetBufferOpaqueCaptureDescriptorDataEXT(this->handle, pInfo, pData);
+	}
+
+	VkResult GetImageOpaqueCaptureDescriptorDataEXT(const  VkImageCaptureDescriptorDataInfoEXT * pInfo, void * pData) {
+		assert(pfn_vkGetImageOpaqueCaptureDescriptorDataEXT && "vkGetImageOpaqueCaptureDescriptorDataEXT is not loaded");
+		return pfn_vkGetImageOpaqueCaptureDescriptorDataEXT(this->handle, pInfo, pData);
+	}
+
+	VkResult GetImageViewOpaqueCaptureDescriptorDataEXT(const  VkImageViewCaptureDescriptorDataInfoEXT * pInfo, void * pData) {
+		assert(pfn_vkGetImageViewOpaqueCaptureDescriptorDataEXT && "vkGetImageViewOpaqueCaptureDescriptorDataEXT is not loaded");
+		return pfn_vkGetImageViewOpaqueCaptureDescriptorDataEXT(this->handle, pInfo, pData);
+	}
+
+	VkResult GetSamplerOpaqueCaptureDescriptorDataEXT(const  VkSamplerCaptureDescriptorDataInfoEXT * pInfo, void * pData) {
+		assert(pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT && "vkGetSamplerOpaqueCaptureDescriptorDataEXT is not loaded");
+		return pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT(this->handle, pInfo, pData);
+	}
+
+	VkResult GetAccelerationStructureOpaqueCaptureDescriptorDataEXT(const  VkAccelerationStructureCaptureDescriptorDataInfoEXT * pInfo, void * pData) {
+		assert(pfn_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT && "vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT is not loaded");
+		return pfn_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT(this->handle, pInfo, pData);
 	}
 
 #endif
@@ -1528,6 +1719,18 @@ struct VklDeviceFunctions {
 	VkResult GetMemoryRemoteAddressNV(const  VkMemoryGetRemoteAddressInfoNV * pMemoryGetRemoteAddressInfo, VkRemoteAddressNV * pAddress) {
 		assert(pfn_vkGetMemoryRemoteAddressNV && "vkGetMemoryRemoteAddressNV is not loaded");
 		return pfn_vkGetMemoryRemoteAddressNV(this->handle, pMemoryGetRemoteAddressInfo, pAddress);
+	}
+
+#endif
+#ifdef VK_EXT_shader_module_identifier
+	void GetShaderModuleIdentifierEXT(VkShaderModule shaderModule, VkShaderModuleIdentifierEXT * pIdentifier) {
+		assert(pfn_vkGetShaderModuleIdentifierEXT && "vkGetShaderModuleIdentifierEXT is not loaded");
+		pfn_vkGetShaderModuleIdentifierEXT(this->handle, shaderModule, pIdentifier);
+	}
+
+	void GetShaderModuleCreateInfoIdentifierEXT(const  VkShaderModuleCreateInfo * pCreateInfo, VkShaderModuleIdentifierEXT * pIdentifier) {
+		assert(pfn_vkGetShaderModuleCreateInfoIdentifierEXT && "vkGetShaderModuleCreateInfoIdentifierEXT is not loaded");
+		pfn_vkGetShaderModuleCreateInfoIdentifierEXT(this->handle, pCreateInfo, pIdentifier);
 	}
 
 #endif
@@ -1584,6 +1787,13 @@ struct VklDeviceFunctions {
 	}
 
 #endif
+#ifdef VK_EXT_device_fault
+	VkResult GetDeviceFaultInfoEXT(VkDeviceFaultCountsEXT * pFaultCounts, VkDeviceFaultInfoEXT * pFaultInfo) {
+		assert(pfn_vkGetDeviceFaultInfoEXT && "vkGetDeviceFaultInfoEXT is not loaded");
+		return pfn_vkGetDeviceFaultInfoEXT(this->handle, pFaultCounts, pFaultInfo);
+	}
+
+#endif
 #ifdef VK_ANDROID_native_buffer
 	VkResult GetSwapchainGrallocUsageANDROID(VkFormat format, VkImageUsageFlags imageUsage, int * grallocUsage) {
 		assert(pfn_vkGetSwapchainGrallocUsageANDROID && "vkGetSwapchainGrallocUsageANDROID is not loaded");
@@ -1605,6 +1815,35 @@ struct VklDeviceFunctions {
 	void SetDeviceMemoryPriorityEXT(VkDeviceMemory memory, float priority) {
 		assert(pfn_vkSetDeviceMemoryPriorityEXT && "vkSetDeviceMemoryPriorityEXT is not loaded");
 		pfn_vkSetDeviceMemoryPriorityEXT(this->handle, memory, priority);
+	}
+
+#endif
+#ifdef VK_NV_optical_flow
+	VkResult CreateOpticalFlowSessionNV(const  VkOpticalFlowSessionCreateInfoNV * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkOpticalFlowSessionNV * pSession) {
+		assert(pfn_vkCreateOpticalFlowSessionNV && "vkCreateOpticalFlowSessionNV is not loaded");
+		return pfn_vkCreateOpticalFlowSessionNV(this->handle, pCreateInfo, pAllocator, pSession);
+	}
+
+	void DestroyOpticalFlowSessionNV(VkOpticalFlowSessionNV session, const  VkAllocationCallbacks * pAllocator) {
+		assert(pfn_vkDestroyOpticalFlowSessionNV && "vkDestroyOpticalFlowSessionNV is not loaded");
+		pfn_vkDestroyOpticalFlowSessionNV(this->handle, session, pAllocator);
+	}
+
+	VkResult BindOpticalFlowSessionImageNV(VkOpticalFlowSessionNV session, VkOpticalFlowSessionBindingPointNV bindingPoint, VkImageView view, VkImageLayout layout) {
+		assert(pfn_vkBindOpticalFlowSessionImageNV && "vkBindOpticalFlowSessionImageNV is not loaded");
+		return pfn_vkBindOpticalFlowSessionImageNV(this->handle, session, bindingPoint, view, layout);
+	}
+
+#endif
+#ifdef VK_NV_external_sci_sync2
+	VkResult CreateSemaphoreSciSyncPoolNV(const  VkSemaphoreSciSyncPoolCreateInfoNV * pCreateInfo, const  VkAllocationCallbacks * pAllocator, VkSemaphoreSciSyncPoolNV * pSemaphorePool) {
+		assert(pfn_vkCreateSemaphoreSciSyncPoolNV && "vkCreateSemaphoreSciSyncPoolNV is not loaded");
+		return pfn_vkCreateSemaphoreSciSyncPoolNV(this->handle, pCreateInfo, pAllocator, pSemaphorePool);
+	}
+
+	void DestroySemaphoreSciSyncPoolNV(VkSemaphoreSciSyncPoolNV semaphorePool, const  VkAllocationCallbacks * pAllocator) {
+		assert(pfn_vkDestroySemaphoreSciSyncPoolNV && "vkDestroySemaphoreSciSyncPoolNV is not loaded");
+		pfn_vkDestroySemaphoreSciSyncPoolNV(this->handle, semaphorePool, pAllocator);
 	}
 
 #endif
@@ -1658,6 +1897,50 @@ struct VklDeviceFunctions {
 	VkResult GetImageDrmFormatModifierPropertiesEXT(VkImage image, VkImageDrmFormatModifierPropertiesEXT * pProperties) {
 		assert(pfn_vkGetImageDrmFormatModifierPropertiesEXT && "vkGetImageDrmFormatModifierPropertiesEXT is not loaded");
 		return pfn_vkGetImageDrmFormatModifierPropertiesEXT(this->handle, image, pProperties);
+	}
+
+#endif
+#ifdef VK_NV_external_sci_sync
+	VkResult GetFenceSciSyncFenceNV(const  VkFenceGetSciSyncInfoNV * pGetSciSyncHandleInfo, void * pHandle) {
+		assert(pfn_vkGetFenceSciSyncFenceNV && "vkGetFenceSciSyncFenceNV is not loaded");
+		return pfn_vkGetFenceSciSyncFenceNV(this->handle, pGetSciSyncHandleInfo, pHandle);
+	}
+
+	VkResult GetFenceSciSyncObjNV(const  VkFenceGetSciSyncInfoNV * pGetSciSyncHandleInfo, void * pHandle) {
+		assert(pfn_vkGetFenceSciSyncObjNV && "vkGetFenceSciSyncObjNV is not loaded");
+		return pfn_vkGetFenceSciSyncObjNV(this->handle, pGetSciSyncHandleInfo, pHandle);
+	}
+
+	VkResult ImportFenceSciSyncFenceNV(const  VkImportFenceSciSyncInfoNV * pImportFenceSciSyncInfo) {
+		assert(pfn_vkImportFenceSciSyncFenceNV && "vkImportFenceSciSyncFenceNV is not loaded");
+		return pfn_vkImportFenceSciSyncFenceNV(this->handle, pImportFenceSciSyncInfo);
+	}
+
+	VkResult ImportFenceSciSyncObjNV(const  VkImportFenceSciSyncInfoNV * pImportFenceSciSyncInfo) {
+		assert(pfn_vkImportFenceSciSyncObjNV && "vkImportFenceSciSyncObjNV is not loaded");
+		return pfn_vkImportFenceSciSyncObjNV(this->handle, pImportFenceSciSyncInfo);
+	}
+
+	VkResult GetSemaphoreSciSyncObjNV(const  VkSemaphoreGetSciSyncInfoNV * pGetSciSyncInfo, void * pHandle) {
+		assert(pfn_vkGetSemaphoreSciSyncObjNV && "vkGetSemaphoreSciSyncObjNV is not loaded");
+		return pfn_vkGetSemaphoreSciSyncObjNV(this->handle, pGetSciSyncInfo, pHandle);
+	}
+
+	VkResult ImportSemaphoreSciSyncObjNV(const  VkImportSemaphoreSciSyncInfoNV * pImportSemaphoreSciSyncInfo) {
+		assert(pfn_vkImportSemaphoreSciSyncObjNV && "vkImportSemaphoreSciSyncObjNV is not loaded");
+		return pfn_vkImportSemaphoreSciSyncObjNV(this->handle, pImportSemaphoreSciSyncInfo);
+	}
+
+#endif
+#ifdef VK_QCOM_tile_properties
+	VkResult GetFramebufferTilePropertiesQCOM(VkFramebuffer framebuffer, uint32_t * pPropertiesCount, VkTilePropertiesQCOM * pProperties) {
+		assert(pfn_vkGetFramebufferTilePropertiesQCOM && "vkGetFramebufferTilePropertiesQCOM is not loaded");
+		return pfn_vkGetFramebufferTilePropertiesQCOM(this->handle, framebuffer, pPropertiesCount, pProperties);
+	}
+
+	VkResult GetDynamicRenderingTilePropertiesQCOM(const  VkRenderingInfo * pRenderingInfo, VkTilePropertiesQCOM * pProperties) {
+		assert(pfn_vkGetDynamicRenderingTilePropertiesQCOM && "vkGetDynamicRenderingTilePropertiesQCOM is not loaded");
+		return pfn_vkGetDynamicRenderingTilePropertiesQCOM(this->handle, pRenderingInfo, pProperties);
 	}
 
 #endif
@@ -1872,14 +2155,14 @@ struct VklCommandFunctions {
 		fnptrs->pfn_vkCmdWriteTimestamp(this->handle, pipelineStage, queryPool, query);
 	}
 
-	void CopyBuffer2(const  VkCopyBufferInfo2 * pCopyBufferInfo) {
-		assert(fnptrs->pfn_vkCmdCopyBuffer2 && "vkCmdCopyBuffer2 is not loaded");
-		fnptrs->pfn_vkCmdCopyBuffer2(this->handle, pCopyBufferInfo);
-	}
-
 	void SetScissor(uint32_t firstScissor, uint32_t scissorCount, const  VkRect2D * pScissors) {
 		assert(fnptrs->pfn_vkCmdSetScissor && "vkCmdSetScissor is not loaded");
 		fnptrs->pfn_vkCmdSetScissor(this->handle, firstScissor, scissorCount, pScissors);
+	}
+
+	void CopyBuffer2(const  VkCopyBufferInfo2 * pCopyBufferInfo) {
+		assert(fnptrs->pfn_vkCmdCopyBuffer2 && "vkCmdCopyBuffer2 is not loaded");
+		fnptrs->pfn_vkCmdCopyBuffer2(this->handle, pCopyBufferInfo);
 	}
 
 	void UpdateBuffer(VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, const  void * pData) {
@@ -2235,6 +2518,11 @@ struct VklCommandFunctions {
 #endif
 
 #ifdef VK_NV_scissor_exclusive
+	void SetExclusiveScissorEnableNV(uint32_t firstExclusiveScissor, uint32_t exclusiveScissorCount, const  VkBool32 * pExclusiveScissorEnables) {
+		assert(fnptrs->pfn_vkCmdSetExclusiveScissorEnableNV && "vkCmdSetExclusiveScissorEnableNV is not loaded");
+		fnptrs->pfn_vkCmdSetExclusiveScissorEnableNV(this->handle, firstExclusiveScissor, exclusiveScissorCount, pExclusiveScissorEnables);
+	}
+
 	void SetExclusiveScissorNV(uint32_t firstExclusiveScissor, uint32_t exclusiveScissorCount, const  VkRect2D * pExclusiveScissors) {
 		assert(fnptrs->pfn_vkCmdSetExclusiveScissorNV && "vkCmdSetExclusiveScissorNV is not loaded");
 		fnptrs->pfn_vkCmdSetExclusiveScissorNV(this->handle, firstExclusiveScissor, exclusiveScissorCount, pExclusiveScissors);
@@ -2267,6 +2555,19 @@ struct VklCommandFunctions {
 	void EndConditionalRenderingEXT() {
 		assert(fnptrs->pfn_vkCmdEndConditionalRenderingEXT && "vkCmdEndConditionalRenderingEXT is not loaded");
 		fnptrs->pfn_vkCmdEndConditionalRenderingEXT(this->handle);
+	}
+
+#endif
+
+#ifdef VK_HUAWEI_cluster_culling_shader
+	void DrawClusterHUAWEI(uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ) {
+		assert(fnptrs->pfn_vkCmdDrawClusterHUAWEI && "vkCmdDrawClusterHUAWEI is not loaded");
+		fnptrs->pfn_vkCmdDrawClusterHUAWEI(this->handle, groupCountX, groupCountY, groupCountZ);
+	}
+
+	void DrawClusterIndirectHUAWEI(VkBuffer buffer, VkDeviceSize offset) {
+		assert(fnptrs->pfn_vkCmdDrawClusterIndirectHUAWEI && "vkCmdDrawClusterIndirectHUAWEI is not loaded");
+		fnptrs->pfn_vkCmdDrawClusterIndirectHUAWEI(this->handle, buffer, offset);
 	}
 
 #endif
@@ -2337,10 +2638,46 @@ struct VklCommandFunctions {
 
 #endif
 
+#ifdef VK_EXT_opacity_micromap
+	void BuildMicromapsEXT(uint32_t infoCount, const  VkMicromapBuildInfoEXT * pInfos) {
+		assert(fnptrs->pfn_vkCmdBuildMicromapsEXT && "vkCmdBuildMicromapsEXT is not loaded");
+		fnptrs->pfn_vkCmdBuildMicromapsEXT(this->handle, infoCount, pInfos);
+	}
+
+	void CopyMicromapEXT(const  VkCopyMicromapInfoEXT * pInfo) {
+		assert(fnptrs->pfn_vkCmdCopyMicromapEXT && "vkCmdCopyMicromapEXT is not loaded");
+		fnptrs->pfn_vkCmdCopyMicromapEXT(this->handle, pInfo);
+	}
+
+	void CopyMicromapToMemoryEXT(const  VkCopyMicromapToMemoryInfoEXT * pInfo) {
+		assert(fnptrs->pfn_vkCmdCopyMicromapToMemoryEXT && "vkCmdCopyMicromapToMemoryEXT is not loaded");
+		fnptrs->pfn_vkCmdCopyMicromapToMemoryEXT(this->handle, pInfo);
+	}
+
+	void CopyMemoryToMicromapEXT(const  VkCopyMemoryToMicromapInfoEXT * pInfo) {
+		assert(fnptrs->pfn_vkCmdCopyMemoryToMicromapEXT && "vkCmdCopyMemoryToMicromapEXT is not loaded");
+		fnptrs->pfn_vkCmdCopyMemoryToMicromapEXT(this->handle, pInfo);
+	}
+
+	void WriteMicromapsPropertiesEXT(uint32_t micromapCount, const  VkMicromapEXT * pMicromaps, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery) {
+		assert(fnptrs->pfn_vkCmdWriteMicromapsPropertiesEXT && "vkCmdWriteMicromapsPropertiesEXT is not loaded");
+		fnptrs->pfn_vkCmdWriteMicromapsPropertiesEXT(this->handle, micromapCount, pMicromaps, queryType, queryPool, firstQuery);
+	}
+
+#endif
+
 #ifdef VK_EXT_sample_locations
 	void SetSampleLocationsEXT(const  VkSampleLocationsInfoEXT * pSampleLocationsInfo) {
 		assert(fnptrs->pfn_vkCmdSetSampleLocationsEXT && "vkCmdSetSampleLocationsEXT is not loaded");
 		fnptrs->pfn_vkCmdSetSampleLocationsEXT(this->handle, pSampleLocationsInfo);
+	}
+
+#endif
+
+#ifdef VK_KHR_object_refresh
+	void RefreshObjectsKHR(const  VkRefreshObjectListKHR * pRefreshObjects) {
+		assert(fnptrs->pfn_vkCmdRefreshObjectsKHR && "vkCmdRefreshObjectsKHR is not loaded");
+		fnptrs->pfn_vkCmdRefreshObjectsKHR(this->handle, pRefreshObjects);
 	}
 
 #endif
@@ -2362,6 +2699,19 @@ struct VklCommandFunctions {
 	void SetLogicOpEXT(VkLogicOp logicOp) {
 		assert(fnptrs->pfn_vkCmdSetLogicOpEXT && "vkCmdSetLogicOpEXT is not loaded");
 		fnptrs->pfn_vkCmdSetLogicOpEXT(this->handle, logicOp);
+	}
+
+#endif
+
+#ifdef VK_NV_memory_decompression
+	void DecompressMemoryNV(uint32_t decompressRegionCount, const  VkDecompressMemoryRegionNV * pDecompressMemoryRegions) {
+		assert(fnptrs->pfn_vkCmdDecompressMemoryNV && "vkCmdDecompressMemoryNV is not loaded");
+		fnptrs->pfn_vkCmdDecompressMemoryNV(this->handle, decompressRegionCount, pDecompressMemoryRegions);
+	}
+
+	void DecompressMemoryIndirectCountNV(VkDeviceAddress indirectCommandsAddress, VkDeviceAddress indirectCommandsCountAddress, uint32_t stride) {
+		assert(fnptrs->pfn_vkCmdDecompressMemoryIndirectCountNV && "vkCmdDecompressMemoryIndirectCountNV is not loaded");
+		fnptrs->pfn_vkCmdDecompressMemoryIndirectCountNV(this->handle, indirectCommandsAddress, indirectCommandsCountAddress, stride);
 	}
 
 #endif
@@ -2444,12 +2794,198 @@ struct VklCommandFunctions {
 		fnptrs->pfn_vkCmdSetDiscardRectangleEXT(this->handle, firstDiscardRectangle, discardRectangleCount, pDiscardRectangles);
 	}
 
+	void SetDiscardRectangleEnableEXT(VkBool32 discardRectangleEnable) {
+		assert(fnptrs->pfn_vkCmdSetDiscardRectangleEnableEXT && "vkCmdSetDiscardRectangleEnableEXT is not loaded");
+		fnptrs->pfn_vkCmdSetDiscardRectangleEnableEXT(this->handle, discardRectangleEnable);
+	}
+
+	void SetDiscardRectangleModeEXT(VkDiscardRectangleModeEXT discardRectangleMode) {
+		assert(fnptrs->pfn_vkCmdSetDiscardRectangleModeEXT && "vkCmdSetDiscardRectangleModeEXT is not loaded");
+		fnptrs->pfn_vkCmdSetDiscardRectangleModeEXT(this->handle, discardRectangleMode);
+	}
+
 #endif
 
 #ifdef VK_EXT_color_write_enable
 	void SetColorWriteEnableEXT(uint32_t attachmentCount, const  VkBool32 * pColorWriteEnables) {
 		assert(fnptrs->pfn_vkCmdSetColorWriteEnableEXT && "vkCmdSetColorWriteEnableEXT is not loaded");
 		fnptrs->pfn_vkCmdSetColorWriteEnableEXT(this->handle, attachmentCount, pColorWriteEnables);
+	}
+
+#endif
+
+#ifdef VK_EXT_extended_dynamic_state3
+	void SetTessellationDomainOriginEXT(VkTessellationDomainOrigin domainOrigin) {
+		assert(fnptrs->pfn_vkCmdSetTessellationDomainOriginEXT && "vkCmdSetTessellationDomainOriginEXT is not loaded");
+		fnptrs->pfn_vkCmdSetTessellationDomainOriginEXT(this->handle, domainOrigin);
+	}
+
+	void SetDepthClampEnableEXT(VkBool32 depthClampEnable) {
+		assert(fnptrs->pfn_vkCmdSetDepthClampEnableEXT && "vkCmdSetDepthClampEnableEXT is not loaded");
+		fnptrs->pfn_vkCmdSetDepthClampEnableEXT(this->handle, depthClampEnable);
+	}
+
+	void SetPolygonModeEXT(VkPolygonMode polygonMode) {
+		assert(fnptrs->pfn_vkCmdSetPolygonModeEXT && "vkCmdSetPolygonModeEXT is not loaded");
+		fnptrs->pfn_vkCmdSetPolygonModeEXT(this->handle, polygonMode);
+	}
+
+	void SetRasterizationSamplesEXT(VkSampleCountFlagBits rasterizationSamples) {
+		assert(fnptrs->pfn_vkCmdSetRasterizationSamplesEXT && "vkCmdSetRasterizationSamplesEXT is not loaded");
+		fnptrs->pfn_vkCmdSetRasterizationSamplesEXT(this->handle, rasterizationSamples);
+	}
+
+	void SetSampleMaskEXT(VkSampleCountFlagBits samples, const  VkSampleMask * pSampleMask) {
+		assert(fnptrs->pfn_vkCmdSetSampleMaskEXT && "vkCmdSetSampleMaskEXT is not loaded");
+		fnptrs->pfn_vkCmdSetSampleMaskEXT(this->handle, samples, pSampleMask);
+	}
+
+	void SetAlphaToCoverageEnableEXT(VkBool32 alphaToCoverageEnable) {
+		assert(fnptrs->pfn_vkCmdSetAlphaToCoverageEnableEXT && "vkCmdSetAlphaToCoverageEnableEXT is not loaded");
+		fnptrs->pfn_vkCmdSetAlphaToCoverageEnableEXT(this->handle, alphaToCoverageEnable);
+	}
+
+	void SetAlphaToOneEnableEXT(VkBool32 alphaToOneEnable) {
+		assert(fnptrs->pfn_vkCmdSetAlphaToOneEnableEXT && "vkCmdSetAlphaToOneEnableEXT is not loaded");
+		fnptrs->pfn_vkCmdSetAlphaToOneEnableEXT(this->handle, alphaToOneEnable);
+	}
+
+	void SetLogicOpEnableEXT(VkBool32 logicOpEnable) {
+		assert(fnptrs->pfn_vkCmdSetLogicOpEnableEXT && "vkCmdSetLogicOpEnableEXT is not loaded");
+		fnptrs->pfn_vkCmdSetLogicOpEnableEXT(this->handle, logicOpEnable);
+	}
+
+	void SetColorBlendEnableEXT(uint32_t firstAttachment, uint32_t attachmentCount, const  VkBool32 * pColorBlendEnables) {
+		assert(fnptrs->pfn_vkCmdSetColorBlendEnableEXT && "vkCmdSetColorBlendEnableEXT is not loaded");
+		fnptrs->pfn_vkCmdSetColorBlendEnableEXT(this->handle, firstAttachment, attachmentCount, pColorBlendEnables);
+	}
+
+	void SetColorBlendEquationEXT(uint32_t firstAttachment, uint32_t attachmentCount, const  VkColorBlendEquationEXT * pColorBlendEquations) {
+		assert(fnptrs->pfn_vkCmdSetColorBlendEquationEXT && "vkCmdSetColorBlendEquationEXT is not loaded");
+		fnptrs->pfn_vkCmdSetColorBlendEquationEXT(this->handle, firstAttachment, attachmentCount, pColorBlendEquations);
+	}
+
+	void SetColorWriteMaskEXT(uint32_t firstAttachment, uint32_t attachmentCount, const  VkColorComponentFlags * pColorWriteMasks) {
+		assert(fnptrs->pfn_vkCmdSetColorWriteMaskEXT && "vkCmdSetColorWriteMaskEXT is not loaded");
+		fnptrs->pfn_vkCmdSetColorWriteMaskEXT(this->handle, firstAttachment, attachmentCount, pColorWriteMasks);
+	}
+
+	void SetRasterizationStreamEXT(uint32_t rasterizationStream) {
+		assert(fnptrs->pfn_vkCmdSetRasterizationStreamEXT && "vkCmdSetRasterizationStreamEXT is not loaded");
+		fnptrs->pfn_vkCmdSetRasterizationStreamEXT(this->handle, rasterizationStream);
+	}
+
+	void SetConservativeRasterizationModeEXT(VkConservativeRasterizationModeEXT conservativeRasterizationMode) {
+		assert(fnptrs->pfn_vkCmdSetConservativeRasterizationModeEXT && "vkCmdSetConservativeRasterizationModeEXT is not loaded");
+		fnptrs->pfn_vkCmdSetConservativeRasterizationModeEXT(this->handle, conservativeRasterizationMode);
+	}
+
+	void SetExtraPrimitiveOverestimationSizeEXT(float extraPrimitiveOverestimationSize) {
+		assert(fnptrs->pfn_vkCmdSetExtraPrimitiveOverestimationSizeEXT && "vkCmdSetExtraPrimitiveOverestimationSizeEXT is not loaded");
+		fnptrs->pfn_vkCmdSetExtraPrimitiveOverestimationSizeEXT(this->handle, extraPrimitiveOverestimationSize);
+	}
+
+	void SetDepthClipEnableEXT(VkBool32 depthClipEnable) {
+		assert(fnptrs->pfn_vkCmdSetDepthClipEnableEXT && "vkCmdSetDepthClipEnableEXT is not loaded");
+		fnptrs->pfn_vkCmdSetDepthClipEnableEXT(this->handle, depthClipEnable);
+	}
+
+	void SetSampleLocationsEnableEXT(VkBool32 sampleLocationsEnable) {
+		assert(fnptrs->pfn_vkCmdSetSampleLocationsEnableEXT && "vkCmdSetSampleLocationsEnableEXT is not loaded");
+		fnptrs->pfn_vkCmdSetSampleLocationsEnableEXT(this->handle, sampleLocationsEnable);
+	}
+
+	void SetColorBlendAdvancedEXT(uint32_t firstAttachment, uint32_t attachmentCount, const  VkColorBlendAdvancedEXT * pColorBlendAdvanced) {
+		assert(fnptrs->pfn_vkCmdSetColorBlendAdvancedEXT && "vkCmdSetColorBlendAdvancedEXT is not loaded");
+		fnptrs->pfn_vkCmdSetColorBlendAdvancedEXT(this->handle, firstAttachment, attachmentCount, pColorBlendAdvanced);
+	}
+
+	void SetProvokingVertexModeEXT(VkProvokingVertexModeEXT provokingVertexMode) {
+		assert(fnptrs->pfn_vkCmdSetProvokingVertexModeEXT && "vkCmdSetProvokingVertexModeEXT is not loaded");
+		fnptrs->pfn_vkCmdSetProvokingVertexModeEXT(this->handle, provokingVertexMode);
+	}
+
+	void SetLineRasterizationModeEXT(VkLineRasterizationModeEXT lineRasterizationMode) {
+		assert(fnptrs->pfn_vkCmdSetLineRasterizationModeEXT && "vkCmdSetLineRasterizationModeEXT is not loaded");
+		fnptrs->pfn_vkCmdSetLineRasterizationModeEXT(this->handle, lineRasterizationMode);
+	}
+
+	void SetLineStippleEnableEXT(VkBool32 stippledLineEnable) {
+		assert(fnptrs->pfn_vkCmdSetLineStippleEnableEXT && "vkCmdSetLineStippleEnableEXT is not loaded");
+		fnptrs->pfn_vkCmdSetLineStippleEnableEXT(this->handle, stippledLineEnable);
+	}
+
+	void SetDepthClipNegativeOneToOneEXT(VkBool32 negativeOneToOne) {
+		assert(fnptrs->pfn_vkCmdSetDepthClipNegativeOneToOneEXT && "vkCmdSetDepthClipNegativeOneToOneEXT is not loaded");
+		fnptrs->pfn_vkCmdSetDepthClipNegativeOneToOneEXT(this->handle, negativeOneToOne);
+	}
+
+	void SetViewportWScalingEnableNV(VkBool32 viewportWScalingEnable) {
+		assert(fnptrs->pfn_vkCmdSetViewportWScalingEnableNV && "vkCmdSetViewportWScalingEnableNV is not loaded");
+		fnptrs->pfn_vkCmdSetViewportWScalingEnableNV(this->handle, viewportWScalingEnable);
+	}
+
+	void SetViewportSwizzleNV(uint32_t firstViewport, uint32_t viewportCount, const  VkViewportSwizzleNV * pViewportSwizzles) {
+		assert(fnptrs->pfn_vkCmdSetViewportSwizzleNV && "vkCmdSetViewportSwizzleNV is not loaded");
+		fnptrs->pfn_vkCmdSetViewportSwizzleNV(this->handle, firstViewport, viewportCount, pViewportSwizzles);
+	}
+
+	void SetCoverageToColorEnableNV(VkBool32 coverageToColorEnable) {
+		assert(fnptrs->pfn_vkCmdSetCoverageToColorEnableNV && "vkCmdSetCoverageToColorEnableNV is not loaded");
+		fnptrs->pfn_vkCmdSetCoverageToColorEnableNV(this->handle, coverageToColorEnable);
+	}
+
+	void SetCoverageToColorLocationNV(uint32_t coverageToColorLocation) {
+		assert(fnptrs->pfn_vkCmdSetCoverageToColorLocationNV && "vkCmdSetCoverageToColorLocationNV is not loaded");
+		fnptrs->pfn_vkCmdSetCoverageToColorLocationNV(this->handle, coverageToColorLocation);
+	}
+
+	void SetCoverageModulationModeNV(VkCoverageModulationModeNV coverageModulationMode) {
+		assert(fnptrs->pfn_vkCmdSetCoverageModulationModeNV && "vkCmdSetCoverageModulationModeNV is not loaded");
+		fnptrs->pfn_vkCmdSetCoverageModulationModeNV(this->handle, coverageModulationMode);
+	}
+
+	void SetCoverageModulationTableEnableNV(VkBool32 coverageModulationTableEnable) {
+		assert(fnptrs->pfn_vkCmdSetCoverageModulationTableEnableNV && "vkCmdSetCoverageModulationTableEnableNV is not loaded");
+		fnptrs->pfn_vkCmdSetCoverageModulationTableEnableNV(this->handle, coverageModulationTableEnable);
+	}
+
+	void SetCoverageModulationTableNV(uint32_t coverageModulationTableCount, const  float * pCoverageModulationTable) {
+		assert(fnptrs->pfn_vkCmdSetCoverageModulationTableNV && "vkCmdSetCoverageModulationTableNV is not loaded");
+		fnptrs->pfn_vkCmdSetCoverageModulationTableNV(this->handle, coverageModulationTableCount, pCoverageModulationTable);
+	}
+
+	void SetShadingRateImageEnableNV(VkBool32 shadingRateImageEnable) {
+		assert(fnptrs->pfn_vkCmdSetShadingRateImageEnableNV && "vkCmdSetShadingRateImageEnableNV is not loaded");
+		fnptrs->pfn_vkCmdSetShadingRateImageEnableNV(this->handle, shadingRateImageEnable);
+	}
+
+	void SetRepresentativeFragmentTestEnableNV(VkBool32 representativeFragmentTestEnable) {
+		assert(fnptrs->pfn_vkCmdSetRepresentativeFragmentTestEnableNV && "vkCmdSetRepresentativeFragmentTestEnableNV is not loaded");
+		fnptrs->pfn_vkCmdSetRepresentativeFragmentTestEnableNV(this->handle, representativeFragmentTestEnable);
+	}
+
+	void SetCoverageReductionModeNV(VkCoverageReductionModeNV coverageReductionMode) {
+		assert(fnptrs->pfn_vkCmdSetCoverageReductionModeNV && "vkCmdSetCoverageReductionModeNV is not loaded");
+		fnptrs->pfn_vkCmdSetCoverageReductionModeNV(this->handle, coverageReductionMode);
+	}
+
+#endif
+
+#ifdef VK_EXT_descriptor_buffer
+	void BindDescriptorBuffersEXT(uint32_t bufferCount, const  VkDescriptorBufferBindingInfoEXT * pBindingInfos) {
+		assert(fnptrs->pfn_vkCmdBindDescriptorBuffersEXT && "vkCmdBindDescriptorBuffersEXT is not loaded");
+		fnptrs->pfn_vkCmdBindDescriptorBuffersEXT(this->handle, bufferCount, pBindingInfos);
+	}
+
+	void SetDescriptorBufferOffsetsEXT(VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, uint32_t setCount, const  uint32_t * pBufferIndices, const  VkDeviceSize * pOffsets) {
+		assert(fnptrs->pfn_vkCmdSetDescriptorBufferOffsetsEXT && "vkCmdSetDescriptorBufferOffsetsEXT is not loaded");
+		fnptrs->pfn_vkCmdSetDescriptorBufferOffsetsEXT(this->handle, pipelineBindPoint, layout, firstSet, setCount, pBufferIndices, pOffsets);
+	}
+
+	void BindDescriptorBufferEmbeddedSamplersEXT(VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t set) {
+		assert(fnptrs->pfn_vkCmdBindDescriptorBufferEmbeddedSamplersEXT && "vkCmdBindDescriptorBufferEmbeddedSamplersEXT is not loaded");
+		fnptrs->pfn_vkCmdBindDescriptorBufferEmbeddedSamplersEXT(this->handle, pipelineBindPoint, layout, set);
 	}
 
 #endif
@@ -2491,9 +3027,9 @@ struct VklCommandFunctions {
 #endif
 
 #ifdef VK_KHR_video_decode_queue
-	void DecodeVideoKHR(const  VkVideoDecodeInfoKHR * pFrameInfo) {
+	void DecodeVideoKHR(const  VkVideoDecodeInfoKHR * pDecodeInfo) {
 		assert(fnptrs->pfn_vkCmdDecodeVideoKHR && "vkCmdDecodeVideoKHR is not loaded");
-		fnptrs->pfn_vkCmdDecodeVideoKHR(this->handle, pFrameInfo);
+		fnptrs->pfn_vkCmdDecodeVideoKHR(this->handle, pDecodeInfo);
 	}
 
 #endif
@@ -2502,6 +3038,32 @@ struct VklCommandFunctions {
 	void SetCheckpointNV(const  void * pCheckpointMarker) {
 		assert(fnptrs->pfn_vkCmdSetCheckpointNV && "vkCmdSetCheckpointNV is not loaded");
 		fnptrs->pfn_vkCmdSetCheckpointNV(this->handle, pCheckpointMarker);
+	}
+
+#endif
+
+#ifdef VK_EXT_mesh_shader
+	void DrawMeshTasksEXT(uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ) {
+		assert(fnptrs->pfn_vkCmdDrawMeshTasksEXT && "vkCmdDrawMeshTasksEXT is not loaded");
+		fnptrs->pfn_vkCmdDrawMeshTasksEXT(this->handle, groupCountX, groupCountY, groupCountZ);
+	}
+
+	void DrawMeshTasksIndirectEXT(VkBuffer buffer, VkDeviceSize offset, uint32_t drawCount, uint32_t stride) {
+		assert(fnptrs->pfn_vkCmdDrawMeshTasksIndirectEXT && "vkCmdDrawMeshTasksIndirectEXT is not loaded");
+		fnptrs->pfn_vkCmdDrawMeshTasksIndirectEXT(this->handle, buffer, offset, drawCount, stride);
+	}
+
+	void DrawMeshTasksIndirectCountEXT(VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride) {
+		assert(fnptrs->pfn_vkCmdDrawMeshTasksIndirectCountEXT && "vkCmdDrawMeshTasksIndirectCountEXT is not loaded");
+		fnptrs->pfn_vkCmdDrawMeshTasksIndirectCountEXT(this->handle, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+	}
+
+#endif
+
+#ifdef VK_NV_optical_flow
+	void OpticalFlowExecuteNV(VkOpticalFlowSessionNV session, const  VkOpticalFlowExecuteInfoNV * pExecuteInfo) {
+		assert(fnptrs->pfn_vkCmdOpticalFlowExecuteNV && "vkCmdOpticalFlowExecuteNV is not loaded");
+		fnptrs->pfn_vkCmdOpticalFlowExecuteNV(this->handle, session, pExecuteInfo);
 	}
 
 #endif
@@ -2520,6 +3082,19 @@ struct VklCommandFunctions {
 	void DrawMeshTasksIndirectCountNV(VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride) {
 		assert(fnptrs->pfn_vkCmdDrawMeshTasksIndirectCountNV && "vkCmdDrawMeshTasksIndirectCountNV is not loaded");
 		fnptrs->pfn_vkCmdDrawMeshTasksIndirectCountNV(this->handle, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+	}
+
+#endif
+
+#ifdef VK_NV_copy_memory_indirect
+	void CopyMemoryIndirectNV(VkDeviceAddress copyBufferAddress, uint32_t copyCount, uint32_t stride) {
+		assert(fnptrs->pfn_vkCmdCopyMemoryIndirectNV && "vkCmdCopyMemoryIndirectNV is not loaded");
+		fnptrs->pfn_vkCmdCopyMemoryIndirectNV(this->handle, copyBufferAddress, copyCount, stride);
+	}
+
+	void CopyMemoryToImageIndirectNV(VkDeviceAddress copyBufferAddress, uint32_t copyCount, uint32_t stride, VkImage dstImage, VkImageLayout dstImageLayout, const  VkImageSubresourceLayers * pImageSubresources) {
+		assert(fnptrs->pfn_vkCmdCopyMemoryToImageIndirectNV && "vkCmdCopyMemoryToImageIndirectNV is not loaded");
+		fnptrs->pfn_vkCmdCopyMemoryToImageIndirectNV(this->handle, copyBufferAddress, copyCount, stride, dstImage, dstImageLayout, pImageSubresources);
 	}
 
 #endif
@@ -2779,6 +3354,9 @@ struct VklFunctions {
 #ifdef VK_EXT_sample_locations
 	PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT pfn_vkGetPhysicalDeviceMultisamplePropertiesEXT;
 #endif
+#ifdef VK_KHR_object_refresh
+	PFN_vkGetPhysicalDeviceRefreshableObjectTypesKHR pfn_vkGetPhysicalDeviceRefreshableObjectTypesKHR;
+#endif
 #ifdef VK_EXT_calibrated_timestamps
 	PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT pfn_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT;
 #endif
@@ -2809,6 +3387,10 @@ struct VklFunctions {
 	PFN_vkGetDisplayModeProperties2KHR pfn_vkGetDisplayModeProperties2KHR;
 	PFN_vkGetDisplayPlaneCapabilities2KHR pfn_vkGetDisplayPlaneCapabilities2KHR;
 #endif
+#ifdef VK_NV_external_memory_sci_buf
+	PFN_vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV pfn_vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV;
+	PFN_vkGetPhysicalDeviceSciBufAttributesNV pfn_vkGetPhysicalDeviceSciBufAttributesNV;
+#endif
 #ifdef VK_EXT_debug_report
 	PFN_vkCreateDebugReportCallbackEXT pfn_vkCreateDebugReportCallbackEXT;
 	PFN_vkDestroyDebugReportCallbackEXT pfn_vkDestroyDebugReportCallbackEXT;
@@ -2825,8 +3407,14 @@ struct VklFunctions {
 #ifdef VK_EXT_full_screen_exclusive
 	PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT pfn_vkGetPhysicalDeviceSurfacePresentModes2EXT;
 #endif
+#ifdef VK_NV_optical_flow
+	PFN_vkGetPhysicalDeviceOpticalFlowImageFormatsNV pfn_vkGetPhysicalDeviceOpticalFlowImageFormatsNV;
+#endif
 #ifdef VK_MVK_macos_surface
 	PFN_vkCreateMacOSSurfaceMVK pfn_vkCreateMacOSSurfaceMVK;
+#endif
+#ifdef VK_NV_external_sci_sync
+	PFN_vkGetPhysicalDeviceSciSyncAttributesNV pfn_vkGetPhysicalDeviceSciSyncAttributesNV;
 #endif
 #ifdef VK_KHR_video_queue
 	PFN_vkGetPhysicalDeviceVideoCapabilitiesKHR pfn_vkGetPhysicalDeviceVideoCapabilitiesKHR;

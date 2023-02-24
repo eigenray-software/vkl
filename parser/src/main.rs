@@ -5,6 +5,7 @@ use xml::*;
 
 use fxhash::*;
 
+use std::default;
 use std::fs::File;
 use std::io::BufReader;
 use std::io::Read;
@@ -84,6 +85,14 @@ impl XmlNode {
     pub fn find_child(&self, c: &str) -> Option<&XmlNode> {
         self.children().into_iter().find(|n| n.name == c)
     }
+
+    pub fn find_children(&self, c: &str) -> Vec<&XmlNode> {
+        self.children()
+            .into_iter()
+            .filter(|n| n.name == c)
+            .collect()
+    }
+
     pub fn get_str(&self) -> &str {
         match self.children.as_slice() {
             [XmlChild::Str(s)] => s,
@@ -225,9 +234,23 @@ fn main() {
 
     let fp = tokens::ParamParserParser::new();
 
+    let mut blacklisted_commands = Set::<String>::default();
+
+    for feature in reg.find_children("feature") {
+        if let Some("vulkansc") = feature.find_attr("api") {
+            blacklisted_commands.extend(feature.find_children("require").into_iter().flat_map(
+                |c| {
+                    c.find_children("command")
+                        .into_iter()
+                        .map(|c| c.find_attr("name").unwrap().to_owned())
+                },
+            ));
+        }
+    }
+
     for cmd in reg.find_child("commands").unwrap().children() {
         if let Some(c) = cmd.find_child("proto") {
-            let args = cmd.children().into_iter().filter(|c| c.name == "param");
+            let args = cmd.children().into_iter().filter(|c| c.name == "param" && c.find_attr("api").map(|a| a == "vulkansc").unwrap_or(true));
             let cmd = format!(
                 "{}({});",
                 c.cpp_type(),
@@ -236,10 +259,12 @@ fn main() {
                     .collect::<Vec<_>>()
                     .join(", ")
             );
-
             let (re, name, params): (String, String, Vec<(String, String, String)>) =
                 fp.parse(&cmd).unwrap();
 
+            if blacklisted_commands.contains(&name) {
+                continue;
+            }
             commands.insert(name, (re, params));
         }
     }
@@ -332,7 +357,7 @@ trait VkFunction {
         let args = self.get_args();
 
         println!(
-            "\nVKAPI_ATTR {} VKAPI_CALL {}({}) {{\n\t{}\n\t{} {}({});\n}}\n",
+            "VKAPI_ATTR {} VKAPI_CALL {}({}) {{\n\t{}\n\t{} {}({});\n}}\n",
             re,
             name,
             collect_pairs(args.iter(), false),
@@ -623,7 +648,7 @@ extern "C" {{
 #endif
 "#
     );
-    
+
     println!("static struct VklFunctions g_vkl_fnptrs;");
     {
         for f in inmap.iter() {
