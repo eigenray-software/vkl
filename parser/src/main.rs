@@ -250,7 +250,7 @@ fn main() {
 
     for cmd in reg.find_child("commands").unwrap().children() {
         if let Some(c) = cmd.find_child("proto") {
-            let args = cmd.children().into_iter().filter(|c| c.name == "param" && c.find_attr("api").map(|a| a == "vulkansc").unwrap_or(true));
+            let args = cmd.children().into_iter().filter(|c| c.name == "param" && c.find_attr("api").map(|a| a != "vulkansc").unwrap_or(true));
             let cmd = format!(
                 "{}({});",
                 c.cpp_type(),
