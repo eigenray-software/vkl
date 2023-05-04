@@ -248,9 +248,13 @@ fn main() {
         }
     }
 
+    let mut alias_commands = Map::<String, String>::default();
+
     for cmd in reg.find_child("commands").unwrap().children() {
         if let Some(c) = cmd.find_child("proto") {
-            let args = cmd.children().into_iter().filter(|c| c.name == "param" && c.find_attr("api").map(|a| a != "vulkansc").unwrap_or(true));
+            let args = cmd.children().into_iter().filter(|c| {
+                c.name == "param" && c.find_attr("api").map(|a| a != "vulkansc").unwrap_or(true)
+            });
             let cmd = format!(
                 "{}({});",
                 c.cpp_type(),
@@ -266,7 +270,13 @@ fn main() {
                 continue;
             }
             commands.insert(name, (re, params));
+        } else if let Some(f) = cmd.find_attr("alias") {
+            alias_commands.insert(cmd.find_attr("name").unwrap().to_owned(), f.to_owned());
         }
+    }
+
+    for (key, val) in alias_commands {
+        commands.insert(key, commands.get(&val).unwrap().to_owned());
     }
 
     println!(
